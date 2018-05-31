@@ -14,27 +14,16 @@
 
 
     <TextView
-        android:textColor="#252525"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Let the losing commence."
-        android:id="@+id/textView3"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/days_not_dead"
         android:id="@+id/textView2"
-        android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="#753c5a"
-        android:layout_marginTop="4dp"/>
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,10 +37,32 @@
         android:textColor="#753c5a"
         android:layout_marginTop="1dp"/>
 
+    <TextView
+        android:id="@+id/happinessIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="203dp"
+        android:layout_marginTop="78dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#753c5a"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/healthIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="203dp"
+        android:layout_marginTop="118dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#753c5a"
+        android:textSize="30sp" />
+
     <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
         android:id="@+id/happinessBar"
         android:layout_width="200dp"
-        android:layout_height="23dp"
+        android:layout_height="24dp"
         app:rcProgress="75"
         app:rcMax="100"
         app:rcRadius="20dp"
@@ -63,12 +74,12 @@
 
         app:rcBackgroundColor="#aaa191"
         app:rcSecondaryProgressColor="#85dbd9d5"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="90dp"
         android:layout_marginLeft="1dp"/>
     <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
         android:id="@+id/healthBar"
         android:layout_width="200dp"
-        android:layout_height="23dp"
+        android:layout_height="24dp"
         app:rcProgress="75"
         app:rcSecondaryProgress="100"
         app:rcMax="100"
@@ -80,7 +91,7 @@
 
 
         app:rcBackgroundColor="#aaa292"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="130dp"
         android:layout_marginLeft="1dp" />
 
     <ImageButton
@@ -92,7 +103,7 @@
         android:layout_alignParentStart="true"
         android:src="@mipmap/happiness_icon1"
         android:background="@android:color/transparent"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="87dp"
         android:layout_marginLeft="1dp"/>
     <ImageButton
         android:layout_width="wrap_content"
@@ -102,7 +113,7 @@
         android:layout_alignParentStart="true"
         android:src="@mipmap/health_icon1"
         android:background="@android:color/transparent"
-        android:layout_marginTop="131dp"
+        android:layout_marginTop="126dp"
         android:layout_marginLeft="1dp" />
 
     <TextView
@@ -116,7 +127,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textColor="#252525"
-        android:textAlignment="viewEnd" />
+        android:textAlignment="viewEnd"
+        android:layout_gravity="end"/>
 
     <Button
         android:text=""

@@ -11,7 +11,7 @@
     android:layout_height="match_parent"
     tools:context="com.loser.superfruit86.myapplication.SuccessFragment"
     android:background="@mipmap/secdefault5"
-    android:minHeight="400dp">
+    android:minHeight="600dp">
 
 
     <!-- TODO: Update blank fragment layout -->

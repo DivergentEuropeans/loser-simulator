@@ -6960,6 +6960,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void messagePrompt(String message, long delay) {
 
+        delay = delay * (long)0.8;
         AlertDialog.Builder popupBuilder = new AlertDialog.Builder(this);
         TextView myMsg = new TextView(this);
         //TextView tv2 = (TextView)findViewById(R.id.textView2);
@@ -8313,22 +8314,27 @@ public class MainActivity extends AppCompatActivity {
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffcc99"));
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(12000);
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(12000);
+                ((TextView) findViewById(R.id.happinessIndicator)).setText("*****");
             } else if (happinessLevel > 1350) {
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffff99"));
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(4000);
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(4000);
+                ((TextView) findViewById(R.id.happinessIndicator)).setText("****");
             } else if (happinessLevel > 450) {
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffffcc"));
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(1350);
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(1350);
+                ((TextView) findViewById(R.id.happinessIndicator)).setText("***");
             } else if (happinessLevel > 150) {
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ccffcc"));
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(450);
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(450);
+                ((TextView) findViewById(R.id.happinessIndicator)).setText("**");
             } else if (happinessLevel > 50) {
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ccffff"));
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(150);
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(150);
+                ((TextView) findViewById(R.id.happinessIndicator)).setText("*");
             } else {
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#b3d9ff"));
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(50);
@@ -8347,22 +8353,27 @@ public class MainActivity extends AppCompatActivity {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#b3ccff"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(12000);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(12000);
+            ((TextView) findViewById(R.id.healthIndicator)).setText("*****");
         } else if (healthRange > 1350) {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ccccff"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(4000);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(4000);
+            ((TextView) findViewById(R.id.healthIndicator)).setText("****");
         } else if (healthRange > 450) {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#dab3ff"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(1350);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(1350);
+            ((TextView) findViewById(R.id.healthIndicator)).setText("***");
         } else if (healthRange > 150) {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ff99ff"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(450);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(450);
+            ((TextView) findViewById(R.id.healthIndicator)).setText("**");
         } else if (healthRange > 50) {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ff99cc"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(150);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(150);
+            ((TextView) findViewById(R.id.healthIndicator)).setText("*");
         } else {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ff9999"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(50);
