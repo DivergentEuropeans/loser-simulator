@@ -1,0 +1,56 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            tools:context="com.loser.superfruit86.myapplication.PhysicalFragment">
+
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="385dp"
+
+                android:textColor="#ffffff"
+                android:textAlignment="center"
+                android:gravity="top"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:autoText="true"
+
+                android:background="@mipmap/secdefault5"
+                android:layout_height="471dp"
+                android:layout_gravity="center_horizontal|bottom" />
+            <RelativeLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="DivergentEuropeans"
+                android:id="@+id/textView5"
+                android:layout_gravity="center_horizontal|top"
+                android:textSize="30dp"
+                android:layout_marginTop="35dp"/>
+
+            <TextView
+                android:layout_width="321dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="My friend and I created a fairly pessimistic game to ourselves as a form of life insurance. The game was, whoever kills themselves first, 'loses' the game. Because we are so competitive, neither of us wanted to give the other the satisfaction of winning. \n\nHence the game, 'Loser', was born.\n\n\n\nIf you liked the game, feel free to share."
+                android:id="@+id/textView6"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="90dp"/>
+
+
+        </FrameLayout>
+    </ScrollView></LinearLayout>

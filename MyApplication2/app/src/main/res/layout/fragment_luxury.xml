@@ -1,0 +1,138 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.LuxuryFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="385dp"
+
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:gravity="top"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:autoText="false"
+        android:background="@mipmap/secdefault5"
+        android:layout_height="720dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Win the game. ($15,000,000)"
+        android:id="@+id/buttonWinTheGame"
+        android:layout_marginTop="630dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionWinTheGame" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Go party at a nightclub. ($600)"
+        android:id="@+id/buttonNightclub"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionNightclub" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Take a trip to Las Vegas. ($10,000)  "
+        android:id="@+id/buttonVegas"
+        android:layout_marginTop="210dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionVegas" />
+
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button_bg"
+            android:text="Travel around the continent. ($45,000)"
+            android:id="@+id/buttonTravelWorld"
+            android:layout_marginTop="270dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="functionTravelWorld" />
+
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button_bg"
+            android:text="Purchase a luxury sports car. ($120,000)"
+            android:id="@+id/buttonCar"
+            android:layout_marginTop="330dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="functionCar" />
+
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button_bg"
+            android:text="Attend a voyage to space. ($400,000)"
+            android:id="@+id/buttonSpace"
+            android:layout_marginTop="390dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="functionSpace" />
+
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button_bg"
+            android:text="Purchase a mansion. ($1,250,000)"
+            android:id="@+id/buttonMansion"
+            android:layout_marginTop="450dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="functionMansion" />
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button_bg"
+            android:text="Buy out a luxury yacht. ($3,000,000)"
+            android:id="@+id/buttonYacht"
+            android:layout_marginTop="510dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="functionYacht" />
+        <Button
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button_bg"
+            android:text="Bribe politicians. ($8,000,000)"
+            android:id="@+id/buttonToppleGovernment"
+            android:layout_marginTop="570dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="functionToppleGovernment" />
+
+    <ImageView
+        android:layout_width="477dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@mipmap/lux_text2"
+
+        android:layout_centerHorizontal="true" />
+
+</FrameLayout></ScrollView></LinearLayout>

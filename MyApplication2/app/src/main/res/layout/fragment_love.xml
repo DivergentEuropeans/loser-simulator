@@ -1,0 +1,131 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.MentalFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="385dp"
+
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:gravity="top"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:autoText="false"
+        android:background="@mipmap/secdefault5"
+        android:layout_height="635dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+            <ImageView
+            android:layout_width="357dp"
+            android:layout_height="96dp"
+                android:layout_marginTop="10dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@mipmap/lov_text2"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Start a family. ($1,500,000)"
+                android:id="@+id/buttonFamily"
+                android:layout_marginTop="545dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionFamily"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Marry your partner. ($600,000)"
+                android:id="@+id/buttonMarriage"
+                android:layout_marginTop="485dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionMarriage"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text=" Rent out a private island to explore. ($250,000)"
+                android:id="@+id/buttonPrivateIsland"
+                android:layout_marginTop="425dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionPrivateIsland"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Taste fine wines on a luxury cruise. ($120,000)"
+                android:id="@+id/buttonWineCruise"
+                android:layout_marginTop="365dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionWineCruise"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Go on a nationwide road trip. ($40,000)"
+                android:id="@+id/buttonRoadTripDate"
+                android:layout_marginTop="305dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionRoadTripDate"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Go camping in the wilderness. ($10,000)"
+                android:id="@+id/buttonCampingDate"
+                android:layout_marginTop="245dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionCampingDate"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Go out to an exquisite restaurant. ($2,000)"
+                android:id="@+id/buttonRestaurantDate"
+                android:layout_marginTop="185dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionRestaurantDate"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Go out to the local diner. ($350)"
+                android:id="@+id/buttonDinerDate"
+                android:layout_marginTop="125dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionDinerDate"
+                android:layout_gravity="center_horizontal|top" />
+
+
+        </FrameLayout></ScrollView></LinearLayout>
+

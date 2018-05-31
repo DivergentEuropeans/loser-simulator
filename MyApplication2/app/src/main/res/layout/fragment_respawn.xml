@@ -1,0 +1,58 @@
+<RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.SuccessFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="385dp"
+
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:gravity="top"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:autoText="false"
+        android:background="@mipmap/secdefault5"
+        android:layout_height="374dp"
+        android:layout_gravity="center_horizontal|bottom" />
+    <RelativeLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="End your life. (0$)"
+        android:id="@+id/buttonSaveRespawnTokens2"
+        android:layout_marginTop="280dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionSaveRespawnTokens2" />
+
+    <TextView
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:text="Are you sure you want to do this? Your hopes, ambitions, and achievements will be wiped away. However, your Respawn Token will carry over into your next life. \n\nUpon clicking this button, you will die."
+        android:id="@+id/textView25"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="20dp"/>
+
+
+</FrameLayout>
+</ScrollView></RelativeLayout>

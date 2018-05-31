@@ -1,0 +1,87 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.MentalFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="385dp"
+
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:gravity="top"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:autoText="false"
+        android:background="@mipmap/secdefault5"
+        android:layout_height="360dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+            <ImageView
+            android:layout_width="338dp"
+            android:layout_height="133dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@mipmap/corp_text"
+                android:layout_marginTop="0dp"
+            android:layout_centerHorizontal="true"
+                />
+
+            <Button
+                android:layout_width="320dp"
+                android:layout_height="90dp"
+                android:background="@null"
+                android:text=""
+                android:id="@+id/buttonCareers3Careers"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionCareers"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="   Work as the Chief Executive Officer (CEO).\n(x190$)"
+                android:id="@+id/buttonCEOJob"
+                android:layout_marginTop="260dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionCEOJob"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="   Work as Chief Operating Officer (COO). \n(x85$)"
+                android:id="@+id/buttonChiefOperatingOfficerJob"
+                android:layout_marginTop="200dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionChiefOperatingOfficerJob"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Work on the board of Directors. (x40$)"
+                android:id="@+id/buttonBoardDirectorsJob"
+                android:layout_marginTop="140dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionBoardDirectorsJob"
+                android:layout_gravity="center_horizontal|top" />
+
+
+        </FrameLayout></ScrollView></LinearLayout>
+

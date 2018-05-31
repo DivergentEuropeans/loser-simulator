@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="205dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    tools:showIn="@layout/app_bar_main"
+    android:background="@mipmap/secdefault4">
+
+
+    <TextView
+        android:textColor="#252525"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Let the losing commence."
+        android:id="@+id/textView3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/days_not_dead"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#753c5a"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/net_worth"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#753c5a"
+        android:layout_marginTop="1dp"/>
+
+    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+        android:id="@+id/happinessBar"
+        android:layout_width="200dp"
+        android:layout_height="23dp"
+        app:rcProgress="75"
+        app:rcMax="100"
+        app:rcRadius="20dp"
+        app:rcBackgroundPadding="7dp"
+        app:rcReverse="false"
+        app:rcProgressColor="#a2c9ca"
+        app:rcSecondaryProgress="100"
+
+
+        app:rcBackgroundColor="#aaa191"
+        app:rcSecondaryProgressColor="#85dbd9d5"
+        android:layout_marginTop="95dp"
+        android:layout_marginLeft="1dp"/>
+    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+        android:id="@+id/healthBar"
+        android:layout_width="200dp"
+        android:layout_height="23dp"
+        app:rcProgress="75"
+        app:rcSecondaryProgress="100"
+        app:rcMax="100"
+        app:rcRadius="8dp"
+        app:rcBackgroundPadding="7dp"
+        app:rcReverse="false"
+        app:rcProgressColor="#f79494"
+        app:rcSecondaryProgressColor="#85dbd9d5"
+
+
+        app:rcBackgroundColor="#aaa292"
+        android:layout_marginTop="135dp"
+        android:layout_marginLeft="1dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@mipmap/happiness_icon1"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="92dp"
+        android:layout_marginLeft="1dp"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@mipmap/health_icon1"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="131dp"
+        android:layout_marginLeft="1dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Highscore: "
+        android:id="@+id/textView10"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#252525"
+        android:textAlignment="viewEnd" />
+
+    <Button
+        android:text=""
+        android:layout_width="400dp"
+        android:layout_gravity="center"
+        android:layout_height="200dp"
+        android:id="@+id/drawerButton"
+        android:onClick="functionDrawer"
+        android:elevation="24dp"
+        android:background="@null" />
+
+
+</RelativeLayout>

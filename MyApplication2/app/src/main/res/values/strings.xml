@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">LOSER</string>
+    <string name="banner_ad_unit_id">ca-app-pub-6612683572827982/7462557959</string>
+    <string name="after_death_advertisement">ca-app-pub-6612683572827982/2642709953</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <integer name="days_not_dead_number">1</integer>
+    <string name="days_not_dead">Days Without Dying: 0</string>
+
+    <string name="net_worth">Net Worth: $1000.00</string>
+
+    <string name="happiness_level">Happiness: 50</string>
+
+    <string name="health_status">Health: Good</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+</resources>

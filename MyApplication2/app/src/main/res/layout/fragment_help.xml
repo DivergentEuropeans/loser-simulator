@@ -1,0 +1,89 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            tools:context="com.loser.superfruit86.myapplication.PhysicalFragment">
+
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="385dp"
+
+                android:textColor="#ffffff"
+                android:textAlignment="center"
+                android:gravity="top"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:autoText="true"
+
+                android:background="@mipmap/secdefault5"
+                android:layout_height="380dp"
+                android:layout_gravity="center_horizontal|bottom" />
+            <RelativeLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Attend a group therapy meeting. ($1,200)"
+                android:id="@+id/buttonGroupTherapy"
+                android:layout_marginTop="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:onClick="functionGroupTherapy"/>
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Book a private therapy session. ($3,000)"
+                android:id="@+id/buttonTherapy"
+                android:layout_marginTop="160dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:onClick="functionTherapy" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Take counsel from a personal guru. ($8,000)"
+                android:id="@+id/buttonMotivator"
+                android:layout_marginTop="220dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:onClick="functionMotivator" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Hire a personal bodyguard. ($25,000)"
+                android:id="@+id/buttonBodyguard"
+                android:layout_marginTop="280dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:onClick="functionBodyguard" />
+
+
+            <ImageView
+                android:layout_width="276dp"
+                android:layout_height="83dp"
+                android:id="@+id/imageView"
+                android:layout_gravity="center_horizontal|top"
+                android:src="@mipmap/advi_text"
+                android:layout_marginTop="10dp"
+                android:onClick="functionMental"/>
+        </FrameLayout>
+    </ScrollView></LinearLayout>

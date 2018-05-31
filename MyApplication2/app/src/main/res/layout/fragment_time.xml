@@ -1,0 +1,89 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            tools:context="com.loser.superfruit86.myapplication.PhysicalFragment">
+
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="385dp"
+
+                android:textColor="#ffffff"
+                android:textAlignment="center"
+                android:gravity="top"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:autoText="true"
+
+                android:background="@mipmap/secdefault5"
+                android:layout_height="375dp"
+                android:layout_gravity="center_horizontal|bottom" />
+            <RelativeLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Watch a show or movie online. ($20)"
+                android:id="@+id/buttonShow"
+                android:layout_marginTop="95dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:onClick="functionShow"/>
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Read a book or novel. ($60)"
+                android:id="@+id/buttonBook"
+                android:layout_marginTop="155dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:onClick="functionBook" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Take some medication. ($200)"
+                android:id="@+id/buttonMedication"
+                android:layout_marginTop="215dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:onClick="functionMedication" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Go drink at the local bar. ($500)"
+                android:id="@+id/buttonBar"
+                android:layout_marginTop="275dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:onClick="functionBar" />
+
+
+            <ImageView
+                android:layout_width="276dp"
+                android:layout_height="83dp"
+                android:id="@+id/imageView"
+                android:layout_gravity="center_horizontal|top"
+                android:src="@mipmap/dist_text"
+                android:layout_marginTop="5dp"
+                android:onClick="functionMental"/>
+        </FrameLayout>
+    </ScrollView></LinearLayout>

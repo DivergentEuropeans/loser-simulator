@@ -1,0 +1,89 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.MentalFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="385dp"
+
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:gravity="top"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:autoText="false"
+        android:background="@mipmap/secdefault5"
+        android:layout_height="340dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+            <ImageView
+            android:layout_width="268dp"
+            android:layout_height="74dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@mipmap/sales_text"
+                android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+                />
+
+            <Button
+                android:layout_width="230dp"
+                android:layout_height="70dp"
+                android:background="@null"
+                android:text=""
+                android:id="@+id/buttonCareers1Careers"
+                android:layout_marginTop="15dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionCareers"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Work as an information officer. (x2.2$)"
+                android:id="@+id/buttonInformationOfficerJob"
+                android:layout_marginTop="220dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionInformationOfficerJob"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Work as an office manager. (x1.5$)"
+                android:id="@+id/buttonOfficeManagerJob"
+                android:layout_marginTop="160dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionOfficeManagerJob"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Work as a boring sales associate. (x1$)"
+                android:id="@+id/buttonSalesJob"
+                android:layout_marginTop="100dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionSalesJob"
+                android:layout_gravity="center_horizontal|top" />
+
+
+        </FrameLayout></ScrollView>
+</LinearLayout>
+

@@ -1,0 +1,94 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.PhysicalFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="385dp"
+
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:gravity="top"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:autoText="true"
+
+        android:background="@mipmap/secdefault5"
+        android:layout_height="380dp"
+        android:layout_gravity="center_horizontal|bottom" />
+<RelativeLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+</RelativeLayout>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Take immuno-boosting formula. ($30,000)"
+        android:id="@+id/buttonInjection"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionInjection" />
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Purchase high quality steroids. ($75,000)"
+        android:id="@+id/buttonSteroids"
+        android:layout_marginTop="160dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionSteroids" />
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Experimental drugs from the black market. ($150,000)"
+        android:id="@+id/buttonExperiment"
+        android:layout_marginTop="220dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionExperiment" />
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Bioengineer the make-up of your DNA. ($500,000)"
+        android:id="@+id/buttonDNA"
+        android:layout_marginTop="280dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionDNA" />
+    <Button
+        android:layout_width="270dp"
+        android:layout_height="70dp"
+        android:background="@null"
+        android:text=""
+        android:id="@+id/buttonPhysicalGoBack"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionPhysical" />
+
+    <ImageView
+        android:layout_width="279dp"
+        android:layout_height="102dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@mipmap/enha_text"
+        android:onClick="functionPhysical"/>
+</FrameLayout>
+</ScrollView></LinearLayout>

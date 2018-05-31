@@ -1,0 +1,89 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.MentalFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="385dp"
+
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:gravity="top"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:autoText="false"
+        android:background="@mipmap/secdefault5"
+        android:layout_height="340dp"
+        android:layout_gravity="center_horizontal|bottom" />
+
+            <ImageView
+            android:layout_width="302dp"
+            android:layout_height="119dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@mipmap/carr_text"
+                android:layout_marginTop="-10dp"
+            android:layout_centerHorizontal="true"
+                />
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:background="@null"
+                android:text=""
+                android:id="@+id/buttonCareersSuccess"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionSuccess"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Top level. ($$$)"
+                android:id="@+id/buttonCareers3"
+                android:layout_marginTop="230dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionCareers3"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Mid level. ($$)"
+                android:id="@+id/buttonCareers2"
+                android:layout_marginTop="165dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionCareers2"
+                android:layout_gravity="center_horizontal|top" />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="Bottom level. ($)"
+                android:id="@+id/buttonCareers1"
+                android:layout_marginTop="100dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionCareers1"
+                android:layout_gravity="center_horizontal|top" />
+
+
+        </FrameLayout></ScrollView>
+</LinearLayout>
+

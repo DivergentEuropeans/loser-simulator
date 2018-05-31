@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion '27.0.1'
+
+    defaultConfig {
+        applicationId "com.loser.superfruit86.myapplication"
+        minSdkVersion 16
+        targetSdkVersion 24
+        versionCode 17
+        versionName "3.5"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
+    compile 'com.google.android.gms:play-services-ads:10.2.0'
+    compile 'com.google.ads.interactivemedia.v3:interactivemedia:3.6.0'
+    compile 'com.google.firebase:firebase-appindexing:10.2.0'
+    compile 'com.google.firebase:firebase-core:10.2.0'
+    compile 'com.google.firebase:firebase-ads:10.2.0'
+    testCompile 'junit:junit:4.12'
+}
+apply plugin: 'com.google.gms.google-services'

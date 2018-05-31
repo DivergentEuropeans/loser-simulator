@@ -1,0 +1,89 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.PhysicalFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="385dp"
+
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:gravity="top"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:autoText="true"
+
+        android:background="@mipmap/secdefault5"
+        android:layout_height="360dp"
+        android:layout_gravity="center_horizontal|bottom" />
+<RelativeLayout android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+</RelativeLayout>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Take a protein shake. ($35)"
+        android:id="@+id/buttonShake"
+        android:layout_marginTop="85dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionShake"/>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Go work out at the gym. ($90)"
+        android:id="@+id/buttonGym"
+        android:layout_marginTop="145dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionGym" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Buy some supplements. ($200)"
+        android:id="@+id/buttonSupplements"
+        android:layout_marginTop="205dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionSupplements" />
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_button_bg"
+        android:text="Change your eating regime. ($500)"
+        android:id="@+id/buttonChangeLifeStyle"
+        android:layout_marginTop="265dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:onClick="functionChangeLifeStyle" />
+
+
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@mipmap/heal_text"
+        android:onClick="functionPhysical"/>
+</FrameLayout>
+</ScrollView></LinearLayout>

@@ -1,0 +1,95 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.loser.superfruit86.myapplication.SuccessFragment">
+
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="400sp"
+
+                android:layout_height="435dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:autoText="false"
+                android:background="@mipmap/secdefault5"
+                android:gravity="top"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonCareers"
+                android:layout_width="350sp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="110sp"
+                android:background="@drawable/my_button_bg"
+                android:onClick="functionCareers"
+                android:text="Pursue your career (?)" />
+
+            <Button
+                android:id="@+id/buttonEducation"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="170dp"
+                android:background="@drawable/my_button_bg"
+                android:onClick="functionEducation"
+                android:text="Pursue your education. (?)" />
+
+            <Button
+                android:id="@+id/buttonLottery"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="290dp"
+                android:background="@drawable/my_button_bg"
+                android:onClick="functionLottery"
+                android:text="Buy a lottery ticket. ($5)" />
+
+            <Button
+                android:id="@+id/buttonSaveRespawnTokens"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="350dp"
+                android:background="@drawable/my_button_bg"
+                android:onClick="functionSaveRespawnTokens"
+                android:text="Kill yourself. (Saves your Respawn Tokens)" />
+
+            <Button
+                android:id="@+id/buttonStocks"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:layout_marginTop="230dp"
+                android:background="@drawable/my_button_bg"
+                android:onClick="functionStocks"
+                android:text="Invest in the stock market. (?)" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="307dp"
+                android:layout_height="108dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal|top"
+                android:src="@mipmap/succ_text" />
+        </FrameLayout>
+</ScrollView></LinearLayout>

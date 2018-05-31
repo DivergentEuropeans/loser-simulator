@@ -1,0 +1,1307 @@
+<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.loser.superfruit86.myapplication.MentalFragment">
+
+
+    <!-- TODO: Update blank fragment layout -->
+
+            <ImageView
+                android:layout_width="188dp"
+                android:layout_height="64dp"
+                android:id="@+id/imageView"
+                android:layout_gravity="center_horizontal|top"
+                android:src="@mipmap/wast_text"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStocks"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockRM25S"
+                android:layout_marginTop="1520dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockRM25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockRM5S"
+                android:layout_marginTop="1520dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockRM5S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    RM - Relative Motors (?)"
+                android:id="@+id/buttonStockRMsell"
+                android:layout_marginTop="1520dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockRMsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockNSX25S"
+                android:layout_marginTop="1390dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockNSX25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockSX5S"
+                android:layout_marginTop="1390dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockNSX5S"
+                android:gravity="left|center"
+                />
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    NSX - National Service Agency (?)"
+                android:id="@+id/buttonStockNSXsell"
+                android:layout_marginTop="1390dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockNSXsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockMM25S"
+                android:layout_marginTop="1260dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMM25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockMM5S"
+                android:layout_marginTop="1260dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMM5S"
+                android:gravity="left|center"
+                />
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    MM - Monopoly Mart Inc. (?)"
+                android:id="@+id/buttonStockMMsell"
+                android:layout_marginTop="1260dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMMsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockMACB25S"
+                android:layout_marginTop="1130dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMACB25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockMACB5S"
+                android:layout_marginTop="1130dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMACB5S"
+                android:gravity="left|center"
+                />
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    MAC.B - Money Arc Central Class B (?)"
+                android:id="@+id/buttonStockMACBsell"
+                android:layout_marginTop="1130dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMACBsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockMACA25S"
+                android:layout_marginTop="1000dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMACA25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockMACA5S"
+                android:layout_marginTop="1000dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMACA5S"
+                android:gravity="left|center"
+                />
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    MAC.A - Money Arc Central Class A (?)"
+                android:id="@+id/buttonStockMACAsell"
+                android:layout_marginTop="1000dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockMACAsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockKC25S"
+                android:layout_marginTop="870dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockKC25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockKC5S"
+                android:layout_marginTop="870dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockKC5S"
+                android:gravity="left|center"
+                />
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    KC - King Cola (?)"
+                android:id="@+id/buttonStockKCsell"
+                android:layout_marginTop="870dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockKCsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockIBC25S"
+                android:layout_marginTop="740dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockIBC25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockIBC5S"
+                android:layout_marginTop="740dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockIBC5S"
+                android:gravity="left|center"
+                />
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    IBC - International Business Corp (?)"
+                android:id="@+id/buttonStockIBCsell"
+                android:layout_marginTop="740dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockIBCsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockET25S"
+                android:layout_marginTop="610dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockET25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockET5S"
+                android:layout_marginTop="610dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockET5S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    ET - Enterprise Connected (?)"
+                android:id="@+id/buttonStockETsell"
+                android:layout_marginTop="610dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockETsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockFWB25S"
+                android:layout_marginTop="480dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockFWB25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockFWB5S"
+                android:layout_marginTop="480dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockFWB5S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    FWB - Fair Weather Bank (?)"
+                android:id="@+id/buttonStockFWBsell"
+                android:layout_marginTop="480dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockFWBsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockFU25S"
+                android:layout_marginTop="350dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockFU25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockFU5S"
+                android:layout_marginTop="350dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockFU5S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    FU - Fracking United Trust (?)"
+                android:id="@+id/buttonStockFUsell"
+                android:layout_marginTop="350dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockFUsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockBNN25S"
+                android:layout_marginTop="220dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockBNN25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockBNN5S"
+                android:layout_marginTop="220dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockBNN5S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="    BNN - Biased News Network (?)"
+                android:id="@+id/buttonStockBNNsell"
+                android:layout_marginTop="220dp"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockBNNsell"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:gravity="left|center"/>
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(50)"
+                android:id="@+id/buttonStockAP25S"
+                android:layout_marginTop="90dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockAP25S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="(5)"
+                android:id="@+id/buttonStockAP5S"
+                android:layout_marginTop="90dp"
+                android:layout_marginRight="59dp"
+                android:textAlignment="center"
+                android:layout_gravity="top|right"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockAP5S"
+                android:gravity="left|center"
+                />
+
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/my_button_bg"
+                android:text="AP - Acquaintance Pages (?)"
+                android:id="@+id/buttonStockAPsell"
+                android:layout_marginTop="90dp"
+                android:layout_marginLeft="10dp"
+                android:textAlignment="center"
+                android:layout_gravity="top"
+                android:layout_centerHorizontal="true"
+                android:onClick="functionStockAPsell"
+                android:gravity="left|center"
+                />
+
+            <TextView
+                android:layout_width="385dp"
+
+                android:textColor="#ffffff"
+                android:textAlignment="center"
+                android:gravity="top"
+                android:textSize="35dp"
+                android:textStyle="bold"
+                android:autoText="false"
+                android:background="@mipmap/secdefault5"
+                android:layout_height="1685dp"
+                android:layout_gravity="center_horizontal|top" />
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="90dp"
+                android:id="@+id/imageView3"
+                android:layout_gravity="center_horizontal|top"
+                android:src="@mipmap/sell_text" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="DAY CHANGE:"
+                    android:id="@+id/textView13"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="145dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/APDayvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="145dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="WEEK CHANGE:"
+                android:id="@+id/textView14"
+                android:layout_gravity="top"
+                android:layout_marginTop="160dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/APWeekvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="160dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="SHARES OWNED:"
+                android:id="@+id/textView15"
+                android:layout_gravity="top"
+                android:layout_marginTop="175dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="(0) $0.00       "
+                    android:id="@+id/APAssetvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="175dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="DAY CHANGE:"
+                android:id="@+id/textView17"
+                android:layout_gravity="top"
+                android:layout_marginTop="275dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/BNNDayvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="275dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="WEEK CHANGE:"
+                android:id="@+id/textView18"
+                android:layout_gravity="top"
+                android:layout_marginTop="290dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/BNNWeekvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="290dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="SHARES OWNED:"
+                android:id="@+id/textView19"
+                android:layout_gravity="top"
+                android:layout_marginTop="305dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="(0) $0.00       "
+                android:id="@+id/BNNAssetvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="305dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="DAY CHANGE:"
+                    android:id="@+id/textView22"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="405dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/FUDayvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="405dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="WEEK CHANGE:"
+                    android:id="@+id/textView23"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="420dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/FUWeekvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="420dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="SHARES OWNED:"
+                    android:id="@+id/textView24"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="435dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="(0) $0.00       "
+                    android:id="@+id/FUAssetvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="435dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="DAY CHANGE:"
+                android:id="@+id/textView26"
+                android:layout_gravity="top"
+                android:layout_marginTop="535dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/FWBDayvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="535dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="WEEK CHANGE:"
+                android:id="@+id/textView27"
+                android:layout_gravity="top"
+                android:layout_marginTop="550dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/FWBWeekvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="550dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="SHARES OWNED:"
+                android:id="@+id/textView28"
+                android:layout_gravity="top"
+                android:layout_marginTop="565dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="(0) $0.00       "
+                android:id="@+id/FWBAssetvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="565dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="DAY CHANGE:"
+                android:id="@+id/textView30"
+                android:layout_gravity="top"
+                android:layout_marginTop="665dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/ETDayvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="665dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="WEEK CHANGE:"
+                android:id="@+id/textView31"
+                android:layout_gravity="top"
+                android:layout_marginTop="680dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/ETWeekvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="680dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="SHARES OWNED:"
+                android:id="@+id/textView32"
+                android:layout_gravity="top"
+                android:layout_marginTop="695dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="(0) $0.00       "
+                android:id="@+id/ETAssetvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="695dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="DAY CHANGE:"
+                android:id="@+id/textView33"
+                android:layout_gravity="top"
+                android:layout_marginTop="795dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/IBCDayvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="795dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="WEEK CHANGE:"
+                android:id="@+id/textView34"
+                android:layout_gravity="top"
+                android:layout_marginTop="810dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/IBCWeekvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="810dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="SHARES OWNED:"
+                android:id="@+id/textView35"
+                android:layout_gravity="top"
+                android:layout_marginTop="825dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="(0) $0.00       "
+                android:id="@+id/IBCAssetvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="825dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="DAY CHANGE:"
+                    android:id="@+id/textView36"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="925dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/KCDayvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="925dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="WEEK CHANGE:"
+                    android:id="@+id/textView37"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="940dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/KCWeekvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="940dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="SHARES OWNED:"
+                    android:id="@+id/textView38"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="955dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="(0) $0.00       "
+                    android:id="@+id/KCAssetvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="955dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="DAY CHANGE:"
+                    android:id="@+id/textView39"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1055dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/MACADayvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1055dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="WEEK CHANGE:"
+                    android:id="@+id/textView40"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1070dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/MACAWeekvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1070dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="SHARES OWNED:"
+                    android:id="@+id/textView41"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1085dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="(0) $0.00       "
+                    android:id="@+id/MACAAssetvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1085dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="DAY CHANGE:"
+                    android:id="@+id/textView42"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1185dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/MACBDayvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1185dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="WEEK CHANGE:"
+                    android:id="@+id/textView43"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1200dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/MACBWeekvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1200dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="SHARES OWNED:"
+                    android:id="@+id/textView44"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1215dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="(0) $0.00       "
+                    android:id="@+id/MACBAssetvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1215dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="DAY CHANGE:"
+                    android:id="@+id/textView45"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1315dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/MMDayvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1315dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="WEEK CHANGE:"
+                    android:id="@+id/textView46"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1330dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/MMWeekvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1330dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="SHARES OWNED:"
+                    android:id="@+id/textView47"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1345dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="(0) $0.00       "
+                    android:id="@+id/MMAssetvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1345dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="DAY CHANGE:"
+                    android:id="@+id/textView48"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1445dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/NSXDayvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1445dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="WEEK CHANGE:"
+                    android:id="@+id/textView49"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1460dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="$0.00       "
+                    android:id="@+id/NSXWeekvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1460dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="SHARES OWNED:"
+                    android:id="@+id/textView50"
+                    android:layout_gravity="top"
+                    android:layout_marginTop="1475dp"
+                    android:layout_marginLeft="25dp"
+                    android:textColor="#252525" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="(0) $0.00       "
+                    android:id="@+id/NSXAssetvalue"
+                    android:layout_gravity="right|top"
+                    android:layout_marginTop="1475dp"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="DAY CHANGE:"
+                android:id="@+id/textView51"
+                android:layout_gravity="top"
+                android:layout_marginTop="1575dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/RMDayvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="1575dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="WEEK CHANGE:"
+                android:id="@+id/textView52"
+                android:layout_gravity="top"
+                android:layout_marginTop="1590dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="$0.00       "
+                android:id="@+id/RMWeekvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="1590dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="SHARES OWNED:"
+                android:id="@+id/textView53"
+                android:layout_gravity="top"
+                android:layout_marginTop="1605dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="#252525" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="(0) $0.00       "
+                android:id="@+id/RMAssetvalue"
+                android:layout_gravity="right|top"
+                android:layout_marginTop="1605dp"
+                android:textAlignment="viewEnd"
+                android:textColor="#252525" />
+
+        </FrameLayout></ScrollView></LinearLayout>
+

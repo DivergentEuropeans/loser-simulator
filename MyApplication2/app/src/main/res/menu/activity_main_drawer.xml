@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_physical"
+            android:icon="@mipmap/physical_icon1"
+            android:title="Physical"
+            />
+        <item
+            android:id="@+id/nav_mental"
+            android:icon="@mipmap/mental_icon1"
+            android:title="Mental" />
+        <item
+            android:id="@+id/nav_success"
+            android:icon="@mipmap/financial_icon5"
+            android:title="Success" />
+        <item
+            android:id="@+id/nav_luxury"
+            android:icon="@mipmap/luxury_icon1"
+            android:title="Luxury" />
+        <item
+            android:id="@+id/nav_love"
+            android:icon="@mipmap/love_icon1"
+            android:title="Love" />
+</group>
+
+    <item android:title="Developer">
+        <menu>
+            <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@mipmap/about_icon1"
+                android:title="About Me" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
