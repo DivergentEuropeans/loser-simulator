@@ -932,7 +932,7 @@ public class MainActivity extends AppCompatActivity {
         if (firstTimePlaying == 1 && daysNotDead > 0)
             messagePrompt("<Welcome back.>\n\n You have been alive for " + daysNotDead + " days.", 1200);
         if (firstTimePlaying == 1 && daysNotDead == 0)
-            messagePrompt("<Welcome back.>\n\n Back to square 1.", 1200);
+            messagePrompt("<Welcome.>\n\n Back to square 1.", 1200);
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commit();
@@ -7348,7 +7348,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (daysNotDead > 14) {
             if (daysNotDead % 28 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Clicking on the purple Respawn Token to the right allows you to see your Health and Happiness drain, along with number of Respawn Tokens. \n" +
+                messagePrompt("TIP(!) - Clicking on the purple Respawn Token to the right allows you to see how much your Health and Happiness decreases by, along with number of Respawn Tokens if any. \n" +
                         "\nHappiness drain increases by 2. ", 1500);
             } else if (daysNotDead % 21 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt("TIP(!) - Save up your Net Worth for education. Eventually, you can learn your way to a higher-paying job. \n\nHealth drain increases by 2. ", 1500);
@@ -7358,19 +7358,19 @@ public class MainActivity extends AppCompatActivity {
                 messagePrompt("TIP(!) - Once your Health or Happiness hit zero, you enter a 48 hour buffer zone or eventually, die. Use this to your advantage by accomplishing the most draining tasks during this time.\n\nHappiness drain increases by 1. ", 1500);
             } else if (daysNotDead % 7 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt("TIP(!) - A handful of inexpensive activities will be more effective than" +
-                        " a few expensive ones. However, the effectiveness of an activity decreases with time.\n\nHealth drain increases by 1. ", 1500);
+                        " a couple expensive ones. However, the effectiveness of an activity decreases with time.\n\nHealth drain increases by 1. ", 1500);
             }
         }
         if (daysNotDead > 2 && dayMessage == 1)
         {
             dayMessage = 0;
-            messagePrompt("You have survived " + daysNotDead + " days.\n\nEvery 3 functions you complete, equates to 1 day not being dead.", 1200);
+            messagePrompt("Congratulations! You have survived " + daysNotDead + " days.\n\nEvery 3 functions you complete, equates to 1 day of being alive. The days you are alive represents your score.", 1200);
         }
         if (loveCounter2 > 90)
         {
             if (hasPartner == 1 && isMarried == 0 && isEngaged == 0) {
                 messagePrompt("It's been over a month since your last date. You have not been returning texts or calls.\n\n<I regret" +
-                        " to inform you, but your partner has broken up with you.>\n\nYou are now single, again. Your happiness took a low" +
+                        " to inform you, but your partner has broken up with you.>\n\nYou are now single... again. Your happiness took a low" +
                         " blow.", 3500);
                 hasPartner = 0;
                 isEngaged = 0;
@@ -7380,7 +7380,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (hasPartner == 1 && isEngaged == 1 && isMarried == 0) {
                 messagePrompt("It's been over a month since your last date. You have not been returning texts or calls.\n\n<I regret" +
-                        " to inform you, but your fiance has broken up with you.>\n\nYou are now single, and can no longer get married.", 3500);
+                        " to inform you, but your fiance has broken up with you.>\n\nYou are now single, and are no longer eligible to get married.", 3500);
                 happinessLevel = happinessLevel - 400;
                 hasPartner = 0;
                 isEngaged = 0;
@@ -7472,10 +7472,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        messagePrompt("Open the Category menu by swiping right from the left side, or clicking on the status bar screen.", 1500);
+        messagePrompt("Open the categories menu by swiping from left to right, or by clicking on the top left icon.", 1500);
 
-        messagePrompt("<Well, since you skipped the tutorial, I'm going to assume that you'll never need " +
-                "it again.> \n\nGood luck.", 1500);
+        messagePrompt("<Well, since you skipped the tutorial, I'm going to assume that you won't need " +
+                "it and thus will never show it to you again.> \n\nGood luck.", 1500);
     }
 
     public void functionDone(View view) {

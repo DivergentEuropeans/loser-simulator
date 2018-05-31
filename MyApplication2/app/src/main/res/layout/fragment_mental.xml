@@ -1,4 +1,4 @@
-<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+<RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -7,34 +7,18 @@
         android:orientation="vertical" >
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
+            tools:context="com.loser.superfruit86.myapplication.PhysicalFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            tools:context="com.loser.superfruit86.myapplication.PhysicalFragment">
+            android:background="@mipmap/secdefault5"
+            android:minHeight="400dp">
 
 
             <!-- TODO: Update blank fragment layout -->
-            <TextView
-                android:layout_width="385dp"
-
-                android:textColor="#ffffff"
-                android:textAlignment="center"
-                android:gravity="top"
-                android:textSize="35dp"
-                android:textStyle="bold"
-                android:autoText="true"
-
-                android:background="@mipmap/secdefault5"
-                android:layout_height="360dp"
-                android:layout_gravity="center_horizontal|bottom" />
-            <RelativeLayout android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-            </RelativeLayout>
 
             <Button
                 android:layout_width="350dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/my_button_bg"
                 android:text="Kill some time. ($)"
                 android:id="@+id/buttonTime"
@@ -45,7 +29,7 @@
 
             <Button
                 android:layout_width="350dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/my_button_bg"
                 android:text="Seek professional help. ($$)"
                 android:id="@+id/buttonHelp"
@@ -56,7 +40,7 @@
 
             <Button
                 android:layout_width="350dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/my_button_bg"
                 android:text="Take some narcotics. ($$$)"
                 android:id="@+id/buttonDrugs"
@@ -72,4 +56,4 @@
                 android:layout_gravity="center_horizontal|top"
                 android:src="@mipmap/ment_text" />
         </FrameLayout>
-    </ScrollView></LinearLayout>
+    </ScrollView></RelativeLayout>

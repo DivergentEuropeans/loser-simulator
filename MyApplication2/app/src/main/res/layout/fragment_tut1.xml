@@ -1,4 +1,4 @@
-<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+<RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,24 +9,12 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@mipmap/secdefaulttut1_2"
+            android:minHeight="400dp"
             xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
             <!-- TODO: Update blank fragment layout -->
-            <TextView
-                android:layout_width="385dp"
-
-                android:textColor="#ffffff"
-                android:textAlignment="center"
-                android:gravity="top"
-                android:textSize="35dp"
-                android:textStyle="bold"
-                android:autoText="true"
-
-                android:background="@mipmap/secdefaulttut1_2"
-                android:layout_height="360dp"
-                android:layout_gravity="center_horizontal|bottom" />
-
 
             <Button
                 android:layout_width="130dp"
@@ -54,4 +42,4 @@
 
 
         </FrameLayout>
-    </ScrollView></LinearLayout>
+    </ScrollView></RelativeLayout>

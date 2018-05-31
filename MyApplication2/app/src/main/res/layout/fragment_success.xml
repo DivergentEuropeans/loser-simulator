@@ -1,4 +1,4 @@
-<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+<RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,22 +11,12 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@mipmap/secdefault5"
+            android:minHeight="400dp"
             tools:context="com.loser.superfruit86.myapplication.SuccessFragment">
 
 
             <!-- TODO: Update blank fragment layout -->
-            <TextView
-                android:layout_width="400sp"
-
-                android:layout_height="435dp"
-                android:layout_gravity="center_horizontal|bottom"
-                android:autoText="false"
-                android:background="@mipmap/secdefault5"
-                android:gravity="top"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="35dp"
-                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/buttonCareers"
@@ -92,4 +82,4 @@
                 android:layout_gravity="center_horizontal|top"
                 android:src="@mipmap/succ_text" />
         </FrameLayout>
-</ScrollView></LinearLayout>
+</ScrollView></RelativeLayout>
