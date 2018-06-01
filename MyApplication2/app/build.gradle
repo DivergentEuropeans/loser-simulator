@@ -8,8 +8,8 @@ android {
         applicationId "com.loser.superfruit86.myapplication"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 19
-        versionName "4.01"
+        versionCode 21
+        versionName "4.03"
     }
     buildTypes {
         release {

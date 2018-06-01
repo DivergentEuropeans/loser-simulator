@@ -8339,6 +8339,7 @@ public class MainActivity extends AppCompatActivity {
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#b3d9ff"));
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(50);
                 ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(50);
+                ((TextView) findViewById(R.id.happinessIndicator)).setText("");
             }
         if (firstTimeHappinessIndicator == 0 && happinessLevel > 50)
         {
@@ -8378,6 +8379,7 @@ public class MainActivity extends AppCompatActivity {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ff9999"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(50);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(50);
+            ((TextView) findViewById(R.id.healthIndicator)).setText("");
         }
         if (firstTimeHealthIndicator == 0 && healthRange > 50)
         {
