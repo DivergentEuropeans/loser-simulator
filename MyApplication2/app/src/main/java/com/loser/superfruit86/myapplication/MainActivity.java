@@ -698,6 +698,7 @@ public class MainActivity extends AppCompatActivity {
         RM.movingPeriod = (sharedPref.getInt("RM movingPeriod", RM.movingPeriod));
         IBC.movingPeriod = (sharedPref.getInt("IBC movingPeriod", IBC.movingPeriod));
         FWB.movingPeriod = (sharedPref.getInt("FWB movingPeriod", FWB.movingPeriod));
+        
         editor.apply();
     }
 
@@ -6815,7 +6816,7 @@ public class MainActivity extends AppCompatActivity {
         if (daysNotDead >= 30) {
             if (happinessLevel < 15 && healthRange < 15 && popupCounter1 == 1) {
                 popupCounter1 = 0;
-                messagePrompt(" Your health and happiness are both low. You are both sick and depressed. ", 1000);
+                messagePrompt(" Your health and happiness are both low. \n\nYou are both sick and depressed. ", 1000);
                 return;
             } else if (healthRange < 14 && popupCounter2 == 1) {
                 popupCounter2 = 0;
@@ -6850,7 +6851,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (daysNotDead >= 45) {
             if (happinessLevel < 25 && healthRange < 25 && popupCounter1 == 1) {
                 popupCounter1 = 0;
-                messagePrompt(" Your health and happiness are both low. You are both sick and depressed. ", 1000);
+                messagePrompt(" Your health and happiness are both low. \n\nYou are both sick and depressed. ", 1000);
                 return;
             } else if (healthRange < 24 && popupCounter2 == 1) {
                 popupCounter2 = 0;
@@ -6885,7 +6886,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (daysNotDead >= 75) {
             if (happinessLevel < 35 && healthRange < 35 && popupCounter1 == 1) {
                 popupCounter1 = 0;
-                messagePrompt(" Your health and happiness are both low. You are both sick and depressed. ", 1000);
+                messagePrompt(" Your health and happiness are both low. \n\nYou are both sick and depressed. ", 1000);
                 return;
             } else if (healthRange < 34 && popupCounter2 == 1) {
                 popupCounter2 = 0;
@@ -6919,7 +6920,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             if (happinessLevel < 9 && healthRange < 9 && popupCounter1 == 1) {
                 popupCounter1 = 0;
-                messagePrompt(" Your health and happiness are both low. You are both sick and depressed. ", 1000);
+                messagePrompt(" Your health and happiness are both low. \n\nYou are both sick and depressed. ", 1000);
                 return;
             } else if (healthRange < 8 && popupCounter2 == 1) {
 
@@ -7314,19 +7315,19 @@ public class MainActivity extends AppCompatActivity {
                 }
         } else if (daysNotDead > 70) {
             if (daysNotDead % 84 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Assets that you own (for ex. shares of a stock) are taxed at a much lower rate " +
-                        "than your Net Worth. \n\nHappiness drain increases by 8. ", 800);
+                messagePrompt("TIP(!) - Wall Street assets (stocks) are taxed at a much lower rate " +
+                        "than your Net Worth. This will be important when taxes are collected every 90 days. \n\nHappiness drain increases by 8. ", 800);
             } else if (daysNotDead % 77 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt("TIP(!) - Every 90 days, taxes are collected. The amount you pay is calculated by an algorithm" +
-                        " based on how much money you've made, how much Net Worth you have, stock assets, and other variables.\n\nHealth drain increases by 8. ", 800);
+                        " based on how much money you have made, how much Net Worth you have, and Wall Street (stock) assets which are taxed less.\n\nHealth drain increases by 8. ", 800);
             }
         } else if (daysNotDead > 56) {
             if (daysNotDead % 70 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt(" You have been alive for " + daysNotDead +
                         " days now. Happiness drain increases by 5. ", 800);
             } else if (daysNotDead % 63 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - You can kill yourself in the Success category to save your Respawn Tokens. If you do, you can " +
-                                "reincarnate back to Day 1, but you will have a Respawn Token already handy. \n\nHealth drain increases by 5. ", 800);
+                messagePrompt("TIP(!) - You can kill yourself in the Success category to save your Respawn Tokens. If you do, you will restart " +
+                                "the game back to Day 1, but start with 1 Respawn Token instead of 0. \n\nHealth drain increases by 5. ", 800);
             }
         } else if (daysNotDead > 42) {
             if (daysNotDead % 56 == 0 && daysNotDeadCycle == 0) {
@@ -7349,17 +7350,17 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (daysNotDead > 14) {
             if (daysNotDead % 28 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Clicking on the purple Respawn Token to the right allows you to see how much your Health and Happiness decreases by, along with number of Respawn Tokens if any. \n" +
+                messagePrompt("TIP(!) - Clicking on the purple Respawn Token to the right allows you to see how much your Health and Happiness decreases by, along with the number of Respawn Tokens (if any). \n" +
                         "\nHappiness drain increases by 2. ", 1500);
             } else if (daysNotDead % 21 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt("TIP(!) - Save up your Net Worth for education. Eventually, you can learn your way to a higher-paying job. \n\nHealth drain increases by 2. ", 1500);
             }
         } else if (daysNotDead > 0) {
             if (daysNotDead % 14 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Once your Health or Happiness hit zero, you enter a 48 hour buffer zone or eventually, die. Use this to your advantage by accomplishing the most draining tasks during this time.\n\nHappiness drain increases by 1. ", 1500);
+                messagePrompt("TIP(!) - Once your Health or Happiness hit zero, you enter a 24 hour buffer zone or eventually, die. Use this to your advantage by accomplishing the most punishing tasks during this time.\n\nHappiness drain increases by 1. ", 1500);
             } else if (daysNotDead % 7 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt("TIP(!) - A handful of inexpensive activities will be more effective than" +
-                        " a couple expensive ones. However, the effectiveness of an activity decreases with time.\n\nHealth drain increases by 1. ", 1500);
+                        " a few expensive ones. However, as your drains increase, this will become less effective and you will need more expensive alternatives.\n\nHealth drain increases by 1. ", 1500);
             }
         }
         if (daysNotDead > 2 && dayMessage == 1)

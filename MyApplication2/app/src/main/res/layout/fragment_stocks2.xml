@@ -543,7 +543,8 @@
                 android:layout_height="90dp"
                 android:id="@+id/imageView3"
                 android:layout_gravity="center_horizontal|top"
-                android:src="@mipmap/sell_text" />
+                android:src="@mipmap/sell_text"
+                    android:onClick="functionStocks"/>
 
             <TextView
                     android:layout_width="wrap_content"
