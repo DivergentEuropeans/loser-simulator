@@ -53,200 +53,165 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
 
     // --------------------- STATS OF USER --------------
-    public int highScore = 0;
-    public int daysNotDead = 0;
-    public int daysNotDeadCycle = 0; //every 3rd iteration adds +1 to daysNotDead
-    public BigDecimal netWorth = new BigDecimal("1000.00"); //starting netWorth
-    public BigDecimal totalEarned = new BigDecimal("0.00");
-    public int happinessLevel = 38;
-    public int healthRange = 38;
-    public int happinessDrain = 3;
-    public int healthDrain = 3;
-    public int drainVariable = 1;
-    public int respawnToken = 0;
-    public int hasPartner = 0; //trigger to check if user is 0 - single 1 - partner
-    public int educationDrain = 1;
-    public int luxuryDrain = 1;
-    public int loveDrain = 1;
-    public int deathCounter = 0;
-    public int popupCounter1 = 1;
-    public int popupCounter2 = 1;
-    public int popupCounter3 = 1;
-    public int cheatingCounter = 0;
-    public int firstTimePlaying = 0;
-    public int succMessage = 1;
-    public int luxuMessage = 1;
-    public int loveMessage = 1;
-    public int careerMessage = 1;
-    public int educMessage = 1;
-    public int dayMessage = 1;
-    public int hasWon = 0;
-    public int taxSeason = 1;
-    public int taxCollector = 0;
-    public BigDecimal taxCollection = new BigDecimal("0.00");
-    public int difficulty = 0;
-    public int securityCounter = 0;
+    public int highScore;
+    public int daysNotDead;
+    public int daysNotDeadCycle;
+    public BigDecimal netWorth;
+    public BigDecimal totalEarned;
+    public int happinessLevel;
+    public int healthRange;
+    public int happinessDrain;
+    public int healthDrain;
+    public int drainVariable;
+    public int respawnToken;
+    public int hasPartner; //trigger to check if user is 0 - single 1 - partner
+    public int educationDrain;
+    public int luxuryDrain;
+    public int loveDrain;
+    public int deathCounter;
+    public int popupCounter1;
+    public int popupCounter2;
+    public int popupCounter3;
+    public int cheatingCounter;
+    public int firstTimePlaying;
+    public int succMessage;
+    public int luxuMessage;
+    public int loveMessage;
+    public int careerMessage;
+    public int educMessage;
+    public int dayMessage;
+    public int hasWon;
+    public int taxSeason;
+    public int taxCollector;
+    public BigDecimal taxCollection;
+    public int difficulty;
+    public int securityCounter;
 
 
     // ---------------------- ATTRIBUTES OF USER -----------
-    public int isHomeless = 0; //trigger to check if user is homeless 0 - not homeless 1 - homeless
-    public int isSick = 0;
+    public int isHomeless; //trigger to check if user is homeless 0 - not homeless 1 - homeless
+    public int isSick;
     //1 - Rhinovirus(cold)
     //2 - Influenza(flu)
     //3 - Strep Throat(streptococcus)
     //4 - Heart Disease
     //5 - Type 2 Diabetes
     //6 - Cancer
-    public int sicknessCounter = 0;
-    public int luxuryCounter = 0;
-    public int luxuryCounter2 = 0; //luxury every 7 days
-    public int loveCounter = 0;    //love every 14 days
-    public int loveCounter2 = 0;
-    public int gymCounter = 0;
-    public int pShakeCounter = 0;
-    public int showCounter = 0;
-    public int supplementCounter = 0;
-    public int medicationCounter = 0;
-    public int therapyCounter = 0;
-    public int barCounter = 0;
-    public int tradeCounter = 0;
-    public int firstTimeHealthIndicator = 0;
-    public int firstTimeHappinessIndicator = 0;
-    public int loveUnlock1 = 0;
-    public int loveUnlock2 = 0;
-    public int loveUnlock3 = 0;
-    public int loveUnlock4 = 0;
-    public int loveUnlock5 = 0;
-    public int loveUnlock6 = 0;
+    public int sicknessCounter;
+    public int luxuryCounter;
+    public int luxuryCounter2; //luxury every 7 days
+    public int loveCounter;    //love every 14 days
+    public int loveCounter2;
+    public int gymCounter;
+    public int pShakeCounter;
+    public int showCounter;
+    public int supplementCounter;
+    public int medicationCounter;
+    public int therapyCounter;
+    public int barCounter;
+    public int tradeCounter;
+    public int firstTimeHealthIndicator;
+    public int firstTimeHappinessIndicator;
+    public int loveUnlock1;
+    public int loveUnlock2;
+    public int loveUnlock3;
+    public int loveUnlock4;
+    public int loveUnlock5;
+    public int loveUnlock6;
 
-    public int isEducated = 0; //trigger to check if user has 0 - no schooling 1 - took 1 class 2 - bachelors 3 - masters 4 - doctors
-    public int collegeClassesTaken = 0;//5 classes needed to go to grad school
-    public int gradClassesTaken = 0;//10 classes needed to get masters
-    public int postGradClassesTaken = 0;//15 classes needed to get masters
+    public int isEducated; //trigger to check if user has 0 - no schooling 1 - took 1 class 2 - bachelors 3 - masters 4 - doctors
+    public int collegeClassesTaken;//5 classes needed to go to grad school
+    public int gradClassesTaken;//10 classes needed to get masters
+    public int postGradClassesTaken;//15 classes needed to get masters
 
-    public int isEmployed = 1; //trigger to check if user is employed 0 - not employed 1 - employed
-    public int jobCounter = 0;
-    public int jobCycle = 0;
-    public int payRate = 155;//1x
+    public int isEmployed; //trigger to check if user is employed 0 - not employed 1 - employed
+    public int jobCounter;
+    public int jobCycle;
+    public int payRate;
 
-    public int job2Trigger = 0;
-    public int jobCycle2 = 0;
-    public int payRate2 = 225;//1.5x
+    public int job2Trigger;
+    public int jobCycle2;
+    public int payRate2;
 
-    public int jobCycle3 = 0;
-    public int payRate3 = 335;//2.2x
+    public int jobCycle3;
+    public int payRate3;
 
-    public int jobCycle4 = 0;
-    public int payRate4 = 510;//3.3x
-    public int job4Trigger = 0;
+    public int jobCycle4;
+    public int payRate4;
+    public int job4Trigger;
 
-    public int jobCycle5 = 0;
-    public int payRate5 = 1100;//7x
+    public int jobCycle5;
+    public int payRate5;
 
-    public int jobCycle6 = 0;
-    public int payRate6 = 3100;//20x
-    public int job6Trigger = 0;
+    public int jobCycle6;
+    public int payRate6;
+    public int job6Trigger;
 
-    public int jobCycle7 = 0;
-    public int payRate7 = 6400;//40x
+    public int jobCycle7;
+    public int payRate7;
 
-    public int jobCycle8 = 0;
-    public int payRate8 = 13000;//85x
-    public int job8Trigger = 0;
+    public int jobCycle8;
+    public int payRate8;
+    public int job8Trigger;
 
-    public int jobCycle9 = 0;
-    public int payRate9 = 29000;//190x
-    public int jobCEOTrigger = 0;
-    public int jobCEOReference = 0;
+    public int jobCycle9;
+    public int payRate9;
+    public int jobCEOTrigger;
+    public int jobCEOReference;
 
-    public int lotteryCycle = 0;
-    public int isMarried = 0;
-    public int isEngaged = 0;
-    public int hasSecurity = 0;
-    public int partnerKidnap = 0;
+    public int lotteryCycle;
+    public int isMarried;
+    public int isEngaged;
+    public int hasSecurity;
+    public int partnerKidnap;
 
     // --------------- STOCK DATA -------------------
 
-    public BigDecimal valueDayAgo = new BigDecimal("0.00");
-    public BigDecimal valueNow = new BigDecimal("0.00");
-    public BigDecimal value29DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value28DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value27DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value26DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value25DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value24DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value23DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value22DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value21DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value20DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value19DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value18DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value17DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value16DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value15DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value14DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value13DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value12DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value11DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value10DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value9DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value8DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value7DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value6DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value5DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value4DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value3DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value2DaysAgo = new BigDecimal("0.00");
+    public BigDecimal valueDayAgo;
+    public BigDecimal valueNow;
+    public BigDecimal value29DaysAgo;
+    public BigDecimal value28DaysAgo;
+    public BigDecimal value27DaysAgo;
+    public BigDecimal value26DaysAgo;
+    public BigDecimal value25DaysAgo;
+    public BigDecimal value24DaysAgo;
+    public BigDecimal value23DaysAgo;
+    public BigDecimal value22DaysAgo;
+    public BigDecimal value21DaysAgo;
+    public BigDecimal value20DaysAgo;
+    public BigDecimal value19DaysAgo;
+    public BigDecimal value18DaysAgo;
+    public BigDecimal value17DaysAgo;
+    public BigDecimal value16DaysAgo;
+    public BigDecimal value15DaysAgo;
+    public BigDecimal value14DaysAgo;
+    public BigDecimal value13DaysAgo;
+    public BigDecimal value12DaysAgo;
+    public BigDecimal value11DaysAgo;
+    public BigDecimal value10DaysAgo;
+    public BigDecimal value9DaysAgo;
+    public BigDecimal value8DaysAgo;
+    public BigDecimal value7DaysAgo;
+    public BigDecimal value6DaysAgo;
+    public BigDecimal value5DaysAgo;
+    public BigDecimal value4DaysAgo;
+    public BigDecimal value3DaysAgo;
+    public BigDecimal value2DaysAgo;
 
-    public BigDecimal value30DaysAgo = new BigDecimal("0.00");
-    public BigDecimal value90DaysAgo = new BigDecimal("0.00");
-    public BigDecimal RM_low = new BigDecimal("26.00");
-    public BigDecimal RM_high = new BigDecimal("37.00");
-    public Stock RM = new Stock(RM_high, RM_low, 2, 13);
-
-    public BigDecimal IBC_low = new BigDecimal("115.00");
-    public BigDecimal IBC_high = new BigDecimal("165.00");
-    public Stock IBC = new Stock(IBC_high, IBC_low, 3, 148);
-
-    public BigDecimal FWB_low = new BigDecimal("43.00");
-    public BigDecimal FWB_high = new BigDecimal("55.00");
-    public Stock FWB = new Stock(FWB_high, FWB_low, 1, 11);
-
-    public BigDecimal KC_low = new BigDecimal("40.00");
-    public BigDecimal KC_high = new BigDecimal("47.00");
-    public Stock KC = new Stock(KC_high, KC_low, 2, 22);
-
-    public BigDecimal ET_low = new BigDecimal("40.00");
-    public BigDecimal ET_high = new BigDecimal("60.00");
-    public Stock ET = new Stock(ET_high, ET_low, 1, 39);
-
-    public BigDecimal NSX_low = new BigDecimal("70.00");
-    public BigDecimal NSX_high = new BigDecimal("95.00");
-    public Stock NSX = new Stock(NSX_high, NSX_low, 4, 41);
-
-    public BigDecimal FU_low = new BigDecimal("19.00");
-    public BigDecimal FU_high = new BigDecimal("30.00");
-    public Stock FU = new Stock(FU_high, FU_low, 2, 164);
-
-    public BigDecimal AP_low = new BigDecimal("94.00");
-    public BigDecimal AP_high = new BigDecimal("132.00");
-    public Stock AP = new Stock(AP_high, AP_low, 3, 72);
-
-    public BigDecimal BNN_low = new BigDecimal("60.00");
-    public BigDecimal BNN_high = new BigDecimal("82.00");
-    public Stock BNN = new Stock(BNN_high, BNN_low, 3, 17);
-
-    public BigDecimal MACA_low = new BigDecimal("187000.00");
-    public BigDecimal MACA_high = new BigDecimal("227000.00");
-    public Stock MACA = new Stock(MACA_high, MACA_low, 2, 63);
-
-    public BigDecimal MACB_low = new BigDecimal("125.00");
-    public BigDecimal MACB_high = new BigDecimal("151.00");
-    public Stock MACB = new Stock(MACB_high, MACB_low, 2, 63);
-
-    public BigDecimal MM_low = new BigDecimal("56.00");
-    public BigDecimal MM_high = new BigDecimal("75.00");
-    public Stock MM = new Stock(MM_high, MM_low, 1, 94);
+    public BigDecimal value30DaysAgo;
+    public BigDecimal value90DaysAgo;
+    public Stock RM;
+    public Stock IBC;
+    public Stock FWB;
+    public Stock KC;
+    public Stock ET;
+    public Stock NSX;
+    public Stock FU;
+    public Stock AP;
+    public Stock BNN;
+    public Stock MACA;
+    public Stock MACB;
+    public Stock MM;
     /*
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -260,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        resetStocks();
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         //editor.clear();
@@ -545,6 +511,8 @@ public class MainActivity extends AppCompatActivity {
             netWorth = new BigDecimal(i);
         }
 
+        totalEarned = new BigDecimal(sharedPref.getInt("totalEarned", 0));
+
         String c = sharedPref.getString("taxCollectionS", "0.00");
         taxCollection = new BigDecimal(c);
 
@@ -663,6 +631,8 @@ public class MainActivity extends AppCompatActivity {
         RM.value = new BigDecimal(sharedPref.getInt("RM value", RM.value.intValue()));
         IBC.value = new BigDecimal(sharedPref.getInt("IBC value", IBC.value.intValue()));
         FWB.value = new BigDecimal(sharedPref.getInt("FWB value", FWB.value.intValue()));
+        KC.value = new BigDecimal(sharedPref.getInt("KC value", KC.value.intValue()));
+
         ET.sharesOwned = (sharedPref.getInt("ET shares", ET.sharesOwned));
         NSX.sharesOwned = (sharedPref.getInt("NSX shares", NSX.sharesOwned));
         FU.sharesOwned = (sharedPref.getInt("FU shares", FU.sharesOwned));
@@ -674,6 +644,7 @@ public class MainActivity extends AppCompatActivity {
         RM.sharesOwned = (sharedPref.getInt("RM shares", RM.sharesOwned));
         IBC.sharesOwned = (sharedPref.getInt("IBC shares", IBC.sharesOwned));
         FWB.sharesOwned = (sharedPref.getInt("FWB shares", FWB.sharesOwned));
+        KC.sharesOwned = (sharedPref.getInt("KC shares", KC.sharesOwned));
 
         ET.growth = (sharedPref.getInt("ET growth", ET.growth));
         NSX.growth = (sharedPref.getInt("NSX growth", NSX.growth));
@@ -686,6 +657,7 @@ public class MainActivity extends AppCompatActivity {
         RM.growth = (sharedPref.getInt("RM growth", RM.growth));
         IBC.growth = (sharedPref.getInt("IBC growth", IBC.growth));
         FWB.growth = (sharedPref.getInt("FWB growth", FWB.growth));
+        KC.growth = (sharedPref.getInt("KC growth", KC.growth));
 
         ET.movingPeriod = (sharedPref.getInt("ET movingPeriod", ET.movingPeriod));
         NSX.movingPeriod = (sharedPref.getInt("NSX movingPeriod", NSX.movingPeriod));
@@ -698,7 +670,22 @@ public class MainActivity extends AppCompatActivity {
         RM.movingPeriod = (sharedPref.getInt("RM movingPeriod", RM.movingPeriod));
         IBC.movingPeriod = (sharedPref.getInt("IBC movingPeriod", IBC.movingPeriod));
         FWB.movingPeriod = (sharedPref.getInt("FWB movingPeriod", FWB.movingPeriod));
-        
+        KC.movingPeriod = (sharedPref.getInt("KC movingPeriod", KC.movingPeriod));
+
+        //Stock updating
+        ET.value = new BigDecimal(sharedPref.getInt("ET value", ET.value.intValue())); ET.value2 = new BigDecimal(sharedPref.getInt("ET value2", ET.value2.intValue())); ET.value3 = new BigDecimal(sharedPref.getInt("ET value3", ET.value3.intValue())); ET.value4 = new BigDecimal(sharedPref.getInt("ET value4", ET.value4.intValue())); ET.value5 = new BigDecimal(sharedPref.getInt("ET value5", ET.value5.intValue())); ET.value6 = new BigDecimal(sharedPref.getInt("ET value6", ET.value6.intValue())); ET.value7 = new BigDecimal(sharedPref.getInt("ET value7", ET.value7.intValue())); ET.value8 = new BigDecimal(sharedPref.getInt("ET value8", ET.value8.intValue())); ET.value9 = new BigDecimal(sharedPref.getInt("ET value9", ET.value9.intValue())); ET.value10 = new BigDecimal(sharedPref.getInt("ET value10", ET.value10.intValue())); ET.value11 = new BigDecimal(sharedPref.getInt("ET value11", ET.value11.intValue())); ET.value12 = new BigDecimal(sharedPref.getInt("ET value12", ET.value12.intValue())); ET.value13 = new BigDecimal(sharedPref.getInt("ET value13", ET.value13.intValue())); ET.value14 = new BigDecimal(sharedPref.getInt("ET value14", ET.value14.intValue())); ET.value15 = new BigDecimal(sharedPref.getInt("ET value15", ET.value15.intValue())); ET.value16 = new BigDecimal(sharedPref.getInt("ET value16", ET.value16.intValue())); ET.value17 = new BigDecimal(sharedPref.getInt("ET value17", ET.value17.intValue())); ET.value18 = new BigDecimal(sharedPref.getInt("ET value18", ET.value18.intValue())); ET.value19 = new BigDecimal(sharedPref.getInt("ET value19", ET.value19.intValue())); ET.value20 = new BigDecimal(sharedPref.getInt("ET value20", ET.value20.intValue())); ET.value21 = new BigDecimal(sharedPref.getInt("ET value21", ET.value21.intValue())); ET.value22 = new BigDecimal(sharedPref.getInt("ET value22", ET.value22.intValue())); ET.value23 = new BigDecimal(sharedPref.getInt("ET value23", ET.value23.intValue())); ET.value24 = new BigDecimal(sharedPref.getInt("ET value24", ET.value24.intValue())); ET.value25 = new BigDecimal(sharedPref.getInt("ET value25", ET.value25.intValue())); ET.value26 = new BigDecimal(sharedPref.getInt("ET value26", ET.value26.intValue())); ET.value27 = new BigDecimal(sharedPref.getInt("ET value27", ET.value27.intValue())); ET.value28 = new BigDecimal(sharedPref.getInt("ET value28", ET.value8.intValue())); ET.value29 = new BigDecimal(sharedPref.getInt("ET value29", ET.value29.intValue())); ET.value30 = new BigDecimal(sharedPref.getInt("ET value30", ET.value30.intValue()));
+        NSX.value = new BigDecimal(sharedPref.getInt("NSX value", NSX.value.intValue())); NSX.value2 = new BigDecimal(sharedPref.getInt("NSX value2", NSX.value2.intValue())); NSX.value3 = new BigDecimal(sharedPref.getInt("NSX value3", NSX.value3.intValue())); NSX.value4 = new BigDecimal(sharedPref.getInt("NSX value4", NSX.value4.intValue())); NSX.value5 = new BigDecimal(sharedPref.getInt("NSX value5", NSX.value5.intValue())); NSX.value6 = new BigDecimal(sharedPref.getInt("NSX value6", NSX.value6.intValue())); NSX.value7 = new BigDecimal(sharedPref.getInt("NSX value7", NSX.value7.intValue())); NSX.value8 = new BigDecimal(sharedPref.getInt("NSX value8", NSX.value8.intValue())); NSX.value9 = new BigDecimal(sharedPref.getInt("NSX value9", NSX.value9.intValue())); NSX.value10 = new BigDecimal(sharedPref.getInt("NSX value10", NSX.value10.intValue())); NSX.value11 = new BigDecimal(sharedPref.getInt("NSX value11", NSX.value11.intValue())); NSX.value12 = new BigDecimal(sharedPref.getInt("NSX value12", NSX.value12.intValue())); NSX.value13 = new BigDecimal(sharedPref.getInt("NSX value13", NSX.value13.intValue())); NSX.value14 = new BigDecimal(sharedPref.getInt("NSX value14", NSX.value14.intValue())); NSX.value15 = new BigDecimal(sharedPref.getInt("NSX value15", NSX.value15.intValue())); NSX.value16 = new BigDecimal(sharedPref.getInt("NSX value16", NSX.value16.intValue())); NSX.value17 = new BigDecimal(sharedPref.getInt("NSX value17", NSX.value17.intValue())); NSX.value18 = new BigDecimal(sharedPref.getInt("NSX value18", NSX.value18.intValue())); NSX.value19 = new BigDecimal(sharedPref.getInt("NSX value19", NSX.value19.intValue())); NSX.value20 = new BigDecimal(sharedPref.getInt("NSX value20", NSX.value20.intValue())); NSX.value21 = new BigDecimal(sharedPref.getInt("NSX value21", NSX.value21.intValue())); NSX.value22 = new BigDecimal(sharedPref.getInt("NSX value22", NSX.value22.intValue())); NSX.value23 = new BigDecimal(sharedPref.getInt("NSX value23", NSX.value23.intValue())); NSX.value24 = new BigDecimal(sharedPref.getInt("NSX value24", NSX.value24.intValue())); NSX.value25 = new BigDecimal(sharedPref.getInt("NSX value25", NSX.value25.intValue())); NSX.value26 = new BigDecimal(sharedPref.getInt("NSX value26", NSX.value26.intValue())); NSX.value27 = new BigDecimal(sharedPref.getInt("NSX value27", NSX.value27.intValue())); NSX.value28 = new BigDecimal(sharedPref.getInt("NSX value28", NSX.value8.intValue())); NSX.value29 = new BigDecimal(sharedPref.getInt("NSX value29", NSX.value29.intValue())); NSX.value30 = new BigDecimal(sharedPref.getInt("NSX value30", NSX.value30.intValue()));
+        FU.value = new BigDecimal(sharedPref.getInt("FU value", FU.value.intValue())); FU.value2 = new BigDecimal(sharedPref.getInt("FU value2", FU.value2.intValue())); FU.value3 = new BigDecimal(sharedPref.getInt("FU value3", FU.value3.intValue())); FU.value4 = new BigDecimal(sharedPref.getInt("FU value4", FU.value4.intValue())); FU.value5 = new BigDecimal(sharedPref.getInt("FU value5", FU.value5.intValue())); FU.value6 = new BigDecimal(sharedPref.getInt("FU value6", FU.value6.intValue())); FU.value7 = new BigDecimal(sharedPref.getInt("FU value7", FU.value7.intValue())); FU.value8 = new BigDecimal(sharedPref.getInt("FU value8", FU.value8.intValue())); FU.value9 = new BigDecimal(sharedPref.getInt("FU value9", FU.value9.intValue())); FU.value10 = new BigDecimal(sharedPref.getInt("FU value10", FU.value10.intValue())); FU.value11 = new BigDecimal(sharedPref.getInt("FU value11", FU.value11.intValue())); FU.value12 = new BigDecimal(sharedPref.getInt("FU value12", FU.value12.intValue())); FU.value13 = new BigDecimal(sharedPref.getInt("FU value13", FU.value13.intValue())); FU.value14 = new BigDecimal(sharedPref.getInt("FU value14", FU.value14.intValue())); FU.value15 = new BigDecimal(sharedPref.getInt("FU value15", FU.value15.intValue())); FU.value16 = new BigDecimal(sharedPref.getInt("FU value16", FU.value16.intValue())); FU.value17 = new BigDecimal(sharedPref.getInt("FU value17", FU.value17.intValue())); FU.value18 = new BigDecimal(sharedPref.getInt("FU value18", FU.value18.intValue())); FU.value19 = new BigDecimal(sharedPref.getInt("FU value19", FU.value19.intValue())); FU.value20 = new BigDecimal(sharedPref.getInt("FU value20", FU.value20.intValue())); FU.value21 = new BigDecimal(sharedPref.getInt("FU value21", FU.value21.intValue())); FU.value22 = new BigDecimal(sharedPref.getInt("FU value22", FU.value22.intValue())); FU.value23 = new BigDecimal(sharedPref.getInt("FU value23", FU.value23.intValue())); FU.value24 = new BigDecimal(sharedPref.getInt("FU value24", FU.value24.intValue())); FU.value25 = new BigDecimal(sharedPref.getInt("FU value25", FU.value25.intValue())); FU.value26 = new BigDecimal(sharedPref.getInt("FU value26", FU.value26.intValue())); FU.value27 = new BigDecimal(sharedPref.getInt("FU value27", FU.value27.intValue())); FU.value28 = new BigDecimal(sharedPref.getInt("FU value28", FU.value8.intValue())); FU.value29 = new BigDecimal(sharedPref.getInt("FU value29", FU.value29.intValue())); FU.value30 = new BigDecimal(sharedPref.getInt("FU value30", FU.value30.intValue()));
+        AP.value = new BigDecimal(sharedPref.getInt("AP value", AP.value.intValue())); AP.value2 = new BigDecimal(sharedPref.getInt("AP value2", AP.value2.intValue())); AP.value3 = new BigDecimal(sharedPref.getInt("AP value3", AP.value3.intValue())); AP.value4 = new BigDecimal(sharedPref.getInt("AP value4", AP.value4.intValue())); AP.value5 = new BigDecimal(sharedPref.getInt("AP value5", AP.value5.intValue())); AP.value6 = new BigDecimal(sharedPref.getInt("AP value6", AP.value6.intValue())); AP.value7 = new BigDecimal(sharedPref.getInt("AP value7", AP.value7.intValue())); AP.value8 = new BigDecimal(sharedPref.getInt("AP value8", AP.value8.intValue())); AP.value9 = new BigDecimal(sharedPref.getInt("AP value9", AP.value9.intValue())); AP.value10 = new BigDecimal(sharedPref.getInt("AP value10", AP.value10.intValue())); AP.value11 = new BigDecimal(sharedPref.getInt("AP value11", AP.value11.intValue())); AP.value12 = new BigDecimal(sharedPref.getInt("AP value12", AP.value12.intValue())); AP.value13 = new BigDecimal(sharedPref.getInt("AP value13", AP.value13.intValue())); AP.value14 = new BigDecimal(sharedPref.getInt("AP value14", AP.value14.intValue())); AP.value15 = new BigDecimal(sharedPref.getInt("AP value15", AP.value15.intValue())); AP.value16 = new BigDecimal(sharedPref.getInt("AP value16", AP.value16.intValue())); AP.value17 = new BigDecimal(sharedPref.getInt("AP value17", AP.value17.intValue())); AP.value18 = new BigDecimal(sharedPref.getInt("AP value18", AP.value18.intValue())); AP.value19 = new BigDecimal(sharedPref.getInt("AP value19", AP.value19.intValue())); AP.value20 = new BigDecimal(sharedPref.getInt("AP value20", AP.value20.intValue())); AP.value21 = new BigDecimal(sharedPref.getInt("AP value21", AP.value21.intValue())); AP.value22 = new BigDecimal(sharedPref.getInt("AP value22", AP.value22.intValue())); AP.value23 = new BigDecimal(sharedPref.getInt("AP value23", AP.value23.intValue())); AP.value24 = new BigDecimal(sharedPref.getInt("AP value24", AP.value24.intValue())); AP.value25 = new BigDecimal(sharedPref.getInt("AP value25", AP.value25.intValue())); AP.value26 = new BigDecimal(sharedPref.getInt("AP value26", AP.value26.intValue())); AP.value27 = new BigDecimal(sharedPref.getInt("AP value27", AP.value27.intValue())); AP.value28 = new BigDecimal(sharedPref.getInt("AP value28", AP.value8.intValue())); AP.value29 = new BigDecimal(sharedPref.getInt("AP value29", AP.value29.intValue())); AP.value30 = new BigDecimal(sharedPref.getInt("AP value30", AP.value30.intValue()));
+        BNN.value = new BigDecimal(sharedPref.getInt("BNN value", BNN.value.intValue())); BNN.value2 = new BigDecimal(sharedPref.getInt("BNN value2", BNN.value2.intValue())); BNN.value3 = new BigDecimal(sharedPref.getInt("BNN value3", BNN.value3.intValue())); BNN.value4 = new BigDecimal(sharedPref.getInt("BNN value4", BNN.value4.intValue())); BNN.value5 = new BigDecimal(sharedPref.getInt("BNN value5", BNN.value5.intValue())); BNN.value6 = new BigDecimal(sharedPref.getInt("BNN value6", BNN.value6.intValue())); BNN.value7 = new BigDecimal(sharedPref.getInt("BNN value7", BNN.value7.intValue())); BNN.value8 = new BigDecimal(sharedPref.getInt("BNN value8", BNN.value8.intValue())); BNN.value9 = new BigDecimal(sharedPref.getInt("BNN value9", BNN.value9.intValue())); BNN.value10 = new BigDecimal(sharedPref.getInt("BNN value10", BNN.value10.intValue())); BNN.value11 = new BigDecimal(sharedPref.getInt("BNN value11", BNN.value11.intValue())); BNN.value12 = new BigDecimal(sharedPref.getInt("BNN value12", BNN.value12.intValue())); BNN.value13 = new BigDecimal(sharedPref.getInt("BNN value13", BNN.value13.intValue())); BNN.value14 = new BigDecimal(sharedPref.getInt("BNN value14", BNN.value14.intValue())); BNN.value15 = new BigDecimal(sharedPref.getInt("BNN value15", BNN.value15.intValue())); BNN.value16 = new BigDecimal(sharedPref.getInt("BNN value16", BNN.value16.intValue())); BNN.value17 = new BigDecimal(sharedPref.getInt("BNN value17", BNN.value17.intValue())); BNN.value18 = new BigDecimal(sharedPref.getInt("BNN value18", BNN.value18.intValue())); BNN.value19 = new BigDecimal(sharedPref.getInt("BNN value19", BNN.value19.intValue())); BNN.value20 = new BigDecimal(sharedPref.getInt("BNN value20", BNN.value20.intValue())); BNN.value21 = new BigDecimal(sharedPref.getInt("BNN value21", BNN.value21.intValue())); BNN.value22 = new BigDecimal(sharedPref.getInt("BNN value22", BNN.value22.intValue())); BNN.value23 = new BigDecimal(sharedPref.getInt("BNN value23", BNN.value23.intValue())); BNN.value24 = new BigDecimal(sharedPref.getInt("BNN value24", BNN.value24.intValue())); BNN.value25 = new BigDecimal(sharedPref.getInt("BNN value25", BNN.value25.intValue())); BNN.value26 = new BigDecimal(sharedPref.getInt("BNN value26", BNN.value26.intValue())); BNN.value27 = new BigDecimal(sharedPref.getInt("BNN value27", BNN.value27.intValue())); BNN.value28 = new BigDecimal(sharedPref.getInt("BNN value28", BNN.value8.intValue())); BNN.value29 = new BigDecimal(sharedPref.getInt("BNN value29", BNN.value29.intValue())); BNN.value30 = new BigDecimal(sharedPref.getInt("BNN value30", BNN.value30.intValue()));
+        MACA.value = new BigDecimal(sharedPref.getInt("MACA value", MACA.value.intValue())); MACA.value2 = new BigDecimal(sharedPref.getInt("MACA value2", MACA.value2.intValue())); MACA.value3 = new BigDecimal(sharedPref.getInt("MACA value3", MACA.value3.intValue())); MACA.value4 = new BigDecimal(sharedPref.getInt("MACA value4", MACA.value4.intValue())); MACA.value5 = new BigDecimal(sharedPref.getInt("MACA value5", MACA.value5.intValue())); MACA.value6 = new BigDecimal(sharedPref.getInt("MACA value6", MACA.value6.intValue())); MACA.value7 = new BigDecimal(sharedPref.getInt("MACA value7", MACA.value7.intValue())); MACA.value8 = new BigDecimal(sharedPref.getInt("MACA value8", MACA.value8.intValue())); MACA.value9 = new BigDecimal(sharedPref.getInt("MACA value9", MACA.value9.intValue())); MACA.value10 = new BigDecimal(sharedPref.getInt("MACA value10", MACA.value10.intValue())); MACA.value11 = new BigDecimal(sharedPref.getInt("MACA value11", MACA.value11.intValue())); MACA.value12 = new BigDecimal(sharedPref.getInt("MACA value12", MACA.value12.intValue())); MACA.value13 = new BigDecimal(sharedPref.getInt("MACA value13", MACA.value13.intValue())); MACA.value14 = new BigDecimal(sharedPref.getInt("MACA value14", MACA.value14.intValue())); MACA.value15 = new BigDecimal(sharedPref.getInt("MACA value15", MACA.value15.intValue())); MACA.value16 = new BigDecimal(sharedPref.getInt("MACA value16", MACA.value16.intValue())); MACA.value17 = new BigDecimal(sharedPref.getInt("MACA value17", MACA.value17.intValue())); MACA.value18 = new BigDecimal(sharedPref.getInt("MACA value18", MACA.value18.intValue())); MACA.value19 = new BigDecimal(sharedPref.getInt("MACA value19", MACA.value19.intValue())); MACA.value20 = new BigDecimal(sharedPref.getInt("MACA value20", MACA.value20.intValue())); MACA.value21 = new BigDecimal(sharedPref.getInt("MACA value21", MACA.value21.intValue())); MACA.value22 = new BigDecimal(sharedPref.getInt("MACA value22", MACA.value22.intValue())); MACA.value23 = new BigDecimal(sharedPref.getInt("MACA value23", MACA.value23.intValue())); MACA.value24 = new BigDecimal(sharedPref.getInt("MACA value24", MACA.value24.intValue())); MACA.value25 = new BigDecimal(sharedPref.getInt("MACA value25", MACA.value25.intValue())); MACA.value26 = new BigDecimal(sharedPref.getInt("MACA value26", MACA.value26.intValue())); MACA.value27 = new BigDecimal(sharedPref.getInt("MACA value27", MACA.value27.intValue())); MACA.value28 = new BigDecimal(sharedPref.getInt("MACA value28", MACA.value8.intValue())); MACA.value29 = new BigDecimal(sharedPref.getInt("MACA value29", MACA.value29.intValue())); MACA.value30 = new BigDecimal(sharedPref.getInt("MACA value30", MACA.value30.intValue()));
+        MACB.value = new BigDecimal(sharedPref.getInt("MACB value", MACB.value.intValue())); MACB.value2 = new BigDecimal(sharedPref.getInt("MACB value2", MACB.value2.intValue())); MACB.value3 = new BigDecimal(sharedPref.getInt("MACB value3", MACB.value3.intValue())); MACB.value4 = new BigDecimal(sharedPref.getInt("MACB value4", MACB.value4.intValue())); MACB.value5 = new BigDecimal(sharedPref.getInt("MACB value5", MACB.value5.intValue())); MACB.value6 = new BigDecimal(sharedPref.getInt("MACB value6", MACB.value6.intValue())); MACB.value7 = new BigDecimal(sharedPref.getInt("MACB value7", MACB.value7.intValue())); MACB.value8 = new BigDecimal(sharedPref.getInt("MACB value8", MACB.value8.intValue())); MACB.value9 = new BigDecimal(sharedPref.getInt("MACB value9", MACB.value9.intValue())); MACB.value10 = new BigDecimal(sharedPref.getInt("MACB value10", MACB.value10.intValue())); MACB.value11 = new BigDecimal(sharedPref.getInt("MACB value11", MACB.value11.intValue())); MACB.value12 = new BigDecimal(sharedPref.getInt("MACB value12", MACB.value12.intValue())); MACB.value13 = new BigDecimal(sharedPref.getInt("MACB value13", MACB.value13.intValue())); MACB.value14 = new BigDecimal(sharedPref.getInt("MACB value14", MACB.value14.intValue())); MACB.value15 = new BigDecimal(sharedPref.getInt("MACB value15", MACB.value15.intValue())); MACB.value16 = new BigDecimal(sharedPref.getInt("MACB value16", MACB.value16.intValue())); MACB.value17 = new BigDecimal(sharedPref.getInt("MACB value17", MACB.value17.intValue())); MACB.value18 = new BigDecimal(sharedPref.getInt("MACB value18", MACB.value18.intValue())); MACB.value19 = new BigDecimal(sharedPref.getInt("MACB value19", MACB.value19.intValue())); MACB.value20 = new BigDecimal(sharedPref.getInt("MACB value20", MACB.value20.intValue())); MACB.value21 = new BigDecimal(sharedPref.getInt("MACB value21", MACB.value21.intValue())); MACB.value22 = new BigDecimal(sharedPref.getInt("MACB value22", MACB.value22.intValue())); MACB.value23 = new BigDecimal(sharedPref.getInt("MACB value23", MACB.value23.intValue())); MACB.value24 = new BigDecimal(sharedPref.getInt("MACB value24", MACB.value24.intValue())); MACB.value25 = new BigDecimal(sharedPref.getInt("MACB value25", MACB.value25.intValue())); MACB.value26 = new BigDecimal(sharedPref.getInt("MACB value26", MACB.value26.intValue())); MACB.value27 = new BigDecimal(sharedPref.getInt("MACB value27", MACB.value27.intValue())); MACB.value28 = new BigDecimal(sharedPref.getInt("MACB value28", MACB.value8.intValue())); MACB.value29 = new BigDecimal(sharedPref.getInt("MACB value29", MACB.value29.intValue())); MACB.value30 = new BigDecimal(sharedPref.getInt("MACB value30", MACB.value30.intValue()));
+        MM.value = new BigDecimal(sharedPref.getInt("MM value", MM.value.intValue())); MM.value2 = new BigDecimal(sharedPref.getInt("MM value2", MM.value2.intValue())); MM.value3 = new BigDecimal(sharedPref.getInt("MM value3", MM.value3.intValue())); MM.value4 = new BigDecimal(sharedPref.getInt("MM value4", MM.value4.intValue())); MM.value5 = new BigDecimal(sharedPref.getInt("MM value5", MM.value5.intValue())); MM.value6 = new BigDecimal(sharedPref.getInt("MM value6", MM.value6.intValue())); MM.value7 = new BigDecimal(sharedPref.getInt("MM value7", MM.value7.intValue())); MM.value8 = new BigDecimal(sharedPref.getInt("MM value8", MM.value8.intValue())); MM.value9 = new BigDecimal(sharedPref.getInt("MM value9", MM.value9.intValue())); MM.value10 = new BigDecimal(sharedPref.getInt("MM value10", MM.value10.intValue())); MM.value11 = new BigDecimal(sharedPref.getInt("MM value11", MM.value11.intValue())); MM.value12 = new BigDecimal(sharedPref.getInt("MM value12", MM.value12.intValue())); MM.value13 = new BigDecimal(sharedPref.getInt("MM value13", MM.value13.intValue())); MM.value14 = new BigDecimal(sharedPref.getInt("MM value14", MM.value14.intValue())); MM.value15 = new BigDecimal(sharedPref.getInt("MM value15", MM.value15.intValue())); MM.value16 = new BigDecimal(sharedPref.getInt("MM value16", MM.value16.intValue())); MM.value17 = new BigDecimal(sharedPref.getInt("MM value17", MM.value17.intValue())); MM.value18 = new BigDecimal(sharedPref.getInt("MM value18", MM.value18.intValue())); MM.value19 = new BigDecimal(sharedPref.getInt("MM value19", MM.value19.intValue())); MM.value20 = new BigDecimal(sharedPref.getInt("MM value20", MM.value20.intValue())); MM.value21 = new BigDecimal(sharedPref.getInt("MM value21", MM.value21.intValue())); MM.value22 = new BigDecimal(sharedPref.getInt("MM value22", MM.value22.intValue())); MM.value23 = new BigDecimal(sharedPref.getInt("MM value23", MM.value23.intValue())); MM.value24 = new BigDecimal(sharedPref.getInt("MM value24", MM.value24.intValue())); MM.value25 = new BigDecimal(sharedPref.getInt("MM value25", MM.value25.intValue())); MM.value26 = new BigDecimal(sharedPref.getInt("MM value26", MM.value26.intValue())); MM.value27 = new BigDecimal(sharedPref.getInt("MM value27", MM.value27.intValue())); MM.value28 = new BigDecimal(sharedPref.getInt("MM value28", MM.value8.intValue())); MM.value29 = new BigDecimal(sharedPref.getInt("MM value29", MM.value29.intValue())); MM.value30 = new BigDecimal(sharedPref.getInt("MM value30", MM.value30.intValue()));
+        RM.value = new BigDecimal(sharedPref.getInt("RM value", RM.value.intValue())); RM.value2 = new BigDecimal(sharedPref.getInt("RM value2", RM.value2.intValue())); RM.value3 = new BigDecimal(sharedPref.getInt("RM value3", RM.value3.intValue())); RM.value4 = new BigDecimal(sharedPref.getInt("RM value4", RM.value4.intValue())); RM.value5 = new BigDecimal(sharedPref.getInt("RM value5", RM.value5.intValue())); RM.value6 = new BigDecimal(sharedPref.getInt("RM value6", RM.value6.intValue())); RM.value7 = new BigDecimal(sharedPref.getInt("RM value7", RM.value7.intValue())); RM.value8 = new BigDecimal(sharedPref.getInt("RM value8", RM.value8.intValue())); RM.value9 = new BigDecimal(sharedPref.getInt("RM value9", RM.value9.intValue())); RM.value10 = new BigDecimal(sharedPref.getInt("RM value10", RM.value10.intValue())); RM.value11 = new BigDecimal(sharedPref.getInt("RM value11", RM.value11.intValue())); RM.value12 = new BigDecimal(sharedPref.getInt("RM value12", RM.value12.intValue())); RM.value13 = new BigDecimal(sharedPref.getInt("RM value13", RM.value13.intValue())); RM.value14 = new BigDecimal(sharedPref.getInt("RM value14", RM.value14.intValue())); RM.value15 = new BigDecimal(sharedPref.getInt("RM value15", RM.value15.intValue())); RM.value16 = new BigDecimal(sharedPref.getInt("RM value16", RM.value16.intValue())); RM.value17 = new BigDecimal(sharedPref.getInt("RM value17", RM.value17.intValue())); RM.value18 = new BigDecimal(sharedPref.getInt("RM value18", RM.value18.intValue())); RM.value19 = new BigDecimal(sharedPref.getInt("RM value19", RM.value19.intValue())); RM.value20 = new BigDecimal(sharedPref.getInt("RM value20", RM.value20.intValue())); RM.value21 = new BigDecimal(sharedPref.getInt("RM value21", RM.value21.intValue())); RM.value22 = new BigDecimal(sharedPref.getInt("RM value22", RM.value22.intValue())); RM.value23 = new BigDecimal(sharedPref.getInt("RM value23", RM.value23.intValue())); RM.value24 = new BigDecimal(sharedPref.getInt("RM value24", RM.value24.intValue())); RM.value25 = new BigDecimal(sharedPref.getInt("RM value25", RM.value25.intValue())); RM.value26 = new BigDecimal(sharedPref.getInt("RM value26", RM.value26.intValue())); RM.value27 = new BigDecimal(sharedPref.getInt("RM value27", RM.value27.intValue())); RM.value28 = new BigDecimal(sharedPref.getInt("RM value28", RM.value8.intValue())); RM.value29 = new BigDecimal(sharedPref.getInt("RM value29", RM.value29.intValue())); RM.value30 = new BigDecimal(sharedPref.getInt("RM value30", RM.value30.intValue()));
+        IBC.value = new BigDecimal(sharedPref.getInt("IBC value", IBC.value.intValue())); IBC.value2 = new BigDecimal(sharedPref.getInt("IBC value2", IBC.value2.intValue())); IBC.value3 = new BigDecimal(sharedPref.getInt("IBC value3", IBC.value3.intValue())); IBC.value4 = new BigDecimal(sharedPref.getInt("IBC value4", IBC.value4.intValue())); IBC.value5 = new BigDecimal(sharedPref.getInt("IBC value5", IBC.value5.intValue())); IBC.value6 = new BigDecimal(sharedPref.getInt("IBC value6", IBC.value6.intValue())); IBC.value7 = new BigDecimal(sharedPref.getInt("IBC value7", IBC.value7.intValue())); IBC.value8 = new BigDecimal(sharedPref.getInt("IBC value8", IBC.value8.intValue())); IBC.value9 = new BigDecimal(sharedPref.getInt("IBC value9", IBC.value9.intValue())); IBC.value10 = new BigDecimal(sharedPref.getInt("IBC value10", IBC.value10.intValue())); IBC.value11 = new BigDecimal(sharedPref.getInt("IBC value11", IBC.value11.intValue())); IBC.value12 = new BigDecimal(sharedPref.getInt("IBC value12", IBC.value12.intValue())); IBC.value13 = new BigDecimal(sharedPref.getInt("IBC value13", IBC.value13.intValue())); IBC.value14 = new BigDecimal(sharedPref.getInt("IBC value14", IBC.value14.intValue())); IBC.value15 = new BigDecimal(sharedPref.getInt("IBC value15", IBC.value15.intValue())); IBC.value16 = new BigDecimal(sharedPref.getInt("IBC value16", IBC.value16.intValue())); IBC.value17 = new BigDecimal(sharedPref.getInt("IBC value17", IBC.value17.intValue())); IBC.value18 = new BigDecimal(sharedPref.getInt("IBC value18", IBC.value18.intValue())); IBC.value19 = new BigDecimal(sharedPref.getInt("IBC value19", IBC.value19.intValue())); IBC.value20 = new BigDecimal(sharedPref.getInt("IBC value20", IBC.value20.intValue())); IBC.value21 = new BigDecimal(sharedPref.getInt("IBC value21", IBC.value21.intValue())); IBC.value22 = new BigDecimal(sharedPref.getInt("IBC value22", IBC.value22.intValue())); IBC.value23 = new BigDecimal(sharedPref.getInt("IBC value23", IBC.value23.intValue())); IBC.value24 = new BigDecimal(sharedPref.getInt("IBC value24", IBC.value24.intValue())); IBC.value25 = new BigDecimal(sharedPref.getInt("IBC value25", IBC.value25.intValue())); IBC.value26 = new BigDecimal(sharedPref.getInt("IBC value26", IBC.value26.intValue())); IBC.value27 = new BigDecimal(sharedPref.getInt("IBC value27", IBC.value27.intValue())); IBC.value28 = new BigDecimal(sharedPref.getInt("IBC value28", IBC.value8.intValue())); IBC.value29 = new BigDecimal(sharedPref.getInt("IBC value29", IBC.value29.intValue())); IBC.value30 = new BigDecimal(sharedPref.getInt("IBC value30", IBC.value30.intValue()));
+        FWB.value = new BigDecimal(sharedPref.getInt("FWB value", FWB.value.intValue())); FWB.value2 = new BigDecimal(sharedPref.getInt("FWB value2", FWB.value2.intValue())); FWB.value3 = new BigDecimal(sharedPref.getInt("FWB value3", FWB.value3.intValue())); FWB.value4 = new BigDecimal(sharedPref.getInt("FWB value4", FWB.value4.intValue())); FWB.value5 = new BigDecimal(sharedPref.getInt("FWB value5", FWB.value5.intValue())); FWB.value6 = new BigDecimal(sharedPref.getInt("FWB value6", FWB.value6.intValue())); FWB.value7 = new BigDecimal(sharedPref.getInt("FWB value7", FWB.value7.intValue())); FWB.value8 = new BigDecimal(sharedPref.getInt("FWB value8", FWB.value8.intValue())); FWB.value9 = new BigDecimal(sharedPref.getInt("FWB value9", FWB.value9.intValue())); FWB.value10 = new BigDecimal(sharedPref.getInt("FWB value10", FWB.value10.intValue())); FWB.value11 = new BigDecimal(sharedPref.getInt("FWB value11", FWB.value11.intValue())); FWB.value12 = new BigDecimal(sharedPref.getInt("FWB value12", FWB.value12.intValue())); FWB.value13 = new BigDecimal(sharedPref.getInt("FWB value13", FWB.value13.intValue())); FWB.value14 = new BigDecimal(sharedPref.getInt("FWB value14", FWB.value14.intValue())); FWB.value15 = new BigDecimal(sharedPref.getInt("FWB value15", FWB.value15.intValue())); FWB.value16 = new BigDecimal(sharedPref.getInt("FWB value16", FWB.value16.intValue())); FWB.value17 = new BigDecimal(sharedPref.getInt("FWB value17", FWB.value17.intValue())); FWB.value18 = new BigDecimal(sharedPref.getInt("FWB value18", FWB.value18.intValue())); FWB.value19 = new BigDecimal(sharedPref.getInt("FWB value19", FWB.value19.intValue())); FWB.value20 = new BigDecimal(sharedPref.getInt("FWB value20", FWB.value20.intValue())); FWB.value21 = new BigDecimal(sharedPref.getInt("FWB value21", FWB.value21.intValue())); FWB.value22 = new BigDecimal(sharedPref.getInt("FWB value22", FWB.value22.intValue())); FWB.value23 = new BigDecimal(sharedPref.getInt("FWB value23", FWB.value23.intValue())); FWB.value24 = new BigDecimal(sharedPref.getInt("FWB value24", FWB.value24.intValue())); FWB.value25 = new BigDecimal(sharedPref.getInt("FWB value25", FWB.value25.intValue())); FWB.value26 = new BigDecimal(sharedPref.getInt("FWB value26", FWB.value26.intValue())); FWB.value27 = new BigDecimal(sharedPref.getInt("FWB value27", FWB.value27.intValue())); FWB.value28 = new BigDecimal(sharedPref.getInt("FWB value28", FWB.value8.intValue())); FWB.value29 = new BigDecimal(sharedPref.getInt("FWB value29", FWB.value29.intValue())); FWB.value30 = new BigDecimal(sharedPref.getInt("FWB value30", FWB.value30.intValue()));
+        KC.value = new BigDecimal(sharedPref.getInt("KC value", KC.value.intValue())); KC.value2 = new BigDecimal(sharedPref.getInt("KC value2", KC.value2.intValue())); KC.value3 = new BigDecimal(sharedPref.getInt("KC value3", KC.value3.intValue())); KC.value4 = new BigDecimal(sharedPref.getInt("KC value4", KC.value4.intValue())); KC.value5 = new BigDecimal(sharedPref.getInt("KC value5", KC.value5.intValue())); KC.value6 = new BigDecimal(sharedPref.getInt("KC value6", KC.value6.intValue())); KC.value7 = new BigDecimal(sharedPref.getInt("KC value7", KC.value7.intValue())); KC.value8 = new BigDecimal(sharedPref.getInt("KC value8", KC.value8.intValue())); KC.value9 = new BigDecimal(sharedPref.getInt("KC value9", KC.value9.intValue())); KC.value10 = new BigDecimal(sharedPref.getInt("KC value10", KC.value10.intValue())); KC.value11 = new BigDecimal(sharedPref.getInt("KC value11", KC.value11.intValue())); KC.value12 = new BigDecimal(sharedPref.getInt("KC value12", KC.value12.intValue())); KC.value13 = new BigDecimal(sharedPref.getInt("KC value13", KC.value13.intValue())); KC.value14 = new BigDecimal(sharedPref.getInt("KC value14", KC.value14.intValue())); KC.value15 = new BigDecimal(sharedPref.getInt("KC value15", KC.value15.intValue())); KC.value16 = new BigDecimal(sharedPref.getInt("KC value16", KC.value16.intValue())); KC.value17 = new BigDecimal(sharedPref.getInt("KC value17", KC.value17.intValue())); KC.value18 = new BigDecimal(sharedPref.getInt("KC value18", KC.value18.intValue())); KC.value19 = new BigDecimal(sharedPref.getInt("KC value19", KC.value19.intValue())); KC.value20 = new BigDecimal(sharedPref.getInt("KC value20", KC.value20.intValue())); KC.value21 = new BigDecimal(sharedPref.getInt("KC value21", KC.value21.intValue())); KC.value22 = new BigDecimal(sharedPref.getInt("KC value22", KC.value22.intValue())); KC.value23 = new BigDecimal(sharedPref.getInt("KC value23", KC.value23.intValue())); KC.value24 = new BigDecimal(sharedPref.getInt("KC value24", KC.value24.intValue())); KC.value25 = new BigDecimal(sharedPref.getInt("KC value25", KC.value25.intValue())); KC.value26 = new BigDecimal(sharedPref.getInt("KC value26", KC.value26.intValue())); KC.value27 = new BigDecimal(sharedPref.getInt("KC value27", KC.value27.intValue())); KC.value28 = new BigDecimal(sharedPref.getInt("KC value28", KC.value8.intValue())); KC.value29 = new BigDecimal(sharedPref.getInt("KC value29", KC.value29.intValue())); KC.value30 = new BigDecimal(sharedPref.getInt("FWB value30", KC.value30.intValue()));
+
         editor.apply();
     }
 
@@ -734,6 +721,8 @@ public class MainActivity extends AppCompatActivity {
 
         String i = netWorth.toString();
         editor.putString("netWorthS", i);
+
+        editor.putInt("totalEarned", 0);
 
         String c = taxCollection.toString();
         editor.putString("taxCollectionS", c);
@@ -822,17 +811,13 @@ public class MainActivity extends AppCompatActivity {
     void updateStockVariables() {
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("ET shares", ET.sharesOwned);
-        editor.putInt("NSX shares", NSX.sharesOwned);
-        editor.putInt("FU shares", FU.sharesOwned);
-        editor.putInt("AP shares", AP.sharesOwned);
-        editor.putInt("BNN shares", BNN.sharesOwned);
-        editor.putInt("MACA shares", MACA.sharesOwned);
-        editor.putInt("MACB shares", MACB.sharesOwned);
-        editor.putInt("MM shares", MM.sharesOwned);
-        editor.putInt("RM shares", RM.sharesOwned);
-        editor.putInt("IBC shares", IBC.sharesOwned);
-        editor.putInt("FWB shares", FWB.sharesOwned);
+        //Please bear with me, the following ways are terrible ways to save data,
+        //and I could have totally done it recursively but I was too lazy.
+
+        //Saves to disk the shares owned
+        editor.putInt("ET shares", ET.sharesOwned);editor.putInt("NSX shares", NSX.sharesOwned);editor.putInt("FU shares", FU.sharesOwned);editor.putInt("AP shares", AP.sharesOwned);editor.putInt("BNN shares", BNN.sharesOwned);editor.putInt("MACA shares", MACA.sharesOwned);editor.putInt("MACB shares", MACB.sharesOwned);editor.putInt("MM shares", MM.sharesOwned);editor.putInt("RM shares", RM.sharesOwned);editor.putInt("IBC shares", IBC.sharesOwned);editor.putInt("FWB shares", FWB.sharesOwned);
+
+        //Saves to disk the values of each stock
         editor.putInt("ET value", ET.value.intValue());
         editor.putInt("NSX value", NSX.value.intValue());
         editor.putInt("FU value", FU.value.intValue());
@@ -844,6 +829,9 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("RM value", RM.value.intValue());
         editor.putInt("IBC value", IBC.value.intValue());
         editor.putInt("FWB value", FWB.value.intValue());
+        editor.putInt("KC value", KC.value.intValue());
+
+        //Saves to disk the state of each stock's growth (positive or negative)
         editor.putInt("ET growth", ET.growth);
         editor.putInt("NSX growth", NSX.growth);
         editor.putInt("FU growth", FU.growth);
@@ -855,6 +843,9 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("RM growth", RM.growth);
         editor.putInt("IBC growth", IBC.growth);
         editor.putInt("FWB growth", FWB.growth);
+        editor.putInt("KC growth", KC.growth);
+
+        //Saves to disk the state of each stock's moving period
         editor.putInt("ET movingPeriod", ET.movingPeriod);
         editor.putInt("NSX movingPeriod", NSX.movingPeriod);
         editor.putInt("FU movingPeriod", FU.movingPeriod);
@@ -866,6 +857,21 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("RM movingPeriod", RM.movingPeriod);
         editor.putInt("IBC movingPeriod", IBC.movingPeriod);
         editor.putInt("FWB movingPeriod", FWB.movingPeriod);
+        editor.putInt("KC movingPeriod", KC.movingPeriod);
+
+        //Saves to disk the state of each stock's previous values
+        editor.putInt("ET value", ET.value.intValue()); editor.putInt("ET value2", ET.value2.intValue()); editor.putInt("ET value3", ET.value3.intValue()); editor.putInt("ET value4", ET.value4.intValue()); editor.putInt("ET value5", ET.value5.intValue()); editor.putInt("ET value6", ET.value6.intValue()); editor.putInt("ET value7", ET.value7.intValue()); editor.putInt("ET value8", ET.value8.intValue()); editor.putInt("ET value9", ET.value9.intValue()); editor.putInt("ET value10", ET.value10.intValue()); editor.putInt("ET value11", ET.value11.intValue()); editor.putInt("ET value12", ET.value12.intValue()); editor.putInt("ET value13", ET.value13.intValue()); editor.putInt("ET value14", ET.value14.intValue()); editor.putInt("ET value15", ET.value15.intValue()); editor.putInt("ET value16", ET.value16.intValue()); editor.putInt("ET value17", ET.value17.intValue()); editor.putInt("ET value18", ET.value18.intValue()); editor.putInt("ET value19", ET.value19.intValue()); editor.putInt("ET value20", ET.value20.intValue()); editor.putInt("ET value21", ET.value21.intValue()); editor.putInt("ET value22", ET.value22.intValue()); editor.putInt("ET value23", ET.value23.intValue()); editor.putInt("ET value24", ET.value24.intValue()); editor.putInt("ET value25", ET.value25.intValue()); editor.putInt("ET value26", ET.value26.intValue()); editor.putInt("ET value27", ET.value27.intValue()); editor.putInt("ET value28", ET.value28.intValue()); editor.putInt("ET value29", ET.value29.intValue()); editor.putInt("ET value30", ET.value30.intValue());
+        editor.putInt("NSX value", NSX.value.intValue()); editor.putInt("NSX value2", NSX.value2.intValue()); editor.putInt("NSX value3", NSX.value3.intValue()); editor.putInt("NSX value4", NSX.value4.intValue()); editor.putInt("NSX value5", NSX.value5.intValue()); editor.putInt("NSX value6", NSX.value6.intValue()); editor.putInt("NSX value7", NSX.value7.intValue()); editor.putInt("NSX value8", NSX.value8.intValue()); editor.putInt("NSX value9", NSX.value9.intValue()); editor.putInt("NSX value10", NSX.value10.intValue()); editor.putInt("NSX value11", NSX.value11.intValue()); editor.putInt("NSX value12", NSX.value12.intValue()); editor.putInt("NSX value13", NSX.value13.intValue()); editor.putInt("NSX value14", NSX.value14.intValue()); editor.putInt("NSX value15", NSX.value15.intValue()); editor.putInt("NSX value16", NSX.value16.intValue()); editor.putInt("NSX value17", NSX.value17.intValue()); editor.putInt("NSX value18", NSX.value18.intValue()); editor.putInt("NSX value19", NSX.value19.intValue()); editor.putInt("NSX value20", NSX.value20.intValue()); editor.putInt("NSX value21", NSX.value21.intValue()); editor.putInt("NSX value22", NSX.value22.intValue()); editor.putInt("NSX value23", NSX.value23.intValue()); editor.putInt("NSX value24", NSX.value24.intValue()); editor.putInt("NSX value25", NSX.value25.intValue()); editor.putInt("NSX value26", NSX.value26.intValue()); editor.putInt("NSX value27", NSX.value27.intValue()); editor.putInt("NSX value28", NSX.value28.intValue()); editor.putInt("NSX value29", NSX.value29.intValue()); editor.putInt("NSX value30", NSX.value30.intValue());
+        editor.putInt("FU value", FU.value.intValue()); editor.putInt("FU value2", FU.value2.intValue()); editor.putInt("FU value3", FU.value3.intValue()); editor.putInt("FU value4", FU.value4.intValue()); editor.putInt("FU value5", FU.value5.intValue()); editor.putInt("FU value6", FU.value6.intValue()); editor.putInt("FU value7", FU.value7.intValue()); editor.putInt("FU value8", FU.value8.intValue()); editor.putInt("FU value9", FU.value9.intValue()); editor.putInt("FU value10", FU.value10.intValue()); editor.putInt("FU value11", FU.value11.intValue()); editor.putInt("FU value12", FU.value12.intValue()); editor.putInt("FU value13", FU.value13.intValue()); editor.putInt("FU value14", FU.value14.intValue()); editor.putInt("FU value15", FU.value15.intValue()); editor.putInt("FU value16", FU.value16.intValue()); editor.putInt("FU value17", FU.value17.intValue()); editor.putInt("FU value18", FU.value18.intValue()); editor.putInt("FU value19", FU.value19.intValue()); editor.putInt("FU value20", FU.value20.intValue()); editor.putInt("FU value21", FU.value21.intValue()); editor.putInt("FU value22", FU.value22.intValue()); editor.putInt("FU value23", FU.value23.intValue()); editor.putInt("FU value24", FU.value24.intValue()); editor.putInt("FU value25", FU.value25.intValue()); editor.putInt("FU value26", FU.value26.intValue()); editor.putInt("FU value27", FU.value27.intValue()); editor.putInt("FU value28", FU.value28.intValue()); editor.putInt("FU value29", FU.value29.intValue()); editor.putInt("FU value30", FU.value30.intValue());
+        editor.putInt("AP value", AP.value.intValue()); editor.putInt("AP value2", AP.value2.intValue()); editor.putInt("AP value3", AP.value3.intValue()); editor.putInt("AP value4", AP.value4.intValue()); editor.putInt("AP value5", AP.value5.intValue()); editor.putInt("AP value6", AP.value6.intValue()); editor.putInt("AP value7", AP.value7.intValue()); editor.putInt("AP value8", AP.value8.intValue()); editor.putInt("AP value9", AP.value9.intValue()); editor.putInt("AP value10", AP.value10.intValue()); editor.putInt("AP value11", AP.value11.intValue()); editor.putInt("AP value12", AP.value12.intValue()); editor.putInt("AP value13", AP.value13.intValue()); editor.putInt("AP value14", AP.value14.intValue()); editor.putInt("AP value15", AP.value15.intValue()); editor.putInt("AP value16", AP.value16.intValue()); editor.putInt("AP value17", AP.value17.intValue()); editor.putInt("AP value18", AP.value18.intValue()); editor.putInt("AP value19", AP.value19.intValue()); editor.putInt("AP value20", AP.value20.intValue()); editor.putInt("AP value21", AP.value21.intValue()); editor.putInt("AP value22", AP.value22.intValue()); editor.putInt("AP value23", AP.value23.intValue()); editor.putInt("AP value24", AP.value24.intValue()); editor.putInt("AP value25", AP.value25.intValue()); editor.putInt("AP value26", AP.value26.intValue()); editor.putInt("AP value27", AP.value27.intValue()); editor.putInt("AP value28", AP.value28.intValue()); editor.putInt("AP value29", AP.value29.intValue()); editor.putInt("AP value30", AP.value30.intValue());
+        editor.putInt("BNN value", BNN.value.intValue()); editor.putInt("BNN value2", BNN.value2.intValue()); editor.putInt("BNN value3", BNN.value3.intValue()); editor.putInt("BNN value4", BNN.value4.intValue()); editor.putInt("BNN value5", BNN.value5.intValue()); editor.putInt("BNN value6", BNN.value6.intValue()); editor.putInt("BNN value7", BNN.value7.intValue()); editor.putInt("BNN value8", BNN.value8.intValue()); editor.putInt("BNN value9", BNN.value9.intValue()); editor.putInt("BNN value10", BNN.value10.intValue()); editor.putInt("BNN value11", BNN.value11.intValue()); editor.putInt("BNN value12", BNN.value12.intValue()); editor.putInt("BNN value13", BNN.value13.intValue()); editor.putInt("BNN value14", BNN.value14.intValue()); editor.putInt("BNN value15", BNN.value15.intValue()); editor.putInt("BNN value16", BNN.value16.intValue()); editor.putInt("BNN value17", BNN.value17.intValue()); editor.putInt("BNN value18", BNN.value18.intValue()); editor.putInt("BNN value19", BNN.value19.intValue()); editor.putInt("BNN value20", BNN.value20.intValue()); editor.putInt("BNN value21", BNN.value21.intValue()); editor.putInt("BNN value22", BNN.value22.intValue()); editor.putInt("BNN value23", BNN.value23.intValue()); editor.putInt("BNN value24", BNN.value24.intValue()); editor.putInt("BNN value25", BNN.value25.intValue()); editor.putInt("BNN value26", BNN.value26.intValue()); editor.putInt("BNN value27", BNN.value27.intValue()); editor.putInt("BNN value28", BNN.value28.intValue()); editor.putInt("BNN value29", BNN.value29.intValue()); editor.putInt("BNN value30", BNN.value30.intValue());
+        editor.putInt("MACA value", MACA.value.intValue()); editor.putInt("MACA value2", MACA.value2.intValue()); editor.putInt("MACA value3", MACA.value3.intValue()); editor.putInt("MACA value4", MACA.value4.intValue()); editor.putInt("MACA value5", MACA.value5.intValue()); editor.putInt("MACA value6", MACA.value6.intValue()); editor.putInt("MACA value7", MACA.value7.intValue()); editor.putInt("MACA value8", MACA.value8.intValue()); editor.putInt("MACA value9", MACA.value9.intValue()); editor.putInt("MACA value10", MACA.value10.intValue()); editor.putInt("MACA value11", MACA.value11.intValue()); editor.putInt("MACA value12", MACA.value12.intValue()); editor.putInt("MACA value13", MACA.value13.intValue()); editor.putInt("MACA value14", MACA.value14.intValue()); editor.putInt("MACA value15", MACA.value15.intValue()); editor.putInt("MACA value16", MACA.value16.intValue()); editor.putInt("MACA value17", MACA.value17.intValue()); editor.putInt("MACA value18", MACA.value18.intValue()); editor.putInt("MACA value19", MACA.value19.intValue()); editor.putInt("MACA value20", MACA.value20.intValue()); editor.putInt("MACA value21", MACA.value21.intValue()); editor.putInt("MACA value22", MACA.value22.intValue()); editor.putInt("MACA value23", MACA.value23.intValue()); editor.putInt("MACA value24", MACA.value24.intValue()); editor.putInt("MACA value25", MACA.value25.intValue()); editor.putInt("MACA value26", MACA.value26.intValue()); editor.putInt("MACA value27", MACA.value27.intValue()); editor.putInt("MACA value28", MACA.value28.intValue()); editor.putInt("MACA value29", MACA.value29.intValue()); editor.putInt("MACA value30", MACA.value30.intValue());
+        editor.putInt("MACB value", MACB.value.intValue()); editor.putInt("MACB value2", MACB.value2.intValue()); editor.putInt("MACB value3", MACB.value3.intValue()); editor.putInt("MACB value4", MACB.value4.intValue()); editor.putInt("MACB value5", MACB.value5.intValue()); editor.putInt("MACB value6", MACB.value6.intValue()); editor.putInt("MACB value7", MACB.value7.intValue()); editor.putInt("MACB value8", MACB.value8.intValue()); editor.putInt("MACB value9", MACB.value9.intValue()); editor.putInt("MACB value10", MACB.value10.intValue()); editor.putInt("MACB value11", MACB.value11.intValue()); editor.putInt("MACB value12", MACB.value12.intValue()); editor.putInt("MACB value13", MACB.value13.intValue()); editor.putInt("MACB value14", MACB.value14.intValue()); editor.putInt("MACB value15", MACB.value15.intValue()); editor.putInt("MACB value16", MACB.value16.intValue()); editor.putInt("MACB value17", MACB.value17.intValue()); editor.putInt("MACB value18", MACB.value18.intValue()); editor.putInt("MACB value19", MACB.value19.intValue()); editor.putInt("MACB value20", MACB.value20.intValue()); editor.putInt("MACB value21", MACB.value21.intValue()); editor.putInt("MACB value22", MACB.value22.intValue()); editor.putInt("MACB value23", MACB.value23.intValue()); editor.putInt("MACB value24", MACB.value24.intValue()); editor.putInt("MACB value25", MACB.value25.intValue()); editor.putInt("MACB value26", MACB.value26.intValue()); editor.putInt("MACB value27", MACB.value27.intValue()); editor.putInt("MACB value28", MACB.value28.intValue()); editor.putInt("MACB value29", MACB.value29.intValue()); editor.putInt("MACB value30", MACB.value30.intValue());
+        editor.putInt("MM value", MM.value.intValue()); editor.putInt("MM value2", MM.value2.intValue()); editor.putInt("MM value3", MM.value3.intValue()); editor.putInt("MM value4", MM.value4.intValue()); editor.putInt("MM value5", MM.value5.intValue()); editor.putInt("MM value6", MM.value6.intValue()); editor.putInt("MM value7", MM.value7.intValue()); editor.putInt("MM value8", MM.value8.intValue()); editor.putInt("MM value9", MM.value9.intValue()); editor.putInt("MM value10", MM.value10.intValue()); editor.putInt("MM value11", MM.value11.intValue()); editor.putInt("MM value12", MM.value12.intValue()); editor.putInt("MM value13", MM.value13.intValue()); editor.putInt("MM value14", MM.value14.intValue()); editor.putInt("MM value15", MM.value15.intValue()); editor.putInt("MM value16", MM.value16.intValue()); editor.putInt("MM value17", MM.value17.intValue()); editor.putInt("MM value18", MM.value18.intValue()); editor.putInt("MM value19", MM.value19.intValue()); editor.putInt("MM value20", MM.value20.intValue()); editor.putInt("MM value21", MM.value21.intValue()); editor.putInt("MM value22", MM.value22.intValue()); editor.putInt("MM value23", MM.value23.intValue()); editor.putInt("MM value24", MM.value24.intValue()); editor.putInt("MM value25", MM.value25.intValue()); editor.putInt("MM value26", MM.value26.intValue()); editor.putInt("MM value27", MM.value27.intValue()); editor.putInt("MM value28", MM.value28.intValue()); editor.putInt("MM value29", MM.value29.intValue()); editor.putInt("MM value30", MM.value30.intValue());
+        editor.putInt("RM value", RM.value.intValue()); editor.putInt("RM value2", RM.value2.intValue()); editor.putInt("RM value3", RM.value3.intValue()); editor.putInt("RM value4", RM.value4.intValue()); editor.putInt("RM value5", RM.value5.intValue()); editor.putInt("RM value6", RM.value6.intValue()); editor.putInt("RM value7", RM.value7.intValue()); editor.putInt("RM value8", RM.value8.intValue()); editor.putInt("RM value9", RM.value9.intValue()); editor.putInt("RM value10", RM.value10.intValue()); editor.putInt("RM value11", RM.value11.intValue()); editor.putInt("RM value12", RM.value12.intValue()); editor.putInt("RM value13", RM.value13.intValue()); editor.putInt("RM value14", RM.value14.intValue()); editor.putInt("RM value15", RM.value15.intValue()); editor.putInt("RM value16", RM.value16.intValue()); editor.putInt("RM value17", RM.value17.intValue()); editor.putInt("RM value18", RM.value18.intValue()); editor.putInt("RM value19", RM.value19.intValue()); editor.putInt("RM value20", RM.value20.intValue()); editor.putInt("RM value21", RM.value21.intValue()); editor.putInt("RM value22", RM.value22.intValue()); editor.putInt("RM value23", RM.value23.intValue()); editor.putInt("RM value24", RM.value24.intValue()); editor.putInt("RM value25", RM.value25.intValue()); editor.putInt("RM value26", RM.value26.intValue()); editor.putInt("RM value27", RM.value27.intValue()); editor.putInt("RM value28", RM.value28.intValue()); editor.putInt("RM value29", RM.value29.intValue()); editor.putInt("RM value30", RM.value30.intValue());
+        editor.putInt("IBC value", IBC.value.intValue()); editor.putInt("IBC value2", IBC.value2.intValue()); editor.putInt("IBC value3", IBC.value3.intValue()); editor.putInt("IBC value4", IBC.value4.intValue()); editor.putInt("IBC value5", IBC.value5.intValue()); editor.putInt("IBC value6", IBC.value6.intValue()); editor.putInt("IBC value7", IBC.value7.intValue()); editor.putInt("IBC value8", IBC.value8.intValue()); editor.putInt("IBC value9", IBC.value9.intValue()); editor.putInt("IBC value10", IBC.value10.intValue()); editor.putInt("IBC value11", IBC.value11.intValue()); editor.putInt("IBC value12", IBC.value12.intValue()); editor.putInt("IBC value13", IBC.value13.intValue()); editor.putInt("IBC value14", IBC.value14.intValue()); editor.putInt("IBC value15", IBC.value15.intValue()); editor.putInt("IBC value16", IBC.value16.intValue()); editor.putInt("IBC value17", IBC.value17.intValue()); editor.putInt("IBC value18", IBC.value18.intValue()); editor.putInt("IBC value19", IBC.value19.intValue()); editor.putInt("IBC value20", IBC.value20.intValue()); editor.putInt("IBC value21", IBC.value21.intValue()); editor.putInt("IBC value22", IBC.value22.intValue()); editor.putInt("IBC value23", IBC.value23.intValue()); editor.putInt("IBC value24", IBC.value24.intValue()); editor.putInt("IBC value25", IBC.value25.intValue()); editor.putInt("IBC value26", IBC.value26.intValue()); editor.putInt("IBC value27", IBC.value27.intValue()); editor.putInt("IBC value28", IBC.value28.intValue()); editor.putInt("IBC value29", IBC.value29.intValue()); editor.putInt("IBC value30", IBC.value30.intValue());
+        editor.putInt("FWB value", FWB.value.intValue()); editor.putInt("FWB value2", FWB.value2.intValue()); editor.putInt("FWB value3", FWB.value3.intValue()); editor.putInt("FWB value4", FWB.value4.intValue()); editor.putInt("FWB value5", FWB.value5.intValue()); editor.putInt("FWB value6", FWB.value6.intValue()); editor.putInt("FWB value7", FWB.value7.intValue()); editor.putInt("FWB value8", FWB.value8.intValue()); editor.putInt("FWB value9", FWB.value9.intValue()); editor.putInt("FWB value10", FWB.value10.intValue()); editor.putInt("FWB value11", FWB.value11.intValue()); editor.putInt("FWB value12", FWB.value12.intValue()); editor.putInt("FWB value13", FWB.value13.intValue()); editor.putInt("FWB value14", FWB.value14.intValue()); editor.putInt("FWB value15", FWB.value15.intValue()); editor.putInt("FWB value16", FWB.value16.intValue()); editor.putInt("FWB value17", FWB.value17.intValue()); editor.putInt("FWB value18", FWB.value18.intValue()); editor.putInt("FWB value19", FWB.value19.intValue()); editor.putInt("FWB value20", FWB.value20.intValue()); editor.putInt("FWB value21", FWB.value21.intValue()); editor.putInt("FWB value22", FWB.value22.intValue()); editor.putInt("FWB value23", FWB.value23.intValue()); editor.putInt("FWB value24", FWB.value24.intValue()); editor.putInt("FWB value25", FWB.value25.intValue()); editor.putInt("FWB value26", FWB.value26.intValue()); editor.putInt("FWB value27", FWB.value27.intValue()); editor.putInt("FWB value28", FWB.value28.intValue()); editor.putInt("FWB value29", FWB.value29.intValue()); editor.putInt("FWB value30", FWB.value30.intValue());
+        editor.putInt("KC value", KC.value.intValue()); editor.putInt("KC value2", KC.value2.intValue()); editor.putInt("KC value3", KC.value3.intValue()); editor.putInt("KC value4", KC.value4.intValue()); editor.putInt("KC value5", KC.value5.intValue()); editor.putInt("KC value6", KC.value6.intValue()); editor.putInt("KC value7", KC.value7.intValue()); editor.putInt("KC value8", KC.value8.intValue()); editor.putInt("KC value9", KC.value9.intValue()); editor.putInt("KC value10", KC.value10.intValue()); editor.putInt("KC value11", KC.value11.intValue()); editor.putInt("KC value12", KC.value12.intValue()); editor.putInt("KC value13", KC.value13.intValue()); editor.putInt("KC value14", KC.value14.intValue()); editor.putInt("KC value15", KC.value15.intValue()); editor.putInt("KC value16", KC.value16.intValue()); editor.putInt("KC value17", KC.value17.intValue()); editor.putInt("KC value18", KC.value18.intValue()); editor.putInt("KC value19", KC.value19.intValue()); editor.putInt("KC value20", KC.value20.intValue()); editor.putInt("KC value21", KC.value21.intValue()); editor.putInt("KC value22", KC.value22.intValue()); editor.putInt("KC value23", KC.value23.intValue()); editor.putInt("KC value24", KC.value24.intValue()); editor.putInt("KC value25", KC.value25.intValue()); editor.putInt("KC value26", KC.value26.intValue()); editor.putInt("KC value27", KC.value27.intValue()); editor.putInt("KC value28", KC.value28.intValue()); editor.putInt("KC value29", KC.value29.intValue()); editor.putInt("KC value30", KC.value30.intValue());
 
         String i = netWorth.toString();
         editor.putString("netWorthS", i);
@@ -2745,28 +2751,28 @@ public class MainActivity extends AppCompatActivity {
                         "(after taxes, this sum becomes $661,290.30).", 3500);
                 happinessLevel = happinessLevel + 5000;
                 statChanges(healthDrain / -2, happinessDrain / -2, "-661285.30");
-                amIDeadYet("I don't know you could've fu**ed this up.");
+                amIDeadYet("I don't know, but you really screwed it up.");
             } else if (new Random().nextDouble() < 0.05) {
                 messagePrompt("You scratched out your ticket and...\n" +
                         "\nYou won $30!", 1100);
                 happinessLevel = happinessLevel + 30;
                 statChanges(healthDrain / -2, happinessDrain / -2, "-25.00");
-                amIDeadYet("n/a");
+                amIDeadYet("Lottery depresso.");
             } else if (new Random().nextDouble() < 0.01) {
                 messagePrompt("You scratched out your ticket and...\n" +
                         "\nYou won $100!", 1100);
                 happinessLevel = happinessLevel + 70;
                 statChanges(healthDrain / -2, happinessDrain / -2, "-95.00");
-                amIDeadYet("n/a");
+                amIDeadYet("Lottery depresso.");
             }
             else if (lotteryCycle > 5 && new Random().nextDouble() < 0.25){
                 messagePrompt("Would you look at that?\n\n<Nothing again. You're wasting your time.>", 900);
                 statChanges(healthDrain / -2, happinessDrain / -2, "5.00");
-                amIDeadYet("n/a");
+                amIDeadYet("Lottery depresso.");
             } else {
                 messagePrompt("You scratched out your ticket and...\n\n<Nothing.>", 500);
                 statChanges(healthDrain / -2, happinessDrain / -2, "5.00");
-                amIDeadYet("n/a");
+                amIDeadYet("Lottery depresso.");
             }
 
             String s = "Days Without Dying: " + daysNotDead;
@@ -2811,12 +2817,12 @@ public class MainActivity extends AppCompatActivity {
                 ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
 
             statChanges(healthRange / 2, happinessLevel / 2, "0.00");
-            //amIDeadYet("n/a");
+            //amIDeadYet("Spent too much time day trading.");
             //updates the net worth value to UI
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new StockAnalysisFragment());
             fragmentTransaction.commit();
-            amIDeadYet("n/a");
+            amIDeadYet("Spent too much time day trading.");
             updateVariables();
         } else {
             messagePrompt("You cannot afford this.", 500);
@@ -2840,7 +2846,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new StockInsiderFragment());
             fragmentTransaction.commit();
-            amIDeadYet("n/a");
+            amIDeadYet("Spent too much time day trading.");
             updateVariables();
         } else {
             messagePrompt("You cannot afford this.", 500);
@@ -3057,7 +3063,7 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.NSXAssetvalue)).setText("(" + NSX.sharesOwned + ")     $" + NSX.outputAssets().toString() + "       ");
             ((TextView) findViewById(R.id.RMAssetvalue)).setText("(" + RM.sharesOwned + ")     $" + RM.outputAssets().toString() + "       ");
 
-            amIDeadYet("n/a");
+            amIDeadYet("Spent too much time day trading.");
         }
 
     }
@@ -3133,7 +3139,7 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.MMAssetvalue)).setText("(" + MM.sharesOwned + ")     $" + MM.outputAssets().toString() + "       ");
             ((TextView) findViewById(R.id.NSXAssetvalue)).setText("(" + NSX.sharesOwned + ")     $" + NSX.outputAssets().toString() + "       ");
             ((TextView) findViewById(R.id.RMAssetvalue)).setText("(" + RM.sharesOwned + ")     $" + RM.outputAssets().toString() + "       ");
-            amIDeadYet("n/a");
+            amIDeadYet("Spent too much time day trading.");
         }
     }
 
@@ -4422,7 +4428,7 @@ public class MainActivity extends AppCompatActivity {
             payRate = payRate + 10;
             messagePrompt(" You have been given a raise and will now earn $10 more than before. ", 2000);
             happinessLevel = happinessLevel + 15;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4430,14 +4436,14 @@ public class MainActivity extends AppCompatActivity {
             job2Trigger = 1;
             messagePrompt(" Your position has been promoted. You can now work as a manager. ", 2000);
             happinessLevel = happinessLevel + 30;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
         if (jobCounter > 9 && new Random().nextDouble() < 0.35) {
             messagePrompt(" You've been at work for more than three days now. \n\nYour health is weakening and you need some rest.", 2000);
             healthRange = healthRange - 15;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4448,36 +4454,36 @@ public class MainActivity extends AppCompatActivity {
                         " number. \n\n<Wow, they actually gave it to you.>\n\nYou are no longer single and can now go on dates with your co-worker.", 2000);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
         if (new Random().nextDouble() < 0.02) {
             messagePrompt("I promise, I don't hate myself that much.", 500);
             happinessLevel = happinessLevel - 2;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.02) {
             messagePrompt(" I could probably fit in a few more minutes into this break.", 500);
             happinessLevel = happinessLevel + 2;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.02) {
             messagePrompt(" 'This doesn't have a barcode, that means it's free right?'", 500);
             happinessLevel = happinessLevel + 2;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.02) {
-            messagePrompt(" 'How are you doing today?' *ignored* 'Well, I'll go screw myself then.'", 500);
+            messagePrompt(" 'How are you doing today?' \n...\n\n'Well, I'll go screw myself then.'", 500);
             happinessLevel = happinessLevel - 2;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
     }
@@ -4504,13 +4510,13 @@ public class MainActivity extends AppCompatActivity {
             payRate2 = payRate2 + 20;
             messagePrompt("Good job. You have been given a raise and will now earn $20 more than before. ", 2000);
             happinessLevel = happinessLevel + 25;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (jobCounter > 9 && new Random().nextDouble() < 0.35) {
             messagePrompt(" You've been at work for more than three days now. \n\nYour health is weakening and you need some rest.", 2000);
             healthRange = healthRange - 25;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4521,35 +4527,35 @@ public class MainActivity extends AppCompatActivity {
                         "their number. \n\nYou can now go on dates with your co-worker.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
             if (new Random().nextDouble() < 0.015) {
                 messagePrompt("'This coffee is too cold. Go make another.'", 500);
                 happinessLevel = happinessLevel - 3;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
             if (new Random().nextDouble() < 0.015) {
                 messagePrompt("'Just ping me an email, I'll probably get back to it ASAP.'", 500);
                 happinessLevel = happinessLevel + 3;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
             if (new Random().nextDouble() < 0.015) {
                 messagePrompt("'If you want to survive here, you need to do more with less.'", 500);
                 happinessLevel = happinessLevel + 3;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
             if (new Random().nextDouble() < 0.015) {
                 messagePrompt("'Mhm... yeah. I love the idea.' \n\n'But let's continue this discussion after my lunch, okay?'", 500);
                 happinessLevel = happinessLevel - 3;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
 
@@ -4578,20 +4584,20 @@ public class MainActivity extends AppCompatActivity {
             payRate3 = payRate3 + 40;
             messagePrompt(" Great work. You have been given a raise and will now earn $40 more than before. ", 2000);
             happinessLevel = happinessLevel + 40;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (jobCycle3 == 45) {
             job4Trigger = 1;
             messagePrompt(" Congratulations! Your position has been promoted and you can now work as the Regional Manager. ", 2500);
             happinessLevel = happinessLevel + 80;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (jobCounter > 9 && new Random().nextDouble() < 0.35) {
             messagePrompt(" You've been at work for more than three days now. \n\nYour health is weakening and you need some rest.", 2000);
             healthRange = healthRange - 35;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4602,35 +4608,35 @@ public class MainActivity extends AppCompatActivity {
                         "with your co-worker.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
         if (new Random().nextDouble() < 0.015) {
             messagePrompt("'We are not going to let our IT division dictate how this company is run!'", 500);
             happinessLevel = happinessLevel - 5;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.015) {
             messagePrompt("'Hard work never killed anybody, but why take a chance?.'", 500);
             happinessLevel = happinessLevel + 5;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.015) {
             messagePrompt("'No one has ever got fired around here by using THIS type of hardware.'", 500);
             happinessLevel = happinessLevel + 5;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.015) {
             messagePrompt("'It feels like I am working with dinosaurs.'", 500);
             happinessLevel = happinessLevel - 5;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
 
@@ -4663,13 +4669,13 @@ public class MainActivity extends AppCompatActivity {
             payRate4 = payRate4 + 65;
             messagePrompt("Nice job. You have been given a raise and will now earn $65 more than before. ", 2000);
             happinessLevel = happinessLevel + 55;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (jobCounter > 9 && new Random().nextDouble() < 0.35) {
             messagePrompt("You've been at work for more than three days now. \n\nYour health is weakening and you need some rest.", 2000);
             healthRange = healthRange - 45;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (hasPartner == 0) {
@@ -4679,35 +4685,35 @@ public class MainActivity extends AppCompatActivity {
                         "with your co-worker.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
         if (new Random().nextDouble() < 0.015) {
             messagePrompt("'If you want to get far in this job, you need to think OUTSIDE the box.'", 500);
             happinessLevel = happinessLevel - 5;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.015) {
             messagePrompt("'Don't worry, this is surely a win-win situation.'", 500);
             happinessLevel = happinessLevel + 5;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.015) {
             messagePrompt("'Let's hit the ground running.'", 500);
             happinessLevel = happinessLevel + 5;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (new Random().nextDouble() < 0.015) {
             messagePrompt("'We need to PUSH the envelope here.'", 500);
             happinessLevel = happinessLevel - 5;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
 
@@ -4736,7 +4742,7 @@ public class MainActivity extends AppCompatActivity {
             payRate5 = payRate5 + 90;
             messagePrompt(" Excellent work. You have been given a raise and will now earn $90 more than before. ", 2000);
             happinessLevel = happinessLevel + 90;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (jobCycle5 == 60) {
@@ -4748,7 +4754,7 @@ public class MainActivity extends AppCompatActivity {
         if (jobCounter > 9 && new Random().nextDouble() < 0.35) {
             messagePrompt("You've been at work for more than three days now. \n\nYour health is weakening and you need some rest.", 2000);
             healthRange = healthRange - 55;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4759,11 +4765,11 @@ public class MainActivity extends AppCompatActivity {
                         "with your co-worker.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
 
@@ -4792,13 +4798,13 @@ public class MainActivity extends AppCompatActivity {
             payRate6 = payRate6 + 150;
             messagePrompt(" Exquisite work. You have been given a raise and will now earn $150 more than before. ", 2000);
             happinessLevel = happinessLevel + 140;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (jobCounter > 15 && new Random().nextDouble() < 0.35) {
             messagePrompt("You've been at work for more than five days now. \n\nYour health is weakening and you need some rest.", 2000);
             healthRange = healthRange - 65;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4809,11 +4815,11 @@ public class MainActivity extends AppCompatActivity {
                         "their number. \n\nYou can now go on dates with your personal assistant.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
 
@@ -4838,7 +4844,7 @@ public class MainActivity extends AppCompatActivity {
             payRate7 = payRate7 + 240;
             messagePrompt(" Exquisite work. You have been given a raise and will now earn $240 more than before. ", 2000);
             happinessLevel = happinessLevel + 230;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (jobCycle7 == 100) {
@@ -4850,7 +4856,7 @@ public class MainActivity extends AppCompatActivity {
         if (jobCounter > 21 && new Random().nextDouble() < 0.35) {
             messagePrompt("You've been working for more than a week now. \n\nYour health is weakening and you need some rest.", 2000);
             healthRange = healthRange - 95;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4861,11 +4867,11 @@ public class MainActivity extends AppCompatActivity {
                         "their number. \n\nYou can now go on dates with your personal assistant.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
 
@@ -4894,7 +4900,7 @@ public class MainActivity extends AppCompatActivity {
             payRate8 = payRate8 + 330;
             messagePrompt("Exquisite work. You have been given a raise and will now earn $330 more than before. ", 2000);
             happinessLevel = happinessLevel + 350;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
         if (jobCycle8 == 140) {
@@ -4906,7 +4912,7 @@ public class MainActivity extends AppCompatActivity {
         if (jobCounter > 21 && new Random().nextDouble() < 0.35) {
             messagePrompt("You've been working for more than a week now. Your health is weakening and you need some rest.", 2000);
             healthRange = healthRange - 140;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4917,11 +4923,11 @@ public class MainActivity extends AppCompatActivity {
                         "their number. \n\nYou can now go on dates with your personal assistant.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
 
@@ -4946,7 +4952,7 @@ public class MainActivity extends AppCompatActivity {
             payRate9 = payRate9 + 500;
             messagePrompt(" You raised your own salary and will now earn $500 more than before. ", 2500);
             happinessLevel = happinessLevel + 800;
-            amIDeadYet("n/a");
+            amIDeadYet("Overworked yourself.");
             return;
         }
 
@@ -4958,11 +4964,11 @@ public class MainActivity extends AppCompatActivity {
                         ". \n\nYou can now go on dates with your personal assistant.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Overworked yourself.");
                 return;
             }
         }
-        amIDeadYet("n/a");
+        amIDeadYet("Overworked yourself.");
         if (amIDead() == false && daysNotDead % 7 != 0)
             amIOkayYet();
 
@@ -8270,8 +8276,8 @@ public class MainActivity extends AppCompatActivity {
         BigDecimal MM_high = new BigDecimal("75.00");
         MM = new Stock(MM_high, MM_low, 3, 94);
     }
-    // This function resets all the game stats, except high score
 
+    // This function resets all the game stats, except high score
     public void resetStats() {
 
         // --------------------- STATS OF USER --------------
