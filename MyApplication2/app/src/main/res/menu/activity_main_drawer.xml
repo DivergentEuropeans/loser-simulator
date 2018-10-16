@@ -32,6 +32,11 @@
                 android:id="@+id/nav_about_us"
                 android:icon="@mipmap/about_icon1"
                 android:title="About Me" />
+
+                <item
+                    android:id="@+id/nav_privacy"
+                    android:icon="@mipmap/person_icon1"
+                    android:title="Privacy" />
             </group>
         </menu>
     </item>

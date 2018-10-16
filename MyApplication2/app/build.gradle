@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 26
     buildToolsVersion '27.0.1'
 
     defaultConfig {
         applicationId "com.loser.superfruit86.myapplication"
         minSdkVersion 16
-        targetSdkVersion 24
-        versionCode 24
-        versionName "1.2.4"
+        targetSdkVersion 26
+        versionCode 25
+        versionName "1.2.5"
     }
     buildTypes {
         release {

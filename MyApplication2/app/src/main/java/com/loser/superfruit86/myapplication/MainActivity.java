@@ -1,6 +1,7 @@
 package com.loser.superfruit86.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -470,6 +471,9 @@ public class MainActivity extends AppCompatActivity {
                         //getSupportActionBar().setTitle("Love");
                         item.setChecked(true);
                     }
+                } else if (id == R.id.nav_privacy) {
+                    Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://app.termly.io/document/privacy-policy/a93ae13c-3a07-4bdd-b98a-705572832c3c"));
+                    startActivity(browserIntent);
                 }
 
                 drawer.closeDrawer(GravityCompat.START);
