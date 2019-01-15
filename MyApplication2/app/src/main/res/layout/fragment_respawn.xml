@@ -21,9 +21,9 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@drawable/my_button_bg"
-        android:text="End your life. (0$)"
+        android:text="Reincarnate. (0$)"
         android:id="@+id/buttonSaveRespawnTokens2"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="300dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal|top"
         android:onClick="functionSaveRespawnTokens2" />
@@ -32,11 +32,17 @@
         android:layout_width="302dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:text="Clicking this button will forfeit your playthrough, but will carry over a single Respawn Token towards your next life. Your hopes, ambitions, and achievements will be wiped away. \n\nAre you sure you want to do this?"
+        android:text="Clicking this button will forfeit your playthrough, but will carry over a single Respawn Token towards your next life. Your hopes, ambitions, and achievements will be wiped away but your reincarnated life will be easier. \n\nAre you sure you want to do this?"
         android:id="@+id/textView25"
         android:gravity="center"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:shadowColor="#FF8000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="10"
+        android:textColor="#000000"
+        android:textSize="18sp"/>
 
 
 </FrameLayout>

@@ -64,7 +64,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@drawable/my_button_bg"
-        android:text="Bioengineer the make-up of your DNA. ($500,000)"
+        android:text="Reprogram your genome. ($500,000)"
         android:id="@+id/buttonDNA"
         android:layout_marginTop="280dp"
         android:layout_centerHorizontal="true"

@@ -60,7 +60,7 @@
                 android:layout_marginTop="350dp"
                 android:background="@drawable/my_button_bg"
                 android:onClick="functionSaveRespawnTokens"
-                android:text="Kill yourself. (Saves your Respawn Tokens)" />
+                android:text="Reincarnate. (Saves your Respawn Tokens)" />
 
             <Button
                 android:id="@+id/buttonStocks"

@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '27.0.1'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
-        applicationId "com.loser.superfruit86.myapplication"
+        applicationId "com.losersimulator.divergenteuropeans"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 26
-        versionName "1.2.6"
+        versionCode 1
+        versionName "2.0.0"
     }
     buildTypes {
         release {

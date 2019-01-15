@@ -17,7 +17,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +24,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -37,13 +37,8 @@ import java.nio.charset.Charset;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -219,7 +214,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private GoogleApiClient client;
     public InterstitialAd mInterstitialAd;
-    public InterstitialAd mInterstitialAd2;
 
     //Volatility 1(low-low) 2(low) 3(low-med) 4(med)
 
@@ -242,18 +236,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        MobileAds.initialize(this, "ca-app-pub-6612683572827982~5717244235");
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-6612683572827982/2642709953");
+        mInterstitialAd.setAdUnitId("ca-app-pub-6612683572827982/2716510522");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd2 = new InterstitialAd(this);
-        mInterstitialAd2.setAdUnitId("ca-app-pub-6612683572827982/2642709953");
-        mInterstitialAd2.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //drawerLayout.se
-
 
         byte[] emojiBytes = new byte[]{(byte) 0xE2, (byte) 0x98, (byte) 0xBA};
         final String emojiAsString = new String(emojiBytes, Charset.forName("UTF-8"));
@@ -263,8 +261,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Respawn Tokens: " + respawnToken + "     " + emojiAsString + "Drain: " +
-                        "" + happinessDrain + "      " + emojiHealthString + "Drain: " + healthDrain, Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "R. Tokens(" + respawnToken + ")  " + emojiAsString + " Drain(" +
+                        "" + happinessDrain + ")  " + emojiHealthString + " Drain:(" + healthDrain + ")", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -278,11 +276,11 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
         if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
         else
-            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
         updateHealthAndHappiness();
@@ -307,27 +305,23 @@ public class MainActivity extends AppCompatActivity {
 
                 if (mInterstitialAd.isLoaded())
                     mInterstitialAd.show();
-                else if (mInterstitialAd2.isLoaded())
+                else
                 {
-                    mInterstitialAd2.show();
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
                 }
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                mInterstitialAd2.loadAd(new AdRequest.Builder().build());
-                //mAdView = (AdView) findViewById(R.id.banner_AdView);
-                //AdRequest adRequest = new AdRequest.Builder().build();
-                //mAdView.loadAd(adRequest);
+
             }
             else {
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.add(R.id.main_container, new PhysicalFragment());
                 fragmentTransaction.commit();
-                messagePrompt("<Welcome back.>\n\n You have been alive for " + daysNotDead + " days.", 1200);
+                messagePrompt("« Welcome back. »\n\n You have been alive for " + daysNotDead + " days.", 1000);
             }
         } else {
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.add(R.id.main_container, new DifficultyFragment());
             fragmentTransaction.commit();
-            messagePrompt("Choose a difficulty.\n\n(To close a message, you can click out of it, or click the Back button.)", 1200);
+            messagePrompt("Choose a difficulty.\n\n« Click outside the message (or back button) to close the message. »", 1200);
         }
         if (getSupportFragmentManager().executePendingTransactions()) {
             editor.putInt("firstTimePlaying", 1);
@@ -357,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
                         if (daysNotDead < 35)
                             ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
                         if (daysNotDead < 80)
-                            ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and modify your body. (LOCKED)");
+                            ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
                     }
                     //getSupportActionBar().setTitle("Physical");
@@ -372,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
                         if (daysNotDead < 50)
                             ((TextView) findViewById(R.id.buttonHelp)).setText("Seek professional help. (LOCKED)");
                         if (daysNotDead < 125)
-                            ((TextView) findViewById(R.id.buttonDrugs)).setText("Take some narcotics. (LOCKED)");
+                            ((TextView) findViewById(R.id.buttonDrugs)).setText("Seek out alternative medicine. (LOCKED)");
                     }
                     //getSupportActionBar().setTitle("Mental");
                     item.setChecked(true);
@@ -385,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
                     if (succMessage == 1)
                     {
                         succMessage = 0;
-                        messagePrompt("TIP(!) - The Success category is largely responsible for increasing how much money you have, or Net Worth.", 1000);
+                        messagePrompt("TIP(!) - The Success category is largely responsible for increasing how much money you have to spend.", 1000);
                     }
                     //getSupportActionBar().setTitle("Success");
                     item.setChecked(true);
@@ -393,7 +387,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else if (id == R.id.nav_luxury) {
                     if (daysNotDead < 30) {
-                        messagePrompt("You must survive 30 days before accessing Luxury. ", 500);
+                        messagePrompt("You have to have lived 30 days before you can access Luxury. ", 600);
                     } else {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new LuxuryFragment());
@@ -403,7 +397,7 @@ public class MainActivity extends AppCompatActivity {
                             {
                                 luxuMessage = 0;
                                 messagePrompt("TIP(!) - The Luxury category is where you go to enjoy yourself, and propel the plot of the " +
-                                        "game forward.\n\n<The last event wins the game.>", 1200);
+                                        "game forward.\n\n« The very last button wins the game. »", 1200);
                             }
                             if (luxuryCounter < 1)
                                 ((TextView) findViewById(R.id.buttonTravelWorld)).setText("(LOCKED)");
@@ -460,17 +454,12 @@ public class MainActivity extends AppCompatActivity {
                         messagePrompt("You are single.", 500);
                     }
                 } else if (id == R.id.nav_about_us) {
-                    if (hasWon == 0)
-                    {
-                        messagePrompt("You need to win the game before viewing this.", 500);
-                    }
-                    else {
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new IdentityFragment());
-                        fragmentTransaction.commit();
-                        //getSupportActionBar().setTitle("Love");
-                        item.setChecked(true);
-                    }
+
+                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.main_container, new IdentityFragment());
+                    fragmentTransaction.commit();
+                    //getSupportActionBar().setTitle("Love");
+                    item.setChecked(true);
                 } else if (id == R.id.nav_privacy) {
                     Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://app.termly.io/document/privacy-policy/a93ae13c-3a07-4bdd-b98a-705572832c3c"));
                     startActivity(browserIntent);
@@ -941,9 +930,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         if (firstTimePlaying == 1 && daysNotDead > 0)
-            messagePrompt("<Welcome back.>\n\n You have been alive for " + daysNotDead + " days.", 1200);
+            messagePrompt("« Welcome back. »\n\n So far you have survived " + daysNotDead + " days.", 1200);
         if (firstTimePlaying == 1 && daysNotDead == 0)
-            messagePrompt("<Welcome.>\n\n Back to square 1.", 1200);
+            messagePrompt("« Let's try again. »\n\n Back to square 1.", 1200);
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commit();
@@ -951,7 +940,7 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead < 35)
                 ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and modify your body. (LOCKED)");
+                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
         }
     }
@@ -970,9 +959,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         if (firstTimePlaying == 1 && daysNotDead > 0)
-            messagePrompt("<Welcome back.>\n\n You have been alive for " + daysNotDead + " days.", 1200);
+            messagePrompt("« Welcome back. »\n\n So far you have survived " + daysNotDead + " days.", 1200);
         if (firstTimePlaying == 1 && daysNotDead == 0)
-            messagePrompt("<Welcome back.>\n\n You like more of a challenge, I see?", 1200);
+            messagePrompt("« You enjoy a challenge. »\n\n « I admire that. »", 1200);
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commit();
@@ -980,7 +969,7 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead < 35)
                 ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and modify your body. (LOCKED)");
+                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
         }
     }
@@ -992,13 +981,13 @@ public class MainActivity extends AppCompatActivity {
         }
         if (respawnToken > 0)
         {
-            messagePrompt("You currently have at least 1 Respawn Token in inventory.", 700);
+            messagePrompt("You currently have at least 1 Respawn Token in inventory.\n\n« I cannot let you play this difficulty with an extra life. »", 1200);
             return;
         }
         if (firstTimePlaying == 1 && daysNotDead > 0)
-        messagePrompt("<Welcome back.>\n\n You have been alive for " + daysNotDead + " days.", 1200);
+            messagePrompt("« Welcome back. »\n\n You have made it to " + daysNotDead + " days.", 1200);
         if (firstTimePlaying == 1 && daysNotDead == 0)
-            messagePrompt("<Welcome back.>\n\n You must really hate yourself.", 1200);
+            messagePrompt("« You must really hate yourself. »\n\n « I truly wish you the best of luck. »", 1200);
         difficulty = 3;
         healthDrain = healthDrain + 2;
         happinessDrain = happinessDrain + 2;
@@ -1012,7 +1001,7 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead < 35)
                 ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and modify your body. (LOCKED)");
+                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
         }
     }
@@ -1031,7 +1020,7 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead < 35)
                 ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and modify your body. (LOCKED)");
+                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
         }
     }
@@ -1069,46 +1058,46 @@ public class MainActivity extends AppCompatActivity {
             if (pShakeCounter > 7 && new Random().nextDouble() < 0.50) {
                 healthRange = healthRange - 5;
 
-                amIDeadYet("Protein shake poisoning.");
+                amIDeadYet("Protein poisoning.");
                 messagePrompt(" You're drinking too many shakes. You're beginning to make yourself sick.", 1500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 2;
 
-                amIDeadYet("n/a");
+                amIDeadYet("Protein poisoning.");
                 messagePrompt("Don't fool yourself, this tastes disgusting.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 2;
 
-                amIDeadYet("n/a");
+                amIDeadYet("Protein poisoning.");
                 messagePrompt("You'll be fit in no time.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 healthRange = healthRange + 2;
 
-                amIDeadYet("n/a");
+                amIDeadYet("Protein poisoning.");
                 messagePrompt("It's steak in a bottle.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 2;
                 healthRange = healthRange - 2;
-                amIDeadYet("n/a");
+                amIDeadYet("Protein poisoning.");
                 messagePrompt("I am such a fitness junkie!", 500);
 
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 2;
-                amIDeadYet("n/a");
+                amIDeadYet("Protein poisoning.");
                 messagePrompt("And just a little pinch of Tequila...", 500);
                 return;
             }
-            amIDeadYet("n/a");
+            amIDeadYet("Protein poisoning.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -1128,12 +1117,12 @@ public class MainActivity extends AppCompatActivity {
             gymCounter = temp;
 
             if (hasPartner == 0) {
-                if (new Random().nextDouble() < 0.005) {
+                if (new Random().nextDouble() < 0.01) {
                     happinessLevel = happinessLevel + 20;
                     hasPartner = 1;
                     loveDrain = 0;
                     amIDeadYet("Went too hard at the gym.");
-                    messagePrompt("At the gym, you meet a cute workout junkie. <Clearly, they go here more than you do.> " +
+                    messagePrompt("At the gym, you meet a cute workout junkie. « Clearly, they go here more than you do. » " +
                             "\n\nYou can now go on dates with your gym partner.", 3000);
                     return;
                 }
@@ -1216,11 +1205,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.0002) {
+                if (new Random().nextDouble() < 0.008) {
                     happinessLevel = happinessLevel + 30;
                     hasPartner = 1;
                     loveDrain = 0;
-                    amIDeadYet("n/a");
+                    amIDeadYet("Choked on a tablet.");
                     messagePrompt(" Even though the cashier is scanning your items, they are the one you're interested in checking out"
                             + " tonight. \n\nYou are no longer single and can now go on dates with the clerk.", 2500);
                     return;
@@ -1229,14 +1218,14 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .5 && supplementCounter > 4) {
                 healthRange = healthRange - 20;
-                amIDeadYet("Supplement overdose.");
+                amIDeadYet("Choked on a tablet.");
                 messagePrompt(" You are consuming an extraneous amount of supplements. You're making yourself sick.", 1500);
 
                 return;
             }
             if (new Random().nextDouble() < .06) {
                 happinessLevel = happinessLevel - 9;
-                amIDeadYet("n/a");
+                amIDeadYet("Choked on a tablet.");
                 messagePrompt("You must feel great about yourself.", 500);
 
                 return;
@@ -1244,7 +1233,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .06) {
                 happinessLevel = happinessLevel + 8;
-                amIDeadYet("n/a");
+                amIDeadYet("Choked on a tablet.");
                 messagePrompt("Step 1 to becoming the bodybuilder you've always dreamed of.", 500);
 
                 return;
@@ -1252,7 +1241,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .06) {
                 happinessLevel = happinessLevel + 9;
-                amIDeadYet("n/a");
+                amIDeadYet("Choked on a tablet.");
                 messagePrompt("It's organic, so it must be healthy. ", 500);
 
                 return;
@@ -1272,7 +1261,7 @@ public class MainActivity extends AppCompatActivity {
                 happinessLevel = happinessLevel + 8;
                 netWorth = netWorth.add(new BigDecimal("30.00"));
                 messagePrompt("There was a 30% OFF sale today. ", 1000);
-                amIDeadYet("This is an Easter Egg.");
+                amIDeadYet("You just found an Easter Egg.");
                 return;
             }
 
@@ -1290,7 +1279,7 @@ public class MainActivity extends AppCompatActivity {
 
                 happinessLevel = happinessLevel + 7;
                 healthRange = healthRange + 7;
-                amIDeadYet("Failed convictions.");
+                amIDeadYet("Nutrient deficiency.");
                 messagePrompt("This time, it's for real!", 500);
                 return;
             }
@@ -1298,7 +1287,7 @@ public class MainActivity extends AppCompatActivity {
 
                 happinessLevel = happinessLevel + 11;
                 healthRange = healthRange - 5;
-                amIDeadYet("Failed convictions.");
+                amIDeadYet("Nutrient deficiency.");
                 messagePrompt("I read many internet articles. I know what I'm doing.", 500);
                 return;
             }
@@ -1306,19 +1295,19 @@ public class MainActivity extends AppCompatActivity {
 
                 happinessLevel = happinessLevel + 15;
                 healthRange = healthRange - 15;
-                amIDeadYet("Failed convictions.");
+                amIDeadYet("Nutrient deficiency.");
                 messagePrompt("New year, new me!", 500);
                 return;
             }
             if (new Random().nextDouble() < .07) {
                 happinessLevel = happinessLevel + 13;
                 healthRange = healthRange + 4;
-                amIDeadYet("Failed convictions.");
+                amIDeadYet("Nutrient deficiency.");
                 messagePrompt("I live in a privileged financial situation so I can afford to consume an all-organic diet!", 500);
 
                 return;
             }
-            amIDeadYet("Failed convictions.");
+            amIDeadYet("Nutrient deficiency.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -1330,7 +1319,7 @@ public class MainActivity extends AppCompatActivity {
             statChanges(132, -20, "900.00");
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.01) {
+                if (new Random().nextDouble() < 0.03) {
                     happinessLevel = happinessLevel + 200;
                     hasPartner = 1;
                     loveDrain = 0;
@@ -1346,7 +1335,7 @@ public class MainActivity extends AppCompatActivity {
 
                     amIDeadYet("Going too hard in yoga class.");
                     messagePrompt("You've been killin' it in Yoga, lately." +
-                            "\n\nNamaslaye.", 500);
+                            "\n\nNamaste.", 500);
                     return;
                 }
                 if (new Random().nextDouble() < 0.12) {
@@ -1368,7 +1357,7 @@ public class MainActivity extends AppCompatActivity {
                     happinessLevel = happinessLevel - 5;
                     healthRange = healthRange + 25;
                     amIDeadYet("Going too hard in yoga class.");
-                    messagePrompt("'Let's get Chinese food. You down-dog?", 500);
+                    messagePrompt("You should get Chinese food after.", 500);
                     return;
                 }
             }
@@ -1394,7 +1383,7 @@ public class MainActivity extends AppCompatActivity {
                     sicknessCounter = 0;
 
                     amIDeadYet("The common cold.");
-                    messagePrompt("<The doctor has diagnosed you with the Common Cold (rhinovirus).>" +
+                    messagePrompt("« The doctor has diagnosed you with the Common Cold (rhinovirus). »" +
                             " \n\nYou have taken rest and now feel better.", 2000);
                     return;
                 }
@@ -1404,8 +1393,8 @@ public class MainActivity extends AppCompatActivity {
                     isSick = 0;
                     healthDrain = healthDrain - (sicknessCounter / 3);
                     sicknessCounter = 0;
-                    amIDeadYet("I sh** you not, the flu.");
-                    messagePrompt("<The doctor has diagnosed you with the flu (Influenza).>" +
+                    amIDeadYet("The flu.");
+                    messagePrompt("« The doctor has diagnosed you with the flu (Influenza). »" +
                             " \n\nYou have taken rest and now feel better.", 2000);
                     return;
                 }
@@ -1416,14 +1405,14 @@ public class MainActivity extends AppCompatActivity {
                     healthDrain = healthDrain - (sicknessCounter / 3);
                     sicknessCounter = 0;
                     amIDeadYet("Strep throat.");
-                    messagePrompt("<The doctor has diagnosed you with strep throat (streptococcus).>" +
+                    messagePrompt("« The doctor has diagnosed you with strep throat (streptococcus). »" +
                             " \n\nYou have taken antibiotics and now feel better.", 2000);
                     return;
                 }
             } else if (new Random().nextDouble() < .15) {
                 happinessLevel = happinessLevel + 15;
                 healthRange = healthRange + 25;
-                amIDeadYet("n/a");
+                amIDeadYet("The wait time was too long.");
                 messagePrompt(" After watching so many medical drama TV shows, you should be the one handing out advice.", 500);
 
                 return;
@@ -1431,7 +1420,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .15) {
                 happinessLevel = happinessLevel - 20;
-                amIDeadYet("n/a");
+                amIDeadYet("The wait time was too long.");
                 messagePrompt(" If you think about it, you are one doctor visit closer to your last.", 500);
 
                 return;
@@ -1441,7 +1430,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .15) {
                 happinessLevel = happinessLevel + 20;
                 healthRange = healthRange - 30;
-                amIDeadYet("n/a");
+                amIDeadYet("The wait time was too long.");
                 messagePrompt("An apple a day probably won't keep the doctor away.", 500);
 
                 return;
@@ -1451,8 +1440,8 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .15) {
                 happinessLevel = happinessLevel - 25;
                 healthRange = healthRange - 20;
-                amIDeadYet("n/a");
-                messagePrompt("'Number #0937, please.' Ooo! That's you!", 500);
+                amIDeadYet("The wait time was too long.");
+                messagePrompt("'Number #0937 to the front, please.' \n\n« Ooo! That's you! »", 500);
 
                 return;
             }
@@ -1460,29 +1449,29 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .15) {
                 happinessLevel = happinessLevel + 25;
                 healthRange = healthRange - 20;
-                amIDeadYet("n/a");
-                messagePrompt("Wait your turn, you peasant.", 500);
+                amIDeadYet("The wait time was too long.");
+                messagePrompt("'Wait your turn, you peasant'.", 500);
 
                 return;
             }
 
             if (new Random().nextDouble() < .0003) {
                 happinessLevel = happinessLevel + 50;
-                amIDeadYet("n/a");
-                messagePrompt("<I'm half human on my mother's side.>", 2000);
+                amIDeadYet("The wait time was too long.");
+                messagePrompt("'I'm half homo sapien, on my mother's side.'", 2000);
 
                 return;
             }
 
             if (new Random().nextDouble() < .0003) {
-               happinessLevel = happinessLevel + 50;
-                amIDeadYet("n/a");
-                messagePrompt("<Are you any good at setting alarm clocks?>", 2000);
+                happinessLevel = happinessLevel + 50;
+                amIDeadYet("The wait time was too long.");
+                messagePrompt("« Are you any good at setting alarm clocks? »", 2000);
 
                 return;
             }
 
-            amIDeadYet("n/a");
+            amIDeadYet("The wait time was too long.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -1497,70 +1486,70 @@ public class MainActivity extends AppCompatActivity {
 
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.01) {
+                if (new Random().nextDouble() < 0.04) {
                     happinessLevel = happinessLevel + 400;
 
                     hasPartner = 1;
                     loveDrain = 0;
-                    amIDeadYet("n/a");
+                    amIDeadYet("You overworked yourself.");
                     messagePrompt("Your attractive personal trainer insists that you should try some exercise outside" +
-                            " the gym together... in private. \n\n<You and I both know why you're paying them.> You can" +
+                            " the gym together... in private. \n\n« You and I both know why you're paying them. » You can" +
                             " now go on dates with your workout assistant.", 2500);
                     return;
                 }
             }
-            if (new Random().nextDouble() < 0.13) {
+            if (new Random().nextDouble() < 0.11) {
                 happinessLevel = happinessLevel - 45;
-                amIDeadYet("Trained too hard.");
+                amIDeadYet("You overworked yourself.");
                 messagePrompt("'Pain is just weakness leaving the body.'", 500);
 
                 return;
             }
-            if (new Random().nextDouble() < 0.13) {
+            if (new Random().nextDouble() < 0.11) {
                 happinessLevel = happinessLevel - 35;
                 healthRange = healthRange - 35;
-                amIDeadYet("Trained too hard.");
-                messagePrompt("'No pain, no gain. Also, my check for this session is due by Friday.'", 500);
+                amIDeadYet("You overworked yourself.");
+                messagePrompt("'No pain, no gain champ. Also, my check for this session is due by Friday.'", 500);
                 return;
             }
-            if (new Random().nextDouble() < 0.13) {
+            if (new Random().nextDouble() < 0.11) {
                 happinessLevel = happinessLevel + 50;
                 healthRange = healthRange + 35;
-                amIDeadYet("Trained too hard.");
-                messagePrompt("Your only limitation is your imagination.", 500);
+                amIDeadYet("You overworked yourself.");
+                messagePrompt("'Your only limitation is your imagination.' \n\n'Hmm... I should copyright that.'", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.13) {
                 happinessLevel = happinessLevel + 35;
                 healthRange = healthRange + 35;
-                amIDeadYet("Trained too hard.");
+                amIDeadYet("You overworked yourself.");
                 messagePrompt(" It's never too late to become what you might have looked like a decade ago.", 500);
                 return;
             }
-            if (new Random().nextDouble() < 0.13) {
+            if (new Random().nextDouble() < 0.11) {
                 happinessLevel = happinessLevel - 35;
                 healthRange = healthRange + 45;
-                amIDeadYet("Trained too hard.");
-                messagePrompt(" 80% of success is showing up. If showing up also included having the right genetic framework and financial resources.", 500);
+                amIDeadYet("You overworked yourself.");
+                messagePrompt("'80% of success is showing up. If showing up also included having the right body type and financial resources to afford me.'", 500);
 
                 return;
             }
-            if (new Random().nextDouble() < 0.13) {
+            if (new Random().nextDouble() < 0.11) {
                 happinessLevel = happinessLevel - 35;
                 healthRange = healthRange - 20;
-                amIDeadYet("Trained too hard.");
+                amIDeadYet("You overworked yourself.");
                 messagePrompt("Just because you're not sick, doesn't mean you're healthy.", 500);
                 return;
             }
-            if (new Random().nextDouble() < 0.13) {
+            if (new Random().nextDouble() < 0.11) {
                 happinessLevel = happinessLevel - 45;
                 healthRange = healthRange - 20;
-                amIDeadYet("Trained too hard.");
-                messagePrompt(" I already want to take a nap. 'We haven't even started.'", 500);
+                amIDeadYet("You overworked yourself.");
+                messagePrompt(" This wrist workout is pretty intense.\n\n'Those are just the insurance papers.'", 500);
                 return;
             }
 
-            amIDeadYet("Trained too hard.");
+            amIDeadYet("You overworked yourself.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -1580,7 +1569,7 @@ public class MainActivity extends AppCompatActivity {
                     sicknessCounter = 0;
 
                     amIDeadYet("The common cold.");
-                    messagePrompt("<The doctor has diagnosed you with the Common Cold (rhinovirus).>" +
+                    messagePrompt("« The doctor has diagnosed you with the Common Cold (rhinovirus). »" +
                             " \n\nYou have taken rest and now feel better.", 2000);
                     return;
                 }
@@ -1590,8 +1579,8 @@ public class MainActivity extends AppCompatActivity {
                     isSick = 0;
                     healthDrain = healthDrain - (sicknessCounter / 3);
                     sicknessCounter = 0;
-                    amIDeadYet("I sh** you not, the flu.");
-                    messagePrompt("<The doctor has diagnosed you with the flu (Influenza).>" +
+                    amIDeadYet("The flu.");
+                    messagePrompt("« The doctor has diagnosed you with the flu (Influenza). »" +
                             " \n\nYou have taken rest and now feel better.", 2000);
                     return;
                 }
@@ -1602,7 +1591,7 @@ public class MainActivity extends AppCompatActivity {
                     healthDrain = healthDrain - (sicknessCounter / 3);
                     sicknessCounter = 0;
                     amIDeadYet("Strep throat.");
-                    messagePrompt("<The doctor has diagnosed you with strep throat (streptococcus).>" +
+                    messagePrompt("« The doctor has diagnosed you with strep throat (streptococcus). »" +
                             " \n\nYou have taken antibiotics and now feel better.", 2000);
                     return;
                 }
@@ -1610,26 +1599,26 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.15) {
                 happinessLevel = happinessLevel - 40;
                 healthRange = healthRange + 185;
-                amIDeadYet("Irony.");
-                messagePrompt("Are those hieroglyphics supposed to be English?", 1000);
+                amIDeadYet("The doc was a radioactive alien.");
+                messagePrompt("Are those hieroglyphics you wrote supposed to be English?", 1000);
                 return;
             }
             if (new Random().nextDouble() < 0.15) {
                 happinessLevel = happinessLevel + 80;
                 healthRange = healthRange + 150;
-                amIDeadYet("Irony.");
+                amIDeadYet("The doc was a radioactive alien.");
                 messagePrompt("Ahh. The sweet stench of upper class medical care.", 1000);
                 return;
             }
             if (new Random().nextDouble() < .15) {
                 happinessLevel = happinessLevel - 55;
                 healthRange = healthRange - 70;
-                amIDeadYet("Irony.");
+                amIDeadYet("The doc was a radioactive alien.");
                 messagePrompt("First they kill your ills, then they kill you with bills.", 1000);
 
                 return;
             }
-            amIDeadYet("Irony.");
+            amIDeadYet("The doc was a radioactive alien.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -1641,35 +1630,35 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("30000.00")) {
             statChanges(2158, -200, "30000.00");
 
-            if (new Random().nextDouble() < 0.20) {
+            if (new Random().nextDouble() < 0.14) {
                 happinessLevel = happinessLevel - 250;
                 healthRange = healthRange + 300;
-                amIDeadYet("That was a terrible idea.");
-                messagePrompt("'Trust me, I'm a medical student.'", 1000);
+                amIDeadYet("Why would you even try that?");
+                messagePrompt("'You can trust me, I'm a medical student and we practiced this in class.'", 1000);
                 return;
             }
-            if (new Random().nextDouble() < 0.20) {
+            if (new Random().nextDouble() < 0.14) {
                 happinessLevel = happinessLevel + 250;
                 healthRange = healthRange - 300;
-                amIDeadYet("That was a terrible idea.");
-                messagePrompt(" Obesity is not there because it runs in the family. No one runs in the family.", 1000);
+                amIDeadYet("Why would you even try that?");
+                messagePrompt(" 'You don't have obesity because it runs in the family.'\n\n 'No one runs in the family.'", 1000);
                 return;
             }
-            if (new Random().nextDouble() < 0.20) {
+            if (new Random().nextDouble() < 0.14) {
                 happinessLevel = happinessLevel - 150;
                 healthRange = healthRange - 200;
-                amIDeadYet("That was a terrible idea.");
+                amIDeadYet("Why would you even try that?");
                 messagePrompt("'Eenie, meenie, miney, mo. Which organ shall I poke?'", 1000);
                 return;
             }
-            if (new Random().nextDouble() < 0.20) {
+            if (new Random().nextDouble() < 0.14) {
                 happinessLevel = happinessLevel - 250;
                 healthRange = healthRange - 300;
-                amIDeadYet("That was a terrible idea.");
+                amIDeadYet("Why would you even try that?");
                 messagePrompt("'Which vein was it, now?'", 1000);
                 return;
             } else
-                amIDeadYet("That was a terrible idea.");
+                amIDeadYet("Why would you even try that?");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -1683,26 +1672,26 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.15) {
                 happinessLevel = happinessLevel - 100;
                 healthRange = healthRange - 300;
-                amIDeadYet("n/a");
+                amIDeadYet("The injections were toxic.");
                 messagePrompt("'Which vein was it, now?'", 1000);
                 return;
             }
             if (new Random().nextDouble() < 0.15) {
                 happinessLevel = happinessLevel + 100;
                 healthRange = healthRange + 300;
-                amIDeadYet("n/a");
-                messagePrompt("'On your next physical, just hire someone else to pee in a cup for you.'", 1000);
+                amIDeadYet("The injections were toxic.");
+                messagePrompt("'Look son, I'm not saying these aren't natural, but hire someone else to pee in a cup for you in your next physical.'", 1000);
                 return;
             }
             if (new Random().nextDouble() < 0.15) {
                 happinessLevel = happinessLevel + 170;
                 healthRange = healthRange - 300;
-                amIDeadYet("n/a");
+                amIDeadYet("The injections were toxic.");
                 messagePrompt("'It's federally approved for cattle, you'll be fine.'", 1000);
 
                 return;
             }
-            amIDeadYet("n/a");
+            amIDeadYet("The injections were toxic.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -1714,29 +1703,29 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("150000.00")) {
             statChanges(7574, -500, "150000.00");
 
-            if (new Random().nextDouble() < 0.25) {
+            if (new Random().nextDouble() < 0.22) {
                 happinessLevel = happinessLevel - 100;
                 healthRange = healthRange + 400;
-                amIDeadYet("You know this one was a terrible idea.");
-                messagePrompt(" 'Don't worry, my expert team of biologists has already successfully implemented this procedure on mice.'\n\n" +
-                        "'And nearly a majority of them survived.'", 1000);
+                amIDeadYet("For science!");
+                messagePrompt(" 'Don't worry, my expert team of scientists has successfully done this procedure on mice.'\n\n" +
+                        "'And nearly a majority of them survived.'", 1100);
                 return;
             }
-            if (new Random().nextDouble() < 0.25) {
+            if (new Random().nextDouble() < 0.22) {
                 happinessLevel = happinessLevel - 150;
                 healthRange = healthRange - 400;
-                amIDeadYet("You know this one was a terrible idea.");
-                messagePrompt(" 'You've got to experiment to figure out what works, ya know.'", 1000);
+                amIDeadYet("For science!");
+                messagePrompt(" 'You've got to experiment to figure out what works, ya know?'", 1000);
                 return;
             }
-            if (new Random().nextDouble() < 0.25) {
+            if (new Random().nextDouble() < 0.22) {
                 happinessLevel = happinessLevel + 100;
                 healthRange = healthRange - 200;
-                amIDeadYet("You know this one was a terrible idea.");
-                messagePrompt(" 'We recommend saying farewell to your loved ones... just as a necessary precaution.'", 1000);
+                amIDeadYet("For science!");
+                messagePrompt(" 'We recommend saying farewell to your loved ones... just as a simple precaution.'", 1000);
                 return;
             }
-            amIDeadYet("You know this one was a terrible idea.");
+            amIDeadYet("For science!");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -1749,39 +1738,39 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("500000.00")) {
             statChanges(21043, -1000, "500000.00");
 
-            if (new Random().nextDouble() < 0.20) {
+            if (new Random().nextDouble() < 0.16) {
                 happinessLevel = happinessLevel - 700;
                 healthRange = healthRange - 1900;
 
-                amIDeadYet("It'll be fun they said. Revolutionary, they said.");
-                messagePrompt("'What could possibly go wrong?'", 500);
+                amIDeadYet("You don't have spider powers.");
+                messagePrompt("« Sir, we cannot bio-engineer you a will to live.'", 600);
                 return;
             }
-            if (new Random().nextDouble() < 0.20) {
+            if (new Random().nextDouble() < 0.16) {
                 happinessLevel = happinessLevel - 800;
                 healthRange = healthRange + 500;
 
-                amIDeadYet("It'll be fun they said. Revolutionary, they said.");
-                messagePrompt(" 'It's not an experiment if you know it's going to work.'", 500);
+                amIDeadYet("You don't have spider powers.");
+                messagePrompt(" 'It's not an experiment if you know everything will work correctly.\n\n'So yeah, it's an experiment.'", 1000);
                 return;
             }
-            if (new Random().nextDouble() < 0.20) {
+            if (new Random().nextDouble() < 0.16) {
                 happinessLevel = happinessLevel + 2000;
                 healthRange = healthRange + 1000;
 
-                amIDeadYet("It'll be fun they said. Revolutionary, they said.");
-                messagePrompt(" 'This is similar to how Steve Rogers became a super hero.'", 1000);
+                amIDeadYet("You don't have spider powers.");
+                messagePrompt(" 'The next room over, they are cloning dinosaurs I hear.'", 800);
                 return;
             }
-            if (new Random().nextDouble() < 0.20) {
+            if (new Random().nextDouble() < 0.16) {
                 happinessLevel = happinessLevel + 2000;
                 healthRange = healthRange + 1000;
 
-                amIDeadYet("It'll be fun they said. Revolutionary, they said.");
-                messagePrompt(" 'Don't worry, you're rich, so our top priority is to see this go smoothly.'", 1000);
+                amIDeadYet("You don't have spider powers.");
+                messagePrompt(" 'Don't worry you are wealthy, so your safety is our top priority.'", 1000);
                 return;
             }
-            amIDeadYet("It'll be fun they said. Revolutionary, they said.");
+            amIDeadYet("You don't have spider powers.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -1807,7 +1796,7 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead < 50)
                 ((TextView) findViewById(R.id.buttonHelp)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 125)
-                ((TextView) findViewById(R.id.buttonDrugs)).setText("Take some narcotics. (LOCKED)");
+                ((TextView) findViewById(R.id.buttonDrugs)).setText("Seek alternative medicine. (LOCKED)");
         }
     }
 
@@ -1815,7 +1804,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (daysNotDead < 50)//15
         {
-            messagePrompt("You need to survive 50 days before seeking professional help.", 500);
+            messagePrompt("You need to have survived 50 days before seeking professional help.", 500);
             return;
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -1826,7 +1815,7 @@ public class MainActivity extends AppCompatActivity {
     public void functionDrugs(View view) {
         if (daysNotDead < 125)//50
         {
-            messagePrompt("You need to survive 125 days before experimenting on your body.", 500);
+            messagePrompt("You need to have survived 125 days before experimenting on your body.", 500);
             return;
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -1850,17 +1839,15 @@ public class MainActivity extends AppCompatActivity {
             if (showCounter > 6 && new Random().nextDouble() < 0.5) {
                 //happinessLevel = happinessLevel + 1;
                 healthRange = healthRange - 2;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt(" You've been binge-watching a lot of shows lately. Your health is starting to take a toll.", 2000);
-
                 return;
-
             }
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel + 3;
                 healthRange = healthRange - 1;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt(" There's absolutely nothing better that you could be doing with your time.", 500);
                 return;
             }
@@ -1868,7 +1855,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel + 3;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt("Another happy ending. Why can't the protagonist sit in misery?", 500);
                 return;
             }
@@ -1877,14 +1864,14 @@ public class MainActivity extends AppCompatActivity {
 
                 happinessLevel = happinessLevel - 2;
                 healthRange = healthRange - 1;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt("Well, there goes another weekend. ", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
 
                 healthRange = healthRange - 2;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt("Sleep? Hah! Haven't heard that one in a while.", 500);
                 return;
             }
@@ -1892,7 +1879,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel + 2;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt("Bummer, your laptop ran out of battery.", 500);
                 return;
             }
@@ -1900,15 +1887,15 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel - 2;
-                amIDeadYet("Couldn't get ass off the couch.");
-                messagePrompt("You should have pirated this garbage.", 500);
+                amIDeadYet("Too sedentary of a lifestyle.");
+                messagePrompt("You should have pirated this garbage instead.", 500);
                 return;
             }
 
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel + 3;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt("So many different movies. The same actor. Do they even age?", 1000);
                 return;
             }
@@ -1917,7 +1904,7 @@ public class MainActivity extends AppCompatActivity {
 
                 happinessLevel = happinessLevel + 5;
                 healthRange = healthRange - 1;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt("One more episode...", 500);
                 return;
             }
@@ -1925,12 +1912,12 @@ public class MainActivity extends AppCompatActivity {
 
                 happinessLevel = happinessLevel - 2;
                 healthRange = healthRange - 1;
-                amIDeadYet("Couldn't get ass off the couch.");
+                amIDeadYet("Too sedentary of a lifestyle.");
                 messagePrompt("It must get better next season.", 500);
                 return;
             }
 
-            amIDeadYet("Couldn't get ass off the couch.");
+            amIDeadYet("Too sedentary of a lifestyle.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -1943,12 +1930,12 @@ public class MainActivity extends AppCompatActivity {
             statChanges(-1, 16, "60.00");
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.0001) {
+                if (new Random().nextDouble() < 0.008) {
                     happinessLevel = happinessLevel + 30;
                     hasPartner = 1;
-                    amIDeadYet("n/a");
+                    amIDeadYet("Couldn't handle all of this knowledge.");
                     messagePrompt("Although you're having a hard time finding a book, the librarian is interested in checking YOU out, instead"
-                            + " *wink wink*. \n\nYou are no longer single and can now go on dates with the curator.", 2500);
+                            + " *wink wink*. \n\nYou are no longer single and can now go on dates with the curator.", 2000);
                     loveDrain = 0;
                     return;
                 }
@@ -1956,28 +1943,28 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 4;
                 healthRange = healthRange + 3;
-                amIDeadYet("Couldn't handle the knowledge.");
+                amIDeadYet("Couldn't handle all of this knowledge.");
                 messagePrompt("Knowledge!", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel - 4;
-                amIDeadYet("n/a");
-                messagePrompt(" A Hollywood executive is already trying to make a movie adaptation.", 1000);
+                amIDeadYet("Couldn't handle all of this knowledge.");
+                messagePrompt(" A Hollywood executive is already trying to make a movie adaptation.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 3;
                 healthRange = healthRange - 1;
-                amIDeadYet("n/a");
-                messagePrompt(" Do you think he'll still be alive to publish the next book in the series?", 1000);
+                amIDeadYet("Couldn't handle all of this knowledge.");
+                messagePrompt(" Do you think he'll long enough to publish the next book in the series?", 600);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel - 3;
-                amIDeadYet("n/a");
+                amIDeadYet("Couldn't handle all of this knowledge.");
                 messagePrompt("Your grandma would really enjoy this one.", 500);
                 return;
             }
@@ -1985,7 +1972,7 @@ public class MainActivity extends AppCompatActivity {
 
                 happinessLevel = happinessLevel + 7;
                 healthRange = healthRange - 3;
-                amIDeadYet("n/a");
+                amIDeadYet("Couldn't handle all of this knowledge.");
                 messagePrompt("One more chapter before I go to bed...", 500);
                 return;
             }
@@ -1993,25 +1980,25 @@ public class MainActivity extends AppCompatActivity {
 
                 happinessLevel = happinessLevel + 6;
                 healthRange = healthRange + 3;
-                amIDeadYet("Couldn't handle the knowledge.");
-                messagePrompt("<WARNING!\n\nReading can seriously damage your ignorance.>", 1000);
+                amIDeadYet("Couldn't handle all of this knowledge.");
+                messagePrompt("WARNING!\n\n« Reading can seriously damage your ignorance. »", 600);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel + 2;
-                amIDeadYet("n/a");
+                amIDeadYet("Couldn't handle all of this knowledge.");
                 messagePrompt("The online reviews were really great.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
 
                 happinessLevel = happinessLevel + 4;
-                amIDeadYet("n/a");
-                messagePrompt("This one's got a plot, characters, and everything.", 500);
+                amIDeadYet("Couldn't handle all of this knowledge.");
+                messagePrompt("This one's got a setting, plot, characters, and everything.", 500);
                 return;
             }
-            amIDeadYet("n/a");
+            amIDeadYet("Couldn't handle all of this knowledge.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -2028,12 +2015,12 @@ public class MainActivity extends AppCompatActivity {
 
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.0003) {
+                if (new Random().nextDouble() < 0.007) {
                     happinessLevel = happinessLevel + 55;
                     hasPartner = 1;
-                    amIDeadYet("n/a");
+                    amIDeadYet("You choked on a pill.");
                     messagePrompt(" Quick, pharmacist, think fast! Do you have an inhaler? \n\nBecause YOU are taking my breath away *wink wink*. " +
-                            "\n\nYou can now go on dates with the pharmacologist.", 3000);
+                            "\n\nYou can now go on dates with the pharmacologist.", 2000);
                     loveDrain = 0;
                     return;
                 }
@@ -2041,22 +2028,22 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .50 && medicationCounter > 4) {
                 healthRange = healthRange - 14;
-                amIDeadYet("Medication overdose.");
-                messagePrompt(" You have taken well above the recommended doses of medication. Your health is taking a toll.", 2000);
+                amIDeadYet("You choked on a pill.");
+                messagePrompt(" You have taken well above the recommended doses of medication. Your health is taking a toll.", 1300);
 
                 return;
             }
 
-            if (new Random().nextDouble() < .11) {
+            if (new Random().nextDouble() < .10) {
                 happinessLevel = happinessLevel - 5;
-                amIDeadYet("n/a");
+                amIDeadYet("You choked on a pill.");
                 messagePrompt("Remember treatment, not prevention, is the goal.", 500);
 
                 return;
             }
-            if (new Random().nextDouble() < .11) {
-               happinessLevel = happinessLevel + 8;
-                amIDeadYet("n/a");
+            if (new Random().nextDouble() < .10) {
+                happinessLevel = happinessLevel + 8;
+                amIDeadYet("You choked on a pill.");
                 messagePrompt(" At least the drowsiness helps to mask the chronic suffering.", 500);
 
                 return;
@@ -2065,32 +2052,32 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .08) {
                 healthRange = healthRange - 5;
                 happinessLevel = happinessLevel + 5;
-                amIDeadYet("n/a");
-                messagePrompt(" It's funny that half a decade ago, you would not have needed all this medication.", 500);
+                amIDeadYet("You choked on a pill.");
+                messagePrompt(" Half a decade ago, your doctor would have prescribed you three slaps to the face.", 500);
 
                 return;
             }
-            if (new Random().nextDouble() < 0.11) {
+            if (new Random().nextDouble() < 0.10) {
                 happinessLevel = happinessLevel - 6;
                 healthRange = healthRange + 6;
-                 amIDeadYet("n/a");
+                amIDeadYet("You choked on a pill.");
                 messagePrompt(" Laughter is the best medicine, until you start laughing for no reason. \n\nThen you actually need medicine.", 500);
 
                 return;
             }
 
-            if (new Random().nextDouble() < .03) {
+            if (new Random().nextDouble() < .04) {
                 happinessLevel = happinessLevel + 25;
-                amIDeadYet("Poppin' too many pills.");
-                messagePrompt("Poppin', poppin' is all we know.", 1000);
+                amIDeadYet("You choked on a pill.");
+                messagePrompt("Popping, popping is all we know.", 1200);
 
                 return;
             }
 
             if (new Random().nextDouble() < .08) {
-               happinessLevel = happinessLevel + 7;
+                happinessLevel = happinessLevel + 7;
                 netWorth = netWorth.add(new BigDecimal("50.00"));
-                amIDeadYet("n/a");
+                amIDeadYet("You choked on a pill.");
                 messagePrompt("There was a 50% OFF sale today.", 800);
 
                 return;
@@ -2099,14 +2086,14 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.07) {
                 healthRange = healthRange - 15;
 
-                amIDeadYet("Took wrong medication.");
-                messagePrompt(" Unfortunately, you took the wrong medication. <You are a complete idiot.>\n\nYou " +
+                amIDeadYet("Took the wrong medication.");
+                messagePrompt(" Unfortunately, you took the wrong medication. « I could have stopped you, but I don't intervene. »\n\nYou " +
                         "made yourself very sick.", 2000);
                 return;
 
             }
 
-            amIDeadYet("n/a");
+            amIDeadYet("Took the wrong medication.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -2123,19 +2110,19 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .5 && barCounter > 4) {
                 healthRange = healthRange - 15;
                 amIDeadYet("Alcoholism.");
-                messagePrompt(" You've been visiting the bar often. Your frequent drinking is beginning to hurt your health.", 2000);
+                messagePrompt(" You've been visiting the bar often. Your frequent drinking is beginning to hurt your health.", 1500);
 
                 return;
             }
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.01) {
+                if (new Random().nextDouble() < 0.06) {
                     happinessLevel = happinessLevel + 55;
                     hasPartner = 1;
                     amIDeadYet("Alcoholism.");
-                    messagePrompt(" You notice an attractive individual sitting next to you. <Luckily, they appear just as hopeless as you do!>\n\n After consuming a few drinks for a confidence boost, you ask them" +
-                            " for their number and turns out, they think you're very cute too. " +
-                            "\n\nYou can now go on dates with the drinking buddy.", 3000);
+                    messagePrompt(" You notice an attractive individual sitting next to you. « Luckily, they appear just as hopeless as you do! »\n\n After consuming a few drinks for a confidence boost, you ask them" +
+                            " for their number and they agree to give it. " +
+                            "\n\nYou can now go on dates with the drinking buddy.", 2300);
                     loveDrain = 0;
                     return;
                 }
@@ -2148,7 +2135,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             if (new Random().nextDouble() < 0.1) {
-               happinessLevel = happinessLevel + 15;
+                happinessLevel = happinessLevel + 15;
                 healthRange = healthRange - 5;
                 amIDeadYet("Alcoholism.");
                 messagePrompt("'I don't drink water. Fish live in it. I'm an environmentalist.'", 500);
@@ -2164,7 +2151,7 @@ public class MainActivity extends AppCompatActivity {
                         amIDeadYet("Alcoholism.");
                         messagePrompt(" You met a cute stranger last night and ended up getting very drunk. You were invited to spend the night at their place.\n\n" +
                                 "Your clouded judgement got the best of you and you ended up sleeping with the stranger.\n\n" +
-                                "<You have therefore, cheated on your current partner. The consequences of your actions are to be determined.>", 4000);
+                                "« You have therefore, cheated on your current partner. The consequences of your actions are to be determined. »", 3000);
 
                         return;
                     }
@@ -2173,7 +2160,7 @@ public class MainActivity extends AppCompatActivity {
                     healthRange = healthRange - 10;
                     amIDeadYet("Alcoholism.");
                     messagePrompt("You met a cute stranger last night and ended up getting very drunk. You spent the night at their place.\n\n" +
-                            "However, it was just a fling and the person doesn't wish to pursue any type of relationship. \n\nYou are still single.", 3000);
+                            "However, it was just a fling and the person doesn't wish to pursue any type of relationship. \n\nYou are still single.", 2300);
 
                     return;
                 }
@@ -2181,7 +2168,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.1) {
                 happinessLevel = happinessLevel + 15;
                 amIDeadYet("Alcoholism.");
-                messagePrompt("You ended up meeting a new group of people and you got fairly tipsy. You had a great time throughout the night.", 2500);
+                messagePrompt("You ended up meeting a new group of people and you got fairly tipsy. You had a great time throughout the night.", 2000);
 
                 return;
             }
@@ -2189,42 +2176,42 @@ public class MainActivity extends AppCompatActivity {
                 if (hasSecurity == 1)
                 {
                     happinessLevel = happinessLevel - 25;
-                    amIDeadYet("n/a");
+                    amIDeadYet("Alcoholism.");
                     messagePrompt("You got very intoxicated and became wreckless.\n\nThe bar keeper wanted to kick you out, but they noticed" +
-                            " you had security with you.\n\nYou were nicely asked to leave.", 2500);
+                            " you had security with you.\n\nYou were nicely asked to leave without any trouble.", 2500);
 
                     return;
                 }
                 if (new Random().nextDouble() < .30 && canIAffordIt("50.00") == false) {
                     happinessLevel = happinessLevel - 50;
                     healthRange = healthRange - 20;
-                   amIDeadYet("Mugged by gangsters.");
+                    amIDeadYet("Mugged by gangsters.");
                     messagePrompt("You got very intoxicated and became wreckless. You were kicked out of the bar.\n\nYou did not have enough " +
                             "money for a taxi, so you were forced to walk home. \n\nAs you were stumbling back, you were mugged and beaten by thugs." +
-                            " Your health is hurt and you need to be more careful next time.", 3500);
+                            " Your health is hurt and you need to be more careful next time.", 3000);
 
                     return;
                 } else if (canIAffordIt("50.00") == false) {
                     happinessLevel = happinessLevel - 25;
                     healthRange = healthRange - 8;
-                   amIDeadYet("Alcoholism.");
+                    amIDeadYet("Alcoholism.");
                     messagePrompt("You got very intoxicated and became wreckless. You were kicked out of the bar.\n\nYou did not have enough " +
                             "money for a taxi, so you were forced to walk home. \n\nFortunately, you made it home safely but" +
-                            " you need to be more careful next time.", 3500);
+                            " you need to be more careful next time.", 3000);
 
                     return;
                 } else {
                     happinessLevel = happinessLevel - 15;
                     healthRange = healthRange - 8;
-                   amIDeadYet("Alcoholism.");
+                    amIDeadYet("Alcoholism.");
                     messagePrompt("You got very intoxicated and became wreckless. You were kicked out of the bar.\n\nFortunately, you did have " +
                             "enough money for a taxi, so you did not have to walk home. \n\nYou made it home safely but" +
-                            " you need to be more careful next time.", 3500);
+                            " you need to be more careful next time.", 3000);
 
                     return;
                 }
             }
-            amIDeadYet("n/a");
+            amIDeadYet("Alcoholism.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -2235,32 +2222,32 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("1200.00")) {
             statChanges(-14, 176, "1200.00");
             if (new Random().nextDouble() < 0.13) {
-                messagePrompt(" 'So everyone's just here to talk about our problems all day, right?'", 1000);
+                messagePrompt(" 'So everyone's just here to talk about our problems all day, right?'", 700);
                 happinessLevel = happinessLevel + 20;
             } else
             if (new Random().nextDouble() < 0.13) {
-                messagePrompt("'Shut up, Allen. Let Jenny speak her mind.'", 1000);
+                messagePrompt("'Shut up, Allen. Let Jenny speak her mind.'", 700);
                 happinessLevel = happinessLevel + 15;
             } else
             if (new Random().nextDouble() < 0.13) {
                 messagePrompt(" 'I'm very shy, you know, could you just skip me?'\n'Well, I'm not completely" +
                         " shy, but I'm definitely more shy than average.'\n'I just can't seem to open up to people. Well " +
-                        "it all began in my childhood...'", 1200);
+                        "it all began in my childhood...'", 800);
                 happinessLevel = happinessLevel - 15;
             } else
             if (new Random().nextDouble() < 0.13) {
-                messagePrompt(" 'Oh, don't feel bad sweetie. It's not your fault that your head isn't wired correctly.'", 1000);
+                messagePrompt(" 'Oh, don't feel bad sweetie. It's not your fault that your head isn't wired correctly.'", 700);
                 happinessLevel = happinessLevel + 15;
             } else
             if (new Random().nextDouble() < 0.13) {
-                messagePrompt(" 'I've never told anyone this before, but my dog enjoys it when I use my hand and...'", 1000);
+                messagePrompt(" 'I've never told anyone this before, but my dog enjoys it when I use my hand and...'", 700);
                 happinessLevel = happinessLevel - 15;
             } else
             if (new Random().nextDouble() < 0.13) {
-                messagePrompt("'We have a newcomer here today, please welcome...'", 1000);
+                messagePrompt("'We have a newcomer here today, please welcome...'", 700);
                 happinessLevel = happinessLevel + 15;
             }
-            amIDeadYet("Irony.");
+            amIDeadYet("Well that's ironic, isn't it?");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -2273,14 +2260,14 @@ public class MainActivity extends AppCompatActivity {
 
 
             if (hasPartner == 0) {
-                if (new Random().nextDouble() < 0.0001) {
+                if (new Random().nextDouble() < 0.01) {
                     happinessLevel = happinessLevel + 60;
 
                     hasPartner = 1;
                     loveDrain = 0;
-                    amIDeadYet("n/a");
+                    amIDeadYet("Clearly they weren't very good at their job.");
                     messagePrompt("Your therapist is growing an attachment to you. You seize the opportunity and ask them" +
-                            " out. \n\n<They replied yes, unfortunately.>\n\n You can now " +
+                            " out. \n\n« They reluctantly agree to go out with you. »\n\n You can now " +
                             "go on dates with your mental counselor.", 3500);
                     return;
                 }
@@ -2288,15 +2275,15 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel - 40;
-                amIDeadYet("Therapy did not help much, huh.");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt("'Mhm, that's very interesting. How does that make you feel?'", 1200);
 
                 return;
             }
 
             if (new Random().nextDouble() < .08) {
-               happinessLevel = happinessLevel + 30;
-                amIDeadYet("Therapy did not help much, huh.");
+                happinessLevel = happinessLevel + 30;
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt("'Let's get in touch with your inner child.'", 1200);
 
                 return;
@@ -2304,7 +2291,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel - 25;
-                amIDeadYet("Therapy did not help much, huh.");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt("'It is when therapy seems futile that it is most effective.'", 1200);
 
                 return;
@@ -2312,7 +2299,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel - 35;
-                amIDeadYet("Therapy did not help much, huh.");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt(" 'I'm sorry, that's all we have time for today. Time is money. Well, my time, your money.'", 1200);
 
                 return;
@@ -2320,7 +2307,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel + 35;
-                amIDeadYet("Therapy did not help much, huh.");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt("'Do you know what is the definition of insanity?'", 1200);
 
                 return;
@@ -2328,7 +2315,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel + 50;
-                amIDeadYet("Therapy did not help much, huh.");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt("'Maybe life isn't for everyone.'", 1200);
 
                 return;
@@ -2336,7 +2323,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel - 40;
-                amIDeadYet("Therapy did not help much, huh.");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt("'Think of your head as an unsafe neighborhood; don't go inside it alone.'", 1200);
 
                 return;
@@ -2345,7 +2332,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel - 35;
-                amIDeadYet("Therapy did not help much, huh.");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt("'How do you think we can better bottle up those negative emotions?'", 1200);
 
                 return;
@@ -2353,7 +2340,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel + 35;
-                amIDeadYet("Therapy did not help much, huh.");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 messagePrompt("'You may need to seek actual medical attention.'", 1200);
 
                 return;
@@ -2362,13 +2349,13 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .002) {
                 happinessLevel = happinessLevel + 85;
 
-                amIDeadYet("Therapy did not help much, huh.");
-                messagePrompt("'Doc, I've got this strange feeling that I'm inside of a game.'\n\n<Haha.>", 2200);
+                amIDeadYet("Clearly they weren't very good at their job.");
+                messagePrompt("'Doc, I've got this strange feeling that I'm inside of a game.'\n\n« Haha. »", 2200);
 
                 return;
             }
 
-            amIDeadYet("Therapy did not help much, huh.");
+            amIDeadYet("Clearly they weren't very good at their job.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -2380,13 +2367,13 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("8000.00")) {
             statChanges(0, 782, "8000.00");
             if (hasPartner == 0) {
-                if (new Random().nextDouble() < 0.001) {
+                if (new Random().nextDouble() < 0.01) {
                     happinessLevel = happinessLevel + 120;
                     hasPartner = 1;
                     loveDrain = 0;
-                    amIDeadYet("n/a");
-                    messagePrompt("You're falling in love with your mentor and you asked them for their" +
-                            " number.\n\n You can now go on dates with your guru. ", 2500);
+                    amIDeadYet("Clearly they weren't very good at their job.");
+                    messagePrompt("You're falling in love with your mentor's wise words of wisdom and you ask them for their" +
+                            " number.\n\n They agree to give it.\nYou can now go on dates with your guru. ", 2500);
                     return;
                 }
             }
@@ -2395,14 +2382,14 @@ public class MainActivity extends AppCompatActivity {
                 happinessLevel = happinessLevel + 120;
                 messagePrompt(" Early to bed, and early to rise, deems a young man useless and sleep deprived. ", 1200);
                 healthRange = healthRange + 100;
-                amIDeadYet("n/a");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 return;
             }
             if (new Random().nextDouble() < 0.16) {
                 happinessLevel = happinessLevel + 120;
                 messagePrompt(" It is a cliche that most cliches are true, but then like most cliches, that cliche is untrue.", 1200);
                 healthRange = healthRange - 50;
-                amIDeadYet("n/a");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 return;
             }
             if (new Random().nextDouble() < 0.17) {
@@ -2410,39 +2397,39 @@ public class MainActivity extends AppCompatActivity {
                 messagePrompt(" One day, someone will walk into your life and make you hate yourself more than you already do. You need" +
                         " to marry that person.", 1200);
                 happinessLevel = happinessLevel - 300;
-                amIDeadYet("n/a");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 return;
             }
             if (new Random().nextDouble() < 0.18) {
                 //happinessLevel = happinessLevel + 120;
                 messagePrompt("Money is the root of all evil.", 1200);
                 happinessLevel = happinessLevel - 300;
-                amIDeadYet("n/a");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 return;
             }
             if (new Random().nextDouble() < 0.19) {
                 //happinessLevel = happinessLevel + 120;
                 messagePrompt("You are a fruit loop in a world of cheerios.", 1200);
                 happinessLevel = happinessLevel + 300;
-                amIDeadYet("n/a");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 return;
             }
             if (new Random().nextDouble() < 0.20) {
                 happinessLevel = happinessLevel + 200;
                 messagePrompt("A secret is something you tell everybody to tell nobody.", 1200);
                 //happinessLevel = happinessLevel - 300;
-                amIDeadYet("n/a");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 return;
             }
             if (new Random().nextDouble() < 0.20) {
                 happinessLevel = happinessLevel + 200;
                 messagePrompt("A clever person solves a problem. A wise person avoids it.", 1200);
                 //happinessLevel = happinessLevel - 300;
-                amIDeadYet("n/a");
+                amIDeadYet("Clearly they weren't very good at their job.");
                 return;
             }
 
-            amIDeadYet("n/a");
+            amIDeadYet("Clearly they weren't very good at their job.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -2463,11 +2450,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (securityCounter <= 90 && securityCounter == 0)
                 messagePrompt("You have hired security. Your contract will last for 30 days.\n\n" +
-                        "You can extend your contract for up to 90 days, or rehire upon expiration.", 3000);
+                        "You can extend your contract for up to 90 days, or rehire upon expiration.", 2000);
             else
-                    messagePrompt("You have extended your contract to " + (securityCounter/3) + " days.", 1200);
+                messagePrompt("You have extended your contract to " + (securityCounter/3) + " days.", 1200);
 
-            amIDeadYet("You cannot hire bodyguards for your mind.");
+            amIDeadYet("Bodyguards can't help you with your health.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -2480,7 +2467,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             if (new Random().nextDouble() < .15) {
-                messagePrompt("'What could possibly go wrong?'", 1200);
+                messagePrompt("'What could possibly go wrong?'\n\n« I could just end it so easily... no one would even know. »", 1200);
                 happinessLevel = happinessLevel - 200;
                 healthRange = healthRange - 70;
                 amIDeadYet("Drugs are bad, m'kay?");
@@ -2488,7 +2475,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (new Random().nextDouble() < .15) {
-                messagePrompt("'I feel like I'm floating.\n\nOh wait, that's my blood pressure.'", 1200);
+                messagePrompt("'I feel like I'm rising up to the heavens!'\n\n« That is your blood pressure. »", 1200);
                 healthRange = healthRange - 90;
                 amIDeadYet("Drugs are bad, m'kay?");
                 return;
@@ -2508,7 +2495,7 @@ public class MainActivity extends AppCompatActivity {
                 amIDeadYet("Drugs are bad, m'kay?");
                 return;
             }
-                amIDeadYet("Drugs are bad, m'kay?");
+            amIDeadYet("Drugs are bad, m'kay?");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -2522,7 +2509,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             if (new Random().nextDouble() < .15) {
-                messagePrompt("'Don't do drugs because if you do drugs you'll go to prison, and drugs are really expensive in prison.'", 1200);
+                messagePrompt("« Don't do drugs because if you do drugs you'll go to prison, and drugs are really expensive in prison. »'", 1200);
                 happinessLevel = happinessLevel + 300;
                 healthRange = healthRange - 200;
                 amIDeadYet("Drugs are bad, m'kay?");
@@ -2530,7 +2517,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (new Random().nextDouble() < .15) {
-                messagePrompt("'This is normal behaviour. This is very normal behaviour.'", 1200);
+                messagePrompt("'This is normal. This is very normal. I feel normal.'", 1200);
                 happinessLevel = happinessLevel + 300;
                 healthRange = healthRange - 150;
                 amIDeadYet("Drugs are bad, m'kay?");
@@ -2546,7 +2533,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (new Random().nextDouble() < .15) {
-                messagePrompt("'I don't do cocaine, but it smells amazing.'", 1200);
+                messagePrompt("'I don't do drugs, but they smell amazing.'", 1200);
                 happinessLevel = happinessLevel + 250;
                 healthRange = healthRange - 125;
                 amIDeadYet("Drugs are bad, m'kay?");
@@ -2554,7 +2541,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (new Random().nextDouble() < .15) {
-                messagePrompt("<You have successfully become emotionally constipated. You just don't give a crap, anymore.>", 1200);
+                messagePrompt("« Congratulations on successfully become emotionally constipated. »", 1200);
                 happinessLevel = happinessLevel + 200;
                 healthRange = healthRange + 100;
                 amIDeadYet("Drugs are bad, m'kay?");
@@ -2574,7 +2561,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             if (new Random().nextDouble() < .15) {
-                messagePrompt("'If God dropped acid, would he see people?'", 1200);
+                messagePrompt("'If God dropped acid, would he see people?'\n\n« No. I'd see idiots. »", 1200);
                 happinessLevel = happinessLevel + 400;
                 healthRange = healthRange - 300;
                 amIDeadYet("Drugs are bad, m'kay?");
@@ -2605,7 +2592,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (new Random().nextDouble() < .15) {
-                messagePrompt(" <You have successfully become emotionally constipated. You just don't give a crap, anymore.>", 1200);
+                messagePrompt(" « Congratulations on successfully become emotionally constipated. »", 1200);
                 happinessLevel = happinessLevel + 500;
                 healthRange = healthRange + 350;
                 amIDeadYet("Drugs are bad, m'kay?");
@@ -2624,29 +2611,35 @@ public class MainActivity extends AppCompatActivity {
             statChanges(-3000, 38335, "500000.00");
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.001) {
+                if (new Random().nextDouble() < 0.09) {
                     happinessLevel = happinessLevel + 1500;
                     messagePrompt("During your visit in the private lab, you come across a very" +
-                            " attractive biologist.\n\nThey notice you, and you notice them. <Clearly, you're wealthy enough for this treatment, so the stranger knows you're loaded.> \n\nYou can now go on dates with the researcher. ", 3000);
+                            " attractive biologist.\n\nThey notice you, and you notice them. « Clearly, you're wealthy enough for this treatment, so the stranger knows you're loaded with cash. » \n\nYou can now go on dates with the research assistant. ", 2300);
                     hasPartner = 1;
                     loveDrain = 0;
-                    amIDeadYet("Drugs are bad, m'kay?");
+                    amIDeadYet("You choked on the pill.");
                     return;
                 }
-                if (new Random().nextDouble() < 0.23) {
+                if (new Random().nextDouble() < 0.15) {
                     healthRange = healthRange + 900;
-                    messagePrompt("<Reality is for people who cannot handle drugs.>", 1200);
-                    amIDeadYet("Drugs are bad, m'kay?");
+                    messagePrompt("'Reality is for people who cannot handle drugs.'\n\n« That's not how that saying goes. »", 1200);
+                    amIDeadYet("You choked on the pill.");
                     return;
                 }
-                if (new Random().nextDouble() < 0.23) {
+                if (new Random().nextDouble() < 0.15) {
                     healthRange = healthRange + 900;
-                    messagePrompt("<Mr. Cooper approves.>", 1200);
-                    amIDeadYet("Drugs are bad, m'kay?");
+                    messagePrompt("« I am judging you right now. »", 1200);
+                    amIDeadYet("You choked on the pill.");
+                    return;
+                }
+                if (new Random().nextDouble() < 0.15) {
+                    healthRange = healthRange + 900;
+                    messagePrompt("« Where did I go wrong with my creations? »", 1200);
+                    amIDeadYet("You choked on the pill.");
                     return;
                 }
             }
-            amIDeadYet("Drugs are bad, m'kay?");
+            amIDeadYet("You choked on the pill.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
 
@@ -2660,34 +2653,34 @@ public class MainActivity extends AppCompatActivity {
     public void functionSaveRespawnTokens2(View view) {
         if (daysNotDead > highScore) {
             int rT = respawnToken;
-            messagePrompt(" You killed yourself after surviving " + daysNotDead + " days. A Respawn Token has been granted towards your next life." +
+            messagePrompt(" You died after surviving " + daysNotDead + " days. A Respawn Token has been granted towards your next life." +
                     " \n\n(NEW) HIGHSCORE: " + daysNotDead + " ", 4000);
             highScore = daysNotDead;
             deathCounter = 0;
             resetStats();
             respawnToken = rT;
             updateVariables();
-            ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+            ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
             if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
             ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
             updateHealthAndHappiness();
 
         } else {
             int rT = respawnToken;
-            messagePrompt(" You killed yourself after surviving " + daysNotDead + " days. A Respawn Token has been granted towards your next life." +
+            messagePrompt(" You died after surviving " + daysNotDead + " days. A Respawn Token has been granted towards your next life." +
                     "  \n\nHIGHSCORE: " + highScore, 4000);
             deathCounter = 0;
             resetStats();
             respawnToken = rT;
             updateVariables();
-            ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+            ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
             ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
             updateHealthAndHappiness();
@@ -2698,14 +2691,14 @@ public class MainActivity extends AppCompatActivity {
     public void functionSaveRespawnTokens(View view) {
         if (difficulty == 3)
         {
-            messagePrompt("You can't kill yourself because of the difficulty you chose.", 500);
+            messagePrompt("You can't reincarnate because of the difficulty you chose.", 500);
         }
         if (respawnToken == 2) {
-            messagePrompt(" You can only kill yourself if you have no more than 1 Respawn Token.", 500);
+            messagePrompt(" You can only reincarnate if you have no more than 1 Respawn Token.", 500);
             return;
         }
         if (respawnToken == 0) {
-            messagePrompt(" You must acquire a Respawn Token before you can end your life.", 500);
+            messagePrompt(" You must acquire a Respawn Token before you can reincarnate.", 500);
             return;
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -2722,7 +2715,7 @@ public class MainActivity extends AppCompatActivity {
         if (succMessage == 1)
         {
             succMessage = 0;
-            messagePrompt(" TIP(!) - The Success category is largely responsible for increasing how much money you have, or Net Worth.", 1200);
+            messagePrompt(" TIP(!) - The Success category is largely responsible for increasing how much money you have to spend.", 1200);
 
         }
     }
@@ -2750,43 +2743,43 @@ public class MainActivity extends AppCompatActivity {
 
             lotteryCycle++;
             int temp = lotteryCycle;
-            if (new Random().nextDouble() < 0.00005) {
-                messagePrompt(" You won the jackpot. Congratulations!\n\n<I guess karma does have a way of favoring already well-off individuals.>\n\n You are rewarded $1,000,000 " +
-                        "(after taxes, this sum becomes $661,290.30).", 3500);
+            if (new Random().nextDouble() < 0.0001) {
+                messagePrompt(" You won the jackpot. Congratulations!\n\n« I'll be honest. I forget I even coded this in. Congratulations. »\n\n You are rewarded $1,000,000 " +
+                        "(after taxes, this sum becomes $661,290.30).", 30500);
                 happinessLevel = happinessLevel + 5000;
                 statChanges(healthDrain / -2, happinessDrain / -2, "-661285.30");
-                amIDeadYet("I don't know, but you really screwed it up.");
+                amIDeadYet("How did you screw this up? You won the freaking lottery.");
             } else if (new Random().nextDouble() < 0.05) {
                 messagePrompt("You scratched out your ticket and...\n" +
                         "\nYou won $30!", 1100);
                 happinessLevel = happinessLevel + 30;
                 statChanges(healthDrain / -2, happinessDrain / -2, "-25.00");
-                amIDeadYet("Lottery depresso.");
+                amIDeadYet("The poor tax (otherwise known as the lottery).");
             } else if (new Random().nextDouble() < 0.01) {
                 messagePrompt("You scratched out your ticket and...\n" +
                         "\nYou won $100!", 1100);
                 happinessLevel = happinessLevel + 70;
                 statChanges(healthDrain / -2, happinessDrain / -2, "-95.00");
-                amIDeadYet("Lottery depresso.");
+                amIDeadYet("The poor tax (otherwise known as the lottery).");
             }
-            else if (lotteryCycle > 5 && new Random().nextDouble() < 0.25){
-                messagePrompt("Would you look at that?\n\n<Nothing again. You're wasting your time.>", 900);
+            else if (lotteryCycle > 5 && new Random().nextDouble() < 0.20){
+                messagePrompt("« Nothing again. You're wasting your time. »", 1000);
                 statChanges(healthDrain / -2, happinessDrain / -2, "5.00");
                 amIDeadYet("Lottery depresso.");
             } else {
-                messagePrompt("You scratched out your ticket and...\n\n<Nothing.>", 500);
+                messagePrompt("You scratched out your ticket and...\n\n« Nothing. »", 500);
                 statChanges(healthDrain / -2, happinessDrain / -2, "5.00");
                 amIDeadYet("Lottery depresso.");
             }
 
-            String s = "Days Without Dying: " + daysNotDead;
+            String s = "Days Survived: " + daysNotDead;
             ((TextView) findViewById(R.id.textView2)).setText(s); //updates the value to UI
 
 
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
 
             lotteryCycle = temp;
@@ -2816,9 +2809,9 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("750.00")) {
             netWorth = netWorth.subtract(new BigDecimal("750.00"));
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
             statChanges(healthRange / 2, happinessLevel / 2, "0.00");
             //amIDeadYet("Spent too much time day trading.");
@@ -2837,9 +2830,9 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("7500.00")) {
             netWorth = netWorth.subtract(new BigDecimal("7500.00"));
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
             if (new Random().nextDouble() < .15 && daysNotDead > 250 && netWorth.compareTo(new BigDecimal("50000.00")) <= 0)
             {
@@ -4452,10 +4445,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (hasPartner == 0) {
-            if (new Random().nextDouble() < 0.0005) {
+            if (new Random().nextDouble() < 0.003) {
                 happinessLevel = happinessLevel + 25;
-                messagePrompt("During break time, you asked one of your cute employees for their" +
-                        " number. \n\n<Wow, they actually gave it to you.>\n\nYou are no longer single and can now go on dates with your co-worker.", 2000);
+                messagePrompt("During break time, you ask one of your cute co-workers for their" +
+                        " number. \n\n« They actually gave it to you, congratulations. »\n\nYou are no longer single and can now go on dates with your them.", 2000);
                 hasPartner = 1;
                 loveDrain = 0;
                 amIDeadYet("Overworked yourself.");
@@ -4525,10 +4518,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (hasPartner == 0) {
-            if (new Random().nextDouble() < 0.00010) {
+            if (new Random().nextDouble() < 0.005) {
                 happinessLevel = happinessLevel + 30;
                 messagePrompt("You got the courage to ask one of your hot co-workers for " +
-                        "their number. \n\nYou can now go on dates with your co-worker.", 2500);
+                        "their number. \n\n« They said yes. »\n\nYou can now go on dates with your co-worker.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
                 amIDeadYet("Overworked yourself.");
@@ -4606,9 +4599,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (hasPartner == 0) {
-            if (new Random().nextDouble() < 0.00040) {
+            if (new Random().nextDouble() < 0.007) {
                 happinessLevel = happinessLevel + 60;
-                messagePrompt("You asked one of your hot office workers for their number. \n\nYou can now go on dates " +
+                messagePrompt("You asked one of your hot office workers for their number. \n\n« They said yes. »\n\nYou can now go on dates " +
                         "with your co-worker.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
@@ -4683,9 +4676,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         if (hasPartner == 0) {
-            if (new Random().nextDouble() < 0.0004) {
+            if (new Random().nextDouble() < 0.01) {
                 happinessLevel = happinessLevel + 80;
-                messagePrompt("You asked one of your hot office workers for their number. \n\nYou can now go on dates " +
+                messagePrompt("You asked one of your hot office workers for a date at a nice restaurant. \n\n« They said yes. »\n\nYou can now go on dates " +
                         "with your co-worker.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
@@ -4763,9 +4756,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (hasPartner == 0) {
-            if (new Random().nextDouble() < 0.00040) {
+            if (new Random().nextDouble() < 0.01) {
                 happinessLevel = happinessLevel + 140;
-                messagePrompt("You asked one of your hot office workers for their number. \n\nYou can now go on dates " +
+                messagePrompt("You asked one of your hot office workers for a date at an expensive cuisine. \n\n« They said yes. »\n\nYou can now go on dates " +
                         "with your co-worker.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
@@ -4813,10 +4806,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (hasPartner == 0) {
-            if (new Random().nextDouble() < 0.0050) {
+            if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 160;
                 messagePrompt("You asked one of your sexy interns for " +
-                        "their number. \n\nYou can now go on dates with your personal assistant.", 2500);
+                        "their number. \n\n« Who are they to resist a wealthy creep such as yourself? »\n\nYou can now go on dates with your personal assistant.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
                 amIDeadYet("Overworked yourself.");
@@ -4865,10 +4858,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (hasPartner == 0) {
-            if (new Random().nextDouble() < 0.0050) {
+            if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 230;
                 messagePrompt(" You asked one of your sexy interns for " +
-                        "their number. \n\nYou can now go on dates with your personal assistant.", 2500);
+                        "their number. \n\n« Who are they to resist a wealthy executive like you? »\n\nYou can now go on dates with your personal assistant.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
                 amIDeadYet("Overworked yourself.");
@@ -4921,10 +4914,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (hasPartner == 0) {
-            if (new Random().nextDouble() < 0.0050) {
+            if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 300;
                 messagePrompt("You asked one of your sexy interns for " +
-                        "their number. \n\nYou can now go on dates with your personal assistant.", 2500);
+                        "their number. \n\n« Who are they to resist a wealthy executive such as yourself? »\n\nYou can now go on dates with your personal assistant.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
                 amIDeadYet("Overworked yourself.");
@@ -4962,10 +4955,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (hasPartner == 0) {
 
-            if (new Random().nextDouble() < 0.001) {
+            if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 290;
-                messagePrompt("The new intern looked awfully attractive with those glasses today" +
-                        ". \n\nYou can now go on dates with your personal assistant.", 2500);
+                messagePrompt("The hot, young intern looked awfully attractive with those new glasses today" +
+                        ". \n\n« You run the company! They will do anything for you. »\n\nYou can now go on dates with your personal assistant.", 2500);
                 hasPartner = 1;
                 loveDrain = 0;
                 amIDeadYet("Overworked yourself.");
@@ -5005,8 +4998,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (new Random().nextDouble() < 0.04) {
                     happinessLevel = happinessLevel + 60;
-                    messagePrompt("You've been paired up to work on a project with a classmate you find attractive.\n\n After working with each other, " +
-                            "you find they are into you, too. How pleasant?\n\n You are no longer single and can now go on dates with your classmate.", 3000);
+                    messagePrompt("The professor has paired you up to work on a project, with a classmate you find attractive.\n\n" +
+                            "« You find they are into you, too. How pleasant? »\n\n You are no longer single and can now go on dates with your classmate.", 2400);
                     hasPartner = 1;
                     loveDrain = 0;
                     collegeClassesTaken++;
@@ -5044,7 +5037,7 @@ public class MainActivity extends AppCompatActivity {
                 happinessLevel = happinessLevel + 11;
                 healthRange = healthRange - 5;
                 collegeClassesTaken++;
-                messagePrompt(" You got into a fight with someone from class. <This isn't high school, tone it down, okay?>\n\n" + (8 - collegeClassesTaken) + "" +
+                messagePrompt(" You got into a fight with someone from class. « This isn't high school, tone it down, okay? »\n\n" + (8 - collegeClassesTaken) + "" +
                         " more classes to receive your Bachelor's Degree.", 1000);
                 amIDeadYet("n/a");
                 return;
@@ -5086,7 +5079,7 @@ public class MainActivity extends AppCompatActivity {
             collegeClassesTaken++;
             if (collegeClassesTaken == 8) {
                 messagePrompt(" Congratulations! You have graduated from school and "
-                        + "received your Bachelor's Degree.\n\n<'A different life is ahead of you...', or something like that.>\n\nNew job opportunities are now available.", 2000);
+                        + "received your Bachelor's Degree.\n\n« 'A different life is ahead of you...', or something like that. »\n\nNew job opportunities are now available.", 2000);
                 isEducated++;//promotes user to grad school status, allows some job openings
                 happinessLevel = happinessLevel + 130;
                 amIDeadYet("n/a");
@@ -5128,7 +5121,7 @@ public class MainActivity extends AppCompatActivity {
             statChanges(rHealth, rHappiness, "700.00");
             if (hasPartner == 0 && gradClassesTaken < 9) {
 
-                if (new Random().nextDouble() < 0.04) {
+                if (new Random().nextDouble() < 0.05) {
                     happinessLevel = happinessLevel + 140;
                     messagePrompt("You've been taking a class with a very attractive professor. In, fact that's probably the only " +
                             "reason you didn't drop it yet. They invite you over for coffee to discuss 'homework'.\n\n You are no longer single and can now go on dates with your teacher.", 3000);
@@ -5210,7 +5203,7 @@ public class MainActivity extends AppCompatActivity {
             gradClassesTaken++;
             if (gradClassesTaken == 10) {
                 messagePrompt("Congratulations! You have graduated from school and "
-                        + "received your Master's Degree.\n\n<You have reached a point in life most homo sapiens deem 'successful', I think.>\n\n" +
+                        + "received your Master's Degree.\n\n« You have reached a point in life most homo sapiens deem 'successful', I think. »\n\n" +
                         "New job opportunities are available to you.", 3000);
                 isEducated++;//promotes user to master's status, all jobs available
                 happinessLevel = happinessLevel + 400;
@@ -5251,10 +5244,10 @@ public class MainActivity extends AppCompatActivity {
             statChanges(rHealth, rHappiness, "1000.00");
             if (hasPartner == 0 && postGradClassesTaken < 14) {
 
-                if (new Random().nextDouble() < 0.04) {
+                if (new Random().nextDouble() < 0.05) {
                     happinessLevel = happinessLevel + 120;
-                    messagePrompt("You've been paired up to do a major assignment with some you like from school. Turns out they like " +
-                            "you too. How pleasant?\n\n You are no longer single and can now go on dates with your classmate.\n\n" + (10 - gradClassesTaken) + "" +
+                    messagePrompt("You've been paired up to do a major assignment with some you like from grad. Turns out they like " +
+                            "you too. « How pleasant? »\n\n You are no longer single and can now go on dates with your classmate.\n\n" + (10 - gradClassesTaken) + "" +
                             " more classes to receive your Doctorate's Degree.", 3000);
                     hasPartner = 1;
                     loveDrain = 0;
@@ -5292,7 +5285,7 @@ public class MainActivity extends AppCompatActivity {
             postGradClassesTaken++;
             if (postGradClassesTaken == 15) {
                 messagePrompt(" Congratulations! You have graduated from school and "
-                        + "received your Doctorate's Degree.\n\n <You are now in the top quadrant of the intellectual populace. I, personally, salute you.>\n\n" +
+                        + "received your Doctorate's Degree.\n\n « You are now in the top quadrant of the intellectual populace. I, personally, salute you. »\n\n" +
                         "New job opportunities are available to you.", 3000);
                 isEducated++;//promotes user to master's status, all jobs available
                 happinessLevel = happinessLevel + 100;
@@ -5311,7 +5304,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void functionNightclub(View view) {
         if (luxuryCounter2 < 21) {
-            messagePrompt("You need to wait " + ((21 - luxuryCounter2) / 3) + " days before taking your luxury time.", 500);
+            messagePrompt("You need to wait " + ((21 - luxuryCounter2) / 3) + " days before spending more luxury time.", 500);
             return;
         }
 
@@ -5324,10 +5317,10 @@ public class MainActivity extends AppCompatActivity {
 
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.15) {
+                if (new Random().nextDouble() < 0.12) {
                     happinessLevel = happinessLevel + 90;
                     messagePrompt("You got really wasted and ended up making out with a cutie in the bathroom.\n\n" +
-                            " You are no longer single and can now go on dates with your clubmate.", 2500);
+                            " You are no longer single and can now go on dates with your casual clubmate.", 2500);
                     hasPartner = 1;
                     loveDrain = 0;
                     amIDeadYet("Alcoholism.");
@@ -5388,7 +5381,7 @@ public class MainActivity extends AppCompatActivity {
                     happinessLevel = happinessLevel - 25;
                     netWorth = netWorth.subtract(new BigDecimal("300.00"));
                     messagePrompt(" As you were stumbling back home drunk, you were mugged by a petty " +
-                            "criminal who stole $300.\n\n<Unfortunately, they did not hurt you.>", 2500);
+                            "criminal who stole $300.\n\n« Unfortunately, they did not hurt you. »", 2500);
                     amIDeadYet("n/a");
                     return;
 
@@ -5398,7 +5391,7 @@ public class MainActivity extends AppCompatActivity {
                     netWorth = netWorth.subtract(netWorth);
                     messagePrompt(" As you were stumbling back home drunk, you were mugged by a petty " +
                             "criminal. \n\nSad to say, you did not have a lot of money on you, so " +
-                            "they roughed you up instead. \n\n<Your health took a 'beating'>.", 3500);
+                            "they roughed you up instead. \n\n« I could have stopped it, but I don't intervene. ».", 3500);
                     amIDeadYet("Beaten up by a thug.");
 
                     return;
@@ -5431,10 +5424,10 @@ public class MainActivity extends AppCompatActivity {
             luxuryCounter2 = 0;
 
             if (new Random().nextDouble() < 0.2 && isEducated == 2 && jobCEOReference == 0) {
-                messagePrompt("You were gambling at the casino and merely by chance, you meet Jeffrey Smith, one of the" +
+                messagePrompt("You were gambling at the casino and merely by chance, you meet Corporate Sellout #36, one of the" +
                         " top senior executives from the " +
-                        "company you work for. \n\nYou make acquaintances with your newfound connection and " +
-                        "they became impressed by your business foresight.\n\nThe company council could be notified about you.", 500);
+                        "company you work for! \n\nYou make acquaintances with your newfound connection and " +
+                        "they are impressed by your business foresight.\n\n« The executive board will surely take you into consideration for their next hire. »", 3500);
                 jobCEOReference = 1;
                 happinessLevel = happinessLevel + 400;
                 amIDeadYet("Whatever goes in Vegas, stays in Vegas.");
@@ -5444,10 +5437,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if (new Random().nextDouble() < 0.15) {
                     happinessLevel = happinessLevel + 500;
-                    messagePrompt("You ended up meeting a very attractive individual at the VIP Lounge and took " +
-                            "a few too many drinks. \n\n<Alcohol does wonders, so you make out at the top of the skyline" +
-                            " under the moonlight.>\n\n" +
-                            " You are no longer single and can now go on dates with the wild love interest.", 3000);
+                    messagePrompt("You ended up meeting a very attractive individual at the VIP Lounge and had " +
+                            "a few too many drinks. \n\n« Alcohol does wonders, doesn't it? » You make out at on a rooftop" +
+                            " under the moonlight.\n\n" +
+                            " You are no longer single and can now go on dates with the mysterious love interest.", 3000);
                     hasPartner = 1;
                     loveDrain = 0;
                     amIDeadYet("I don't know how you could've fu**ed this up.");
@@ -5485,7 +5478,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     messagePrompt(" As you were stumbling back to your hotel suite, you were mugged by a " +
                             "mafioso.\n\nWhat he did not see is that you are constantly followed by your hired security.\n\n" +
-                            "They beat him up and threw him in a dumpster.", 3000);
+                            "They beat him up and threw him in a dumpster.", 2600);
                     happinessLevel = happinessLevel + 200;
                     amIDeadYet("n/a");
                     return;
@@ -5496,7 +5489,7 @@ public class MainActivity extends AppCompatActivity {
                     happinessLevel = happinessLevel - 85;
                     netWorth = netWorth.subtract(new BigDecimal("1000.00"));
                     messagePrompt(" As you were stumbling back to your hotel suite, you were mugged by a " +
-                            "mafioso.\n\n<You coughed up $1000 and, unfortunately, did not suffer any injuries.>", 2500);
+                            "mafioso.\n\n« You coughed up $1000 and, unfortunately, did not suffer any injuries. »", 2500);
                     amIDeadYet("n/a");
 
                     return;
@@ -5506,7 +5499,7 @@ public class MainActivity extends AppCompatActivity {
                     happinessLevel = happinessLevel - 75;
                     netWorth = netWorth.subtract(netWorth);
                     messagePrompt(" As you were stumbling back to your hotel suite, you were mugged by a mafioso. \n\nUnfortunately, you did not have a lot of money on you, so " +
-                            "they beat you up instead. \n\n<You should probably get some security, next time.>", 3500);
+                            "they beat you up instead. \n\n« You should probably get some security, next time. »", 3000);
                     amIDeadYet("Beaten by the mafia.");
 
                     return;
@@ -5516,7 +5509,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.08) {
                 messagePrompt(" You played Poker throughout the night and gambled like a mad man. Your poker face" +
                         " is impeccable. " +
-                        "\n\nYou won the $25,000 jackpot!", 3500);
+                        "\n\nYou won the $25,000 jackpot!", 2600);
                 netWorth = netWorth.add(new BigDecimal("25000.00"));
                 happinessLevel = happinessLevel + 300;
                 amIDeadYet("Your heart gave out after winning.");
@@ -5532,7 +5525,7 @@ public class MainActivity extends AppCompatActivity {
                         happinessLevel = happinessLevel - 100;
                         messagePrompt(" You played Poker throughout the night and gambled like a mad man.\n\n You lost " +
                                 "$10,000, but you couldn't pay up, so the casino was getting ready to kick you out.\n\nHowever, you had your hired security with you and" +
-                                " you were nicely asked to leave, despite losing them so much money.", 3000);
+                                " you were nicely asked to leave, despite losing them so much money.", 2600);
                         amIDeadYet("n/a");
                         return;
                     }
@@ -5542,8 +5535,8 @@ public class MainActivity extends AppCompatActivity {
                         netWorth = netWorth.subtract(netWorth);
 
                         messagePrompt(" You played Poker throughout the night and gambled like a mad man.\n\n You lost " +
-                                "$10,000 and you were thrown out of the casino.\n\n<You couldn't pay up properly, so the private security took whatever you had" +
-                                " and beat you up for the rest.>", 3000);
+                                "$10,000 and you were thrown out of the casino.\n\n« You couldn't pay up properly, so the private security took whatever you had" +
+                                " and beat you up for the rest. »", 2600);
                         amIDeadYet("Jumped by casino staff.");
                         return;
                     }
@@ -5553,7 +5546,7 @@ public class MainActivity extends AppCompatActivity {
                         happinessLevel = happinessLevel - 190;
                         messagePrompt(" You played Poker throughout the night and gambled like a mad man.\n\n Although you lost " +
                                 "$10,000, you didn't want to pay up, so the casino was getting ready to kick you out.\n\nNonetheless, you had your hired security with you and" +
-                                " you were nicely asked to leave, despite losing them so much money.", 3000);
+                                " you were nicely asked to leave, despite losing them so much money.", 2600);
                         amIDeadYet("n/a");
                         return;
                     }
@@ -5563,8 +5556,8 @@ public class MainActivity extends AppCompatActivity {
                         netWorth = netWorth.subtract(new BigDecimal("10000.00"));
 
                         messagePrompt(" You played Poker throughout the night and gambled like a mad man.\n\n You lost " +
-                                "over $10,000 and you were thrown out of the casino.\n\n<Unfortunately, you actually had enough Net Worth so no further " +
-                                "consequence occurred. And I was getting excited too.>", 3500);
+                                "over $10,000 and you were thrown out of the casino.\n\n« Unfortunately, you had enough money so no further " +
+                                "consequence occurred. And I was getting excited too. »", 3000);
                         amIDeadYet("Lost too much money.");
                         return;
                     }
@@ -5614,7 +5607,7 @@ public class MainActivity extends AppCompatActivity {
                 if (canIAffordIt("20000.00") == false && hasPartner == 1 && partnerKidnap == 0) {
                     messagePrompt(" Crazy events have unfolded. \n\nWhile sightseeing in the city, your partner was kidnapped by a drug cartel. They are " +
                             "looking for a $20,000 settlement." +
-                            "\n\n<Their deal is simple. Obtain $20,000 in the next 10 days or your partner will be killed. Good luck.>", 3500);
+                            "\n\n« Their deal is simple. Obtain $20,000 in the next 10 days or your partner will die. Good luck. »", 3500);
                     happinessLevel = happinessLevel - 3500;
                     healthRange = healthRange - 50;
                     partnerKidnap = daysNotDead + 11;
@@ -5641,15 +5634,15 @@ public class MainActivity extends AppCompatActivity {
                             " but luckily, you're fairly wealthy so you weren't harmed.", 2500);
                     happinessLevel = happinessLevel - 600;
                     if (netWorth.intValue()/2 > 20000)
-                    netWorth = netWorth.divide(new BigDecimal("2.00"));
+                        netWorth = netWorth.divide(new BigDecimal("2.00"));
                     else
-                    netWorth = netWorth.subtract(new BigDecimal("20000.00"));
+                        netWorth = netWorth.subtract(new BigDecimal("20000.00"));
                     amIDeadYet("Lost too much money.");
                     return;
                 }
             }
 
-                if (new Random().nextDouble() < .08) {
+            if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel + 300;
                 healthRange = healthRange - 55;
                 messagePrompt("'Nope, not done yet.'\n\n'Still a few pages left in my passport.'", 500);
@@ -5659,7 +5652,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .08) {
                 happinessLevel = happinessLevel + 300;
                 healthRange = healthRange - 55;
-                messagePrompt("'The hotel maids are so sweet.'\n\n'It's almost as if their lives depend on it!'", 500);
+                messagePrompt("'The hotel maids are so sweet.'\n\n'It's almost as if their financial stability depends on it.'", 500);
                 amIDeadYet("Got lost and died.");
                 return;
             }
@@ -5735,9 +5728,9 @@ public class MainActivity extends AppCompatActivity {
             else if (firstTime == 1)
             {
                 if (hasSecurity == 1)
-                messagePrompt("Rows of well-dressed upperclassmen encircled the expensive car show.\n\nYou " +
-                        "purchased your first luxury car: a shiny and sleek black model, perfect for racing.\n\nYour hired security makes sure" +
-                        " the car is brought to you safely and without complications.", 3500);
+                    messagePrompt("Rows of well-dressed upperclassmen encircled the expensive car show.\n\nYou " +
+                            "purchased your first luxury car: a shiny and sleek black model, perfect for racing.\n\nYour hired security makes sure" +
+                            " the car is brought to you safely and without complications.", 3500);
                 else
                     messagePrompt("Rows of well-dressed upperclassmen encircled the expensive car show.\n\nYou " +
                             "purchased your first luxury car: a shiny and sleek black model, perfect for racing.", 3500);
@@ -5745,8 +5738,8 @@ public class MainActivity extends AppCompatActivity {
             else
             {
                 if (hasSecurity == 1)
-                messagePrompt("You purchase another expensive vehicle. Why not add even more luxury cars to your arsenal?\n\n" +
-                        "Your hired security ensures that the car is brought to you safely and without complications.", 3500);
+                    messagePrompt("You purchase another expensive vehicle. Why not add even more luxury cars to your arsenal?\n\n" +
+                            "Your hired security ensures that the car is brought to you safely and without complications.", 3500);
                 else
                     messagePrompt("You purchase another expensive vehicle. Why not add even more luxury cars to your arsenal?", 2500);
 
@@ -5843,8 +5836,8 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .15) {
                 happinessLevel = happinessLevel - 500;
                 healthRange = healthRange - 100;
-                messagePrompt("'Wow, this mansion dates back to the 16th century.'\n\n<Doesn't that make you want to foolishly investigate " +
-                        "its strange noises?>", 1200);
+                messagePrompt("'Wow, this mansion dates back to the 16th century.'\n\n« Doesn't that make you want to foolishly investigate " +
+                        "its strange noises? »", 1200);
                 amIDeadYet("Your mansion collapsed.");
                 return;
             }
@@ -5879,7 +5872,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < .15) {
                 happinessLevel = happinessLevel + 700;
                 healthRange = healthRange - 300;
-                messagePrompt("'You're on a boat. You're on a boat.'\n\n<Everybody, look at you, 'cause you're sailing on a boat.>", 1200);
+                messagePrompt("'You're on a boat. You're on a boat.'\n\n« Everybody, look at you, 'cause you're sailing on a boat. »", 1200);
                 amIDeadYet("Got lost in the Bermuda Triangle.");
                 return;
             }
@@ -5911,25 +5904,32 @@ public class MainActivity extends AppCompatActivity {
             luxuryCounter2 = 0;
             luxuryDrain = 0;
             statChanges(-3500, 311225, "8000000.00");
-            if (new Random().nextDouble() < .13) {
-                happinessLevel = happinessLevel + 700;
-                healthRange = healthRange - 300;
-                messagePrompt("'It's my money and I'm using it for my own gains. I don't see the harm.'", 1200);
-                amIDeadYet("n/a");
+            if (new Random().nextDouble() < .25) {
+                happinessLevel = happinessLevel - 17000;
+                healthRange = healthRange + 1300;
+                messagePrompt("« Nothing wrong with generously donating a couple million to a politician for a simple public speech. »", 1200);
+                amIDeadYet("Your dinner party was poisoned.");
                 return;
             }
-            if (new Random().nextDouble() < .13) {
-                happinessLevel = happinessLevel + 700;
-                healthRange = healthRange - 300;
-                messagePrompt("<'You're not corrupting the government. You are offering generous donations for their hard work.'>", 1200);
-                amIDeadYet("n/a");
+            if (new Random().nextDouble() < .25) {
+                happinessLevel = happinessLevel - 17000;
+                healthRange = healthRange + 1300;
+                messagePrompt("« Remember, you are not corrupting the government. You are offering generous donations for their hard work. »", 1200);
+                amIDeadYet("Your dinner party was poisoned.");
                 return;
             }
-            if (new Random().nextDouble() < .13) {
-                happinessLevel = happinessLevel + 700;
-                healthRange = healthRange - 300;
-                messagePrompt("'It's survival of the fittest. I'm just trying to survive by not suffocating in lobbyist contributions.'", 1200);
-                amIDeadYet("n/a");
+            if (new Random().nextDouble() < .25) {
+                happinessLevel = happinessLevel - 17000;
+                healthRange = healthRange + 1300;
+                messagePrompt("'It's survival of the fittest. I'm just trying to survive by not suffocating in super PAC contributions.'", 1200);
+                amIDeadYet("Your dinner party was poisoned.");
+                return;
+            }
+            if (new Random().nextDouble() < .25) {
+                happinessLevel = happinessLevel - 17000;
+                healthRange = healthRange + 1300;
+                messagePrompt("'Politicians have to put food on the table too! Like caviar... and uranium...'", 1200);
+                amIDeadYet("Your dinner party was poisoned.");
                 return;
             }
             else if (hasSecurity == 0)
@@ -5939,10 +5939,10 @@ public class MainActivity extends AppCompatActivity {
                 healthRange = 0;
                 messagePrompt("Well, I have good news and bad news.\n\nGood news: Your plan came to fruition.\n\nBad news: You have been " +
                         "captured by guerilla rebels. Since you did not have hired security, you were assassinated.", 3000);
-                amIDeadYet("Didn't have protection.");
+                amIDeadYet("Killed by rebels. Had no security.");
                 return;
             }
-            amIDeadYet("n/a");
+            amIDeadYet("Your dinner party was poisoned.");
             if (amIDead() == false && daysNotDead % 7 != 0)
                 amIOkayYet();
         } else
@@ -5951,6 +5951,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void functionWinTheGame(View view) {
+        if (canIAffordIt("15000000.00") == false) {
+            messagePrompt("You cannot afford to win the game.\n\n« Yet. »", 500);
+            return;
+        }
         if (luxuryCounter < 7) {
             messagePrompt("(LOCKED)", 500);
             return;
@@ -5965,19 +5969,14 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if (canIAffordIt("15000000.00") == false) {
-            messagePrompt("<You cannot afford to win the game. Yet.>", 500);
-            return;
-        }
-
         hasWon = 1;
         statChanges(healthDrain, happinessDrain, "0.00");
         if (daysNotDead > highScore) {
             highScore = daysNotDead;
-            messagePrompt(" <Oh my 'Me'. You did it. You actually did it. You f***ing beat my game.> \n\n<Congratulations, you are a God amongst humankind. I am literally in tears. What are you going to do with your life, now?>\n\n (NEW) HIGHSCORE: " + highScore, 8000);
+            messagePrompt(" « You did it. You actually did it. You f***ing beat me. » \n\n« If you have the time, I would highly suggest checking out the 'About Me' section to learn about the meaning of it all. »\n\n (NEW) HIGHSCORE: " + highScore, 3500);
         } else
-            messagePrompt(" <Oh my 'Me'. Way to f***ing beat my game... again. You must feel accomplished.> \n\n<Congratulations... yadda yadda yadda... What are you going to do with your life, now?>\n" +
-                    "\n HIGHSCORE: " + highScore, 8000);
+            messagePrompt(" « You beat me... again. I cannot believe this. » \n\n« Congratulations... yadda yadda yadda... What are you going to do with your life, now? »\n" +
+                    "\n HIGHSCORE: " + highScore, 3000);
 
         resetStats();
         return;
@@ -6018,22 +6017,22 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.13) {
                 messagePrompt("'I don't have a dirty mind, I have a sexy imagination.'", 1400);
                 happinessLevel = happinessLevel + 4;
-                amIDeadYet("n/a");
+                amIDeadYet("Your partner poisoned you.");
                 return;
             }
             if (new Random().nextDouble() < 0.13) {
                 messagePrompt("'I'm actually a very nice person, until you piss me off'", 1400);
                 happinessLevel = happinessLevel - 2;
-                amIDeadYet("n/a");
+                amIDeadYet("Your partner poisoned you.");
                 return;
             }
             if (new Random().nextDouble() < 0.13) {
                 messagePrompt("'I'm sorry for what I said when I was hungry.'", 1400);
                 happinessLevel = happinessLevel + 2;
-                amIDeadYet("n/a");
+                amIDeadYet("Your partner poisoned you.");
                 return;
             }
-            amIDeadYet("n/a");
+            amIDeadYet("Your partner poisoned you.");
             if (amIDead() == false && daysNotDead % 7 != 0) {
                 amIOkayYet();
             }
@@ -6077,16 +6076,16 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.13) {
                 messagePrompt("'I'm actually a very nice person, until you piss me off'", 2500);
                 happinessLevel = happinessLevel - 4;
-                amIDeadYet("n/a");
+                amIDeadYet("Your partner poisoned you.");
                 return;
             }
             if (new Random().nextDouble() < 0.13) {
                 messagePrompt("'I'm sorry for what I said when I was hungry.'", 2500);
                 happinessLevel = happinessLevel + 3;
-                amIDeadYet("n/a");
+                amIDeadYet("Your partner poisoned you.");
                 return;
             }
-            amIDeadYet("n/a");
+            amIDeadYet("Your partner poisoned you.");
             if (amIDead() == false && daysNotDead % 7 != 0) {
                 amIOkayYet();
             }
@@ -6106,9 +6105,9 @@ public class MainActivity extends AppCompatActivity {
             loveCounter2 = 0;
             statChanges(120, 1142, "10000.00");
             loveDrain = 0;
-            if (new Random().nextDouble() < 0.05 && isMarried == 0 && isEngaged == 0) {
-                messagePrompt("The date went terribly. \n\nYou got into an argument and your partner stormed out" +
-                        "of your tent. \n\n<A wild grizzly bear then attacked your partner. They died.>\n\n You've been dumped.", 5000);
+            if (new Random().nextDouble() < 0.04 && isMarried == 0 && isEngaged == 0) {
+                messagePrompt("The date went terribly. You got into an argument and your partner stormed out" +
+                        "of your tent. \n\n« A wild pack of coyotes then attacked and ate them. They died. »\n\n You've been indirectly dumped.", 4000);
                 healthDrain = healthDrain - 5;
                 happinessLevel = happinessLevel - 1500;
                 hasPartner = 0;
@@ -6118,24 +6117,24 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             if (new Random().nextDouble() < 0.13) {
-                messagePrompt("'I don't have a dirty mind, I have a sexy imagination.'", 1300);
+                messagePrompt("'I hope we don't get mauled by sea-bears.'", 1300);
                 happinessLevel = happinessLevel + 20;
-                amIDeadYet("n/a");
+                amIDeadYet("A wild bear attack.");
                 return;
             }
             if (new Random().nextDouble() < 0.13) {
                 messagePrompt("'I'm actually a very nice person, until you piss me off'", 1300);
                 happinessLevel = happinessLevel - 10;
-                amIDeadYet("n/a");
+                amIDeadYet("A wild bear attack.");
                 return;
             }
             if (new Random().nextDouble() < 0.13) {
-                messagePrompt("'I'm sorry for what I said when I was hungry.'", 1300);
+                messagePrompt("'These mushrooms definitely seem safe for consumption...'", 1300);
                 happinessLevel = happinessLevel + 8;
-                amIDeadYet("n/a");
+                amIDeadYet("Poisonous mushrooms.");
                 return;
             }
-            amIDeadYet("n/a");
+            amIDeadYet("Poisonous mushrooms.");
             if (amIDead() == false && daysNotDead % 7 != 0) {
                 amIOkayYet();
             }
@@ -6155,8 +6154,17 @@ public class MainActivity extends AppCompatActivity {
             statChanges(200, 3964, "40000.00");
             loveCounter = 0;
             loveDrain = 0;
-            messagePrompt("What a romantic way to get kidnapped.", 1200);
-            amIDeadYet("n/a");
+
+            if (new Random().nextDouble() < 0.13) {
+                messagePrompt("« What a romantic way to get kidnapped. »", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("'I hope we run into aliens.'", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("'Quickly! Take a picture!'", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("'Stop distracting me. I'm trying to enjoy the moment by taking a selfie.'", 1200);
+            }
+            amIDeadYet("Your vehicle rolled off a cliff and you both died.");
             if (amIDead() == false && daysNotDead % 7 != 0) {
                 amIOkayYet();
             }
@@ -6176,8 +6184,29 @@ public class MainActivity extends AppCompatActivity {
             statChanges(450, 9855, "120000.00");
             loveCounter = 0;
             loveDrain = 0;
-            messagePrompt("If the wine hasn't lived through World War II, it's not ripe enough.", 1200);
-            amIDeadYet("n/a");
+            if (new Random().nextDouble() < 0.20 && isEngaged == 0) {
+                isEngaged = 1;
+                messagePrompt("Slowly... you await the magic moment. As the sunset slowly started to " +
+                        "creep in, and the sky fades into a pinkish hue,\n\n You pull out" +
+                        " a ring and say, 'Marry me!'. Your partners overcomes the shock, replies 'Yes!' and" +
+                        " doesn't realize what mistake they just made.\n\nYou are now engaged.", 3500);
+                happinessLevel = happinessLevel + 5000;
+                healthRange = healthRange + 300;
+                amIDeadYet("n/a");
+                return;
+            }
+            else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("If the wine hasn't lived through World War II, it's not ripe enough.", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("Oh yes, this one has a creamy blend and fruity bouquet...", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("And I call this one: The Suburban, Single Mother.", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("And I call this one: The Excrement of the Cobra", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("And I call this one: The Exploited Farmer", 1200);
+            }
+            amIDeadYet("Wine poisoning.");
             if (amIDead() == false && daysNotDead % 7 != 0) {
                 amIOkayYet();
             }
@@ -6197,35 +6226,42 @@ public class MainActivity extends AppCompatActivity {
             statChanges(-300, 18011, "250000.00");
             loveCounter = 0;
             loveDrain = 0;
-            if (new Random().nextDouble() < 0.15 && isEngaged == 0) {
+            if (new Random().nextDouble() < 0.25 && isEngaged == 0) {
                 isEngaged = 1;
-                messagePrompt("You've been waiting for the magic moment. As the sunset slowly started to " +
+                messagePrompt("Slowly... you await the magic moment. As the sunset slowly started to " +
                         "creep in, and the sky fades into a pinkish hue,\n\n You pull out" +
                         " a ring and say, 'Marry me!'. Your partners overcomes the shock, replies 'Yes!' and" +
-                        " you kiss under the moonlit dawn.\n\nYou are now engaged.", 3500);
+                        " doesn't realize what mistake they just made.\n\nYou are now engaged.", 3500);
                 happinessLevel = happinessLevel + 5000;
                 healthRange = healthRange + 300;
-                amIDeadYet("n/a");
+                amIDeadYet("Your return ship sank in the ocean.");
                 return;
-            } else if (new Random().nextDouble() < 0.15 && hasSecurity == 0)
+            } else if (new Random().nextDouble() < 0.07 && hasSecurity == 0)
             {
-                messagePrompt("A series of unfortunate events have occurred.\n\nUnfortunately, the private island " +
+                messagePrompt("A series of unfortunate events have occurred. The private island " +
                         "for which you rented out has not been thoroughly checked, and as it turns out, there lives a serial killer " +
-                        "in a quiet cabin deep in the forest.\n\nYou did not have hired security with you, and your partner was murdered." +
-                        "Luckily, you got away in time.", 5000);
+                        "in a quiet cabin deep in the forest.\n\nYou do not have security. You kick your partner in the leg to slow them down" +
+                        " and you fortunately manage to get away. Your partner had to be sacrificed, unfortunately. You have been dumped.", 4000);
                 happinessLevel = happinessLevel - 14000;
                 healthRange = healthRange - 250;
                 hasPartner = 0;
                 isMarried = 0;
                 isEngaged = 0;
-                amIDeadYet("n/a");
+                amIDeadYet("Your return ship sank in the ocean.");
                 return;
             }
-            else
-            {
-                messagePrompt("It's like Lord of the Flies but less boys, and more whiskey.", 1200);
+            else if (new Random().nextDouble() < 0.13) {
+
+                messagePrompt("It's like Lord of the Flies but less little boys, and more whiskey.", 1200);
             }
-            amIDeadYet("n/a");
+            else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("Too bad we had to kick out those natives to lock this puppy down!", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("Look honey, the natives wish to offer us their funny-smelling essential oils.", 1200);
+            } else if (new Random().nextDouble() < 0.13) {
+                messagePrompt("Look honey, the natives wish to offer us their local cuisine of brightly colored frogs.", 1200);
+            }
+            amIDeadYet("Your return ship sank in the ocean.");
             if (amIDead() == false && daysNotDead % 7 != 0) {
                 amIOkayYet();
             }
@@ -6240,11 +6276,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         if (isMarried == 1) {
-            messagePrompt("You're already married, you buffoon.", 500);
+            messagePrompt("You are already married, you buffoon.", 500);
             return;
         }
         if (loveCounter < 42) {
-            messagePrompt(" You need to wait " + ((44 - loveCounter) / 3) + " days before executing such a feat.", 500);
+            messagePrompt(" You need to wait " + ((44 - loveCounter) / 3) + " days before executing a mistake of this magnitude.", 500);
             return;
         }
 
@@ -6253,9 +6289,9 @@ public class MainActivity extends AppCompatActivity {
             isMarried = 1;
             loveDrain = 0;
             statChanges(-700, 35268, "600000.00");
-            messagePrompt(" <Why would you set your life up for failure?> \n\nYou are now married, congratulations!\n\nYour Happiness drain increases.", 3000);
+            messagePrompt(" Today is your big day when you form a government-sanctioned bond of monogamy. You are now married, congratulations!\n\nYour Happiness drain increases after shortly coming to your senses and realizing what you have done.", 3000);
 
-            amIDeadYet("Heart attack from realizing what you have just done.");
+            amIDeadYet("Your partner poisons you to take your inheritance.");
 
             happinessDrain = happinessDrain + 75;
             if (amIDead() == false && daysNotDead % 7 != 0) {
@@ -6294,12 +6330,12 @@ public class MainActivity extends AppCompatActivity {
             statChanges(-2200, 74527, "1500000.00");
             amIDeadYet("Heart attack from realizing what you have just done.");
             if (firstTime == 1) {
-                messagePrompt(" <Children are the rotten fruit of this planet.>\n\n<Oh well, it's your problem now.>\n\nYour Health drain increases.", 2000);
+                messagePrompt(" « Children are the rotten fruit of this planet. »\n\n« Oh well, they are your problem now. »\n\nYour Health drain increases after realizing the magnitude of your mistake.", 2500);
                 healthDrain = healthDrain + 150;
             }
             else
             {
-                messagePrompt(" <Geez, even more kids.>\n\n <Stop overpopulating the planet you swine.>", 2000);
+                messagePrompt(" « Geez, even more kids. »\n\n « Stop overpopulating the planet with your wretched offspring. »", 2000);
             }
             if (amIDead() == false && daysNotDead % 7 != 0) {
                 amIOkayYet();
@@ -6325,12 +6361,12 @@ public class MainActivity extends AppCompatActivity {
     public void cheatingResult(int day) {
         if (cheatingCounter == 15) {
             if (day == 1) {
-                messagePrompt(" <Be careful coming so close to death. Do not abuse the system I have set up for you.>\n\n<Consider yourself warned.>\n\n" +
+                messagePrompt(" «Be careful coming so close to death. Do not abuse the system I have set up for you. »\n\n« Consider yourself warned. »\n\n" +
                         "You have 16 hours left to live.", 3000);
                 //netWorth.subtract(new BigDecimal("500.00"));
                 return;
             } else {
-                messagePrompt(" <Be careful coming so close to death. Do not abuse the system I have set up for you.>\n\n<Consider yourself warned.>\n\n" +
+                messagePrompt(" « Be careful coming so close to death. Do not abuse the system I have set up for you. »\n\n« Consider yourself warned. »\n\n" +
                         "You have 8 hours left to live. This is your last chance.", 3500);
                 //netWorth.subtract(new BigDecimal("500.00"));
                 return;
@@ -6339,12 +6375,12 @@ public class MainActivity extends AppCompatActivity {
         if (cheatingCounter == 30) {
             if (day == 1) {
                 if (canIAffordIt("1000.00")) {
-                    messagePrompt(" <You play me for a fool? Do not meddle with death, peasant.>\n\n<I have taken 1000$ from your Net Worth.>\n\n" +
+                    messagePrompt(" « You play me for a fool? Do not meddle with death, peasant. »\n\n« I have burned $1000. »\n\n" +
                             "You have 16 hours left to live.", 3000);
                     netWorth = netWorth.subtract(new BigDecimal("1000.00"));
                     return;
                 } else {
-                    messagePrompt(" <You play me for a fool? Do not meddle with death, peasant.>\n\n<I have taken 100 from your Health.>\n\n" +
+                    messagePrompt(" « You play me for a fool? Do not meddle with death, peasant. »\n\n« I have taken 100 from your Health. »\n\n" +
                             "You have 16 hours left to live.", 3000);
                     healthRange = healthRange - 100;
                     if (healthRange < -5)
@@ -6353,12 +6389,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             } else {
                 if (canIAffordIt("1000.00")) {
-                    messagePrompt(" <You play me for a fool? Do not meddle with death, peasant.>\n\n<I have taken 1000$ from your Net Worth.>\n\n" +
+                    messagePrompt(" « You play me for a fool? Do not meddle with death, peasant. »\n\n« I have burned $1000. »\n\n" +
                             "You have 8 hours left to live. This is your last chance.", 3500);
                     netWorth = netWorth.subtract(new BigDecimal("1000.00"));
                     return;
                 } else {
-                    messagePrompt(" <You play me for a fool? Do not meddle with death, peasant.>\n\n<I have taken 100 from your Health.>\n\n" +
+                    messagePrompt(" « You play me for a fool? Do not meddle with death, peasant. »\n\n« I have taken 100 from your Health. »\n\n" +
                             "You have 8 hours left to live. This is your last chance.", 3500);
                     healthRange = healthRange - 100;
                     if (healthRange < -5)
@@ -6370,44 +6406,44 @@ public class MainActivity extends AppCompatActivity {
         if (cheatingCounter == 45) {
             if (day == 1) {
                 if (isEducated == 1) {
-                    messagePrompt(" <Again, you dance with me in a tango of fates. You forget that I am the one in control of fate, not you.>\n\n<Your school performance is faltering." +
-                            " You have failed two classes and need to repeat those in order to continue pursuing your degree.>\n\n" +
+                    messagePrompt(" « Again, you dance with me in a tango of mockery. You forget that I am the one in control of fate, not you. »\n\n« Your school performance is faltering." +
+                            " You have failed two classes and need to repeat those in order to continue pursuing your degree. »\n\n" +
                             "You have 16 hours left to live.", 3500);
                     collegeClassesTaken = collegeClassesTaken - 2;
                     return;
                 }
                 if (isEducated == 2) {
-                    messagePrompt(" <Again, you dance with me in a tango of fates. You forget that I am the one in control, not you.>\n\n<Your school performance is faltering." +
-                            " You have failed two classes and need to repeat those in order to continue pursuing your degree.>\n\n" +
+                    messagePrompt(" « Again, you dance with me in a tango of mockery. You forget that I am the one in control, not you. »\n\n« Your school performance is faltering." +
+                            " You have failed two classes and need to repeat those in order to continue pursuing your degree. »\n\n" +
                             "You have 16 hours left to live.", 3500);
                     gradClassesTaken = gradClassesTaken - 2;
                     return;
                 }
                 if (isEducated == 3) {
-                    messagePrompt(" <Again, you dance with me in a tango of fates. You forget that I am the one in control, not you.>\n\n<Your school performance is faltering." +
-                            " You have failed two classes and need to repeat those in order to continue pursuing your degree.>\n\n" +
+                    messagePrompt(" « Again, you dance with me in a tango of mockery. You forget that I am the one in control, not you. »\n\n« Your school performance is faltering." +
+                            " You have failed two classes and need to repeat those in order to continue pursuing your degree. »\n\n" +
                             "You have 16 hours left to live.", 3500);
                     postGradClassesTaken = postGradClassesTaken - 2;
                     return;
                 }
             } else {
                 if (isEducated == 1) {
-                    messagePrompt(" <Again, you dance with me in a tango of fates. You forget that I am the one in control, not you.>\n\n<Your school performance is faltering." +
-                            " You have failed two classes and need to repeat those in order to continue pursuing your degree.>\n\n" +
+                    messagePrompt(" « Again, you dance with me in a tango of mockery. You forget that I am the one in control, not you. »\n\n« Your school performance is faltering." +
+                            " You have failed two classes and need to repeat those in order to continue pursuing your degree. »\n\n" +
                             "You have 8 hours left to live. This is your last chance.", 3500);
                     collegeClassesTaken = collegeClassesTaken - 2;
                     return;
                 }
                 if (isEducated == 2) {
-                    messagePrompt(" <Again, you dance with me in a tango of fates. You forget that I am the one in control, not you.>\n\n<Your school performance is faltering." +
-                            " You have failed two classes and need to repeat those in order to continue pursuing your degree.>\n\n" +
+                    messagePrompt(" « Again, you dance with me in a tango of mockery. You forget that I am the one in control, not you. »\n\n« Your school performance is faltering." +
+                            " You have failed two classes and need to repeat those in order to continue pursuing your degree. »\n\n" +
                             "You have 8 hours left to live. This is your last chance.", 3500);
                     gradClassesTaken = gradClassesTaken - 2;
                     return;
                 }
                 if (isEducated == 3) {
-                    messagePrompt(" <Again, you dance with me in a tango of fates. You forget that I am the one in control, not you.>\n\n<Your school performance is faltering." +
-                            " You have failed two classes and need to repeat those in order to continue pursuing your degree.>\n\n" +
+                    messagePrompt(" « Again, you dance with me in a tango of mockery. You forget that I am the one in control, not you. »\n\n« Your school performance is faltering." +
+                            " You have failed two classes and need to repeat those in order to continue pursuing your degree. »\n\n" +
                             "You have 8 hours left to live. This is your last chance.", 3500);
                     postGradClassesTaken = postGradClassesTaken - 2;
                     return;
@@ -6664,7 +6700,7 @@ public class MainActivity extends AppCompatActivity {
                 if (cheatingChecker()) {
                     cheatingResult(2);
                 } else
-                        messagePrompt("You have 8 hours left to live. \n\n<This is your last chance.>", 1200);
+                    messagePrompt("You have 8 hours left to live. \n\n« This is your last chance. »", 1200);
             } else if (deathCounter > 3) {
                 if (respawnToken == 0) {
                     if (reason.equals("n/a"))
@@ -6677,88 +6713,87 @@ public class MainActivity extends AppCompatActivity {
                             reason = new String("Chronic depression.");
                     }
                     if (daysNotDead > highScore) {
-                        messagePrompt(" You killed yourself after surviving " + daysNotDead + " days. But hey, it's the longest you've lived thus far." +
+                        messagePrompt(" You died after surviving " + daysNotDead + " days. But hey, it's the longest you've survived thus far." +
                                 " \n\nReason: " + reason + "\n\n(NEW) HIGHSCORE: " + daysNotDead + " ", 2500);
                         dM = 1;
                         highScore = daysNotDead;
                         deathCounter = 0;
                         resetStats();
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
                         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
 
                     } else if (daysNotDead > 100) {
-                        messagePrompt(" You killed yourself after surviving " + daysNotDead + " days. You're definitely getting a grip on life, but you just need a bit more practice." +
+                        messagePrompt(" You died after surviving " + daysNotDead + " days. You're definitely getting a grip on this whole life thing, but you just need a bit more practice." +
                                 " \n\nReason: " + reason + "\n\nHIGHSCORE: " + highScore, 2500);
                         dM = 1;
                         deathCounter = 0;
                         resetStats();
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
                         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
 
                     } else if (daysNotDead > 50) {
-                        messagePrompt(" You killed yourself after surviving " + daysNotDead + " days. You're getting better, but I am still too much of a match for you." +
+                        messagePrompt(" You died after surviving " + daysNotDead + " days. You're getting better, but I am still too much of a match for you." +
                                 "  \n\nReason: " + reason + "\n\nHIGHSCORE: " + highScore, 2500);
                         dM = 1;
                         deathCounter = 0;
                         resetStats();
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
                         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
 
                     } else {
-                        messagePrompt(" You killed yourself after surviving " + daysNotDead + " days. That was a pathetic attempt at living." +
+                        messagePrompt(" You died after surviving " + daysNotDead + " days. You need to try harder at living." +
                                 "  \n\nReason: " + reason + "\n\nHIGHSCORE: " + highScore, 2500);
                         dM = 1;
                         deathCounter = 0;
                         resetStats();
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
                         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
                     }
                 } else  if (difficulty != 3){
-                    messagePrompt("Congratulations, you killed yourself. But by your Respawn Tokens and the" +
-                            " grace of myself, you were given another chance at life. \n\nReason: " + reason + "\n\nYour health and happiness drain is halved.", 3500);
+                    messagePrompt("« Congratulations, you died. But by your Respawn Token and the" +
+                            " grace of me, you were given another chance at life. » \n\nReason: " + reason + "\n\nYour health and happiness drain is halved.", 3500);
                     healthDrain = healthDrain / 2;
                     happinessDrain = happinessDrain / 2;
                     if (daysNotDead < 45 || daysNotDead > 55) {
                         if (mInterstitialAd.isLoaded())
                             mInterstitialAd.show();
-                        else if (mInterstitialAd2.isLoaded()) {
-                            mInterstitialAd2.show();
+                        else {
+                            mInterstitialAd.loadAd(new AdRequest.Builder().build());
                         }
-                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                        mInterstitialAd2.loadAd(new AdRequest.Builder().build());
+
                     }
                     if (daysNotDead > 300) {
                         happinessLevel = 755;
                         healthRange = 755;
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
                         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
@@ -6768,11 +6803,11 @@ public class MainActivity extends AppCompatActivity {
                     if (daysNotDead > 200) {
                         happinessLevel = 250;
                         healthRange = 250;
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
                         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
@@ -6781,11 +6816,11 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         happinessLevel = 90;
                         healthRange = 90;
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
                         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
@@ -6806,11 +6841,11 @@ public class MainActivity extends AppCompatActivity {
             updateStatus();
         updateVariables();
         updateStockVariables();
-        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
         if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
         else
-            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
         updateHealthAndHappiness();
@@ -6960,7 +6995,7 @@ public class MainActivity extends AppCompatActivity {
                     messagePrompt("Your happiness is low. \n\nCheer up, mate. It's just a game.", 1000);
                 }
                 else
-                messagePrompt("Your happiness is low. \n\nYou need to stop hating yourself.", 1000);
+                    messagePrompt("Your happiness is low. \n\nYou need to stop hating yourself.", 1000);
                 return;
             }
         }
@@ -6978,7 +7013,7 @@ public class MainActivity extends AppCompatActivity {
         Typeface OswRegular = Typeface.createFromAsset(getAssets(), "fonts/Odin Rounded - Regular.otf");
         myMsg.setTypeface(OswRegular);
         myMsg.setTextSize(25);
-        //myMsg.setTitle("You killed yourself");
+        //myMsg.setTitle("You died");
         myMsg.setText(message);
         myMsg.setGravity(Gravity.CENTER_HORIZONTAL);
         popupBuilder.setView(myMsg);
@@ -7020,28 +7055,35 @@ public class MainActivity extends AppCompatActivity {
             taxCollector = 1;
             taxCollection = taxAmount.subtract(netWorth);
             taxCollection = taxCollection.setScale(2, RoundingMode.CEILING);
-            messagePrompt("Unfortunately, you could not afford your taxes from your spendable Net Worth.\n\n" +
-                    "<I have taken $" + netWorth.toString() + " from your account.>\n\n" +
-                    "But, you are still $" + taxCollection.toString() + " in debt.\n\n<In 30 days, the tax collector will be back." +
-                    " If you cannot pay up, you will go to prison (death or Respawn Token).>", 4000);
+            messagePrompt("Unfortunately, you could not afford your taxes from your spendable funds.\n\n" +
+                    "« I have taken $" + netWorth.toString() + " from your account. »\n\n" +
+                    "But, you are still $" + taxCollection.toString() + " in debt.\n\n« In 30 days, the tax collector will be back." +
+                    " If you cannot pay up, you will go to prison (death or Respawn Token). »", 3000);
             taxCollector = 1;
             netWorth = netWorth.subtract(netWorth);
         }
 
-        messagePrompt("<TAX SEASON DAY " + daysNotDead + ">" +
+        messagePrompt("« TAX SEASON DAY " + daysNotDead + " »" +
                 "\n\nTotal earnings: $" + totalEarned.toString() + "  ($" + taxOfEarnings.toString() + " taxed [1.00%])" +
-                "\n\nTotal Net Worth: $" + netWorth.toString() + "   ($" + taxOfNetWorth.toString() + " taxed [15.00%])" +
+                "\n\nTotal $" + netWorth.toString() + "   ($" + taxOfNetWorth.toString() + " taxed [15.00%])" +
                 "\n\nTotal assets: $" + outputStocks().toString() + "   ($" + taxOfAssets.toString() + " taxed [6.00%])" +
-                "\n\n\nTotal taxes: $" + taxAmount.toString(), 5000);
+                "\n\n\nTotal taxes: $" + taxAmount.toString(), 3000);
 
         netWorth = netWorth.subtract(taxAmount);
+
+        if (mInterstitialAd.isLoaded())
+            mInterstitialAd.show();
+        else
+        {
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        }
 
 
     }
 
     /* This functions changes the in-game stats. HealthChange changes the health, HappinessChange
        changes the happiness level accordingly. It also updates the daysNotDeadCycle to increase
-       the Days Without Dying counter since every 3 functions, 1 day is added to not being dead
+       the Days Survived counter since every 3 functions, 1 day is added to not being dead
        given as long as the user is not dead
        Cost is the amount of money the function costs/produces represented by a numerical value
        in String format ex. "15.00" */
@@ -7072,7 +7114,7 @@ public class MainActivity extends AppCompatActivity {
             securityCounter--;
         }
         else
-        hasSecurity = 0;
+            hasSecurity = 0;
         gymCounter = 0;
         supplementCounter = 0;
         medicationCounter = 0;
@@ -7095,16 +7137,16 @@ public class MainActivity extends AppCompatActivity {
                 deathCounter = 4;
                 amIDeadYet("Did not pay tax.");
                 messagePrompt("30 days have passed. The tax collector has come.\n\n" +
-                        "<Your debt is $" + taxCollection.toString() + ". But, you don't have enough Net Worth to pay.>\n\n" +
-                        "<Respect the tyranny of an oppressive government. I have smited you.>", 3500);
+                        "« Your debt is $" + taxCollection.toString() + ". But, you don't have enough funds to pay. »\n\n" +
+                        "« Respect the tyranny of an oppressive government. I have warned you before, and now the feds have smited you. »", 3000);
                 taxCollector = 0;
 
             }
             else
             {
                 messagePrompt("30 days have passed. The tax collector has come.\n\n" +
-                        "<Your debt is $" + taxCollection.toString() + ". Unfortunately, you did have enough Net Worth to pay.>\n\n" +
-                        "<No one has to die today.>", 3500);
+                        "« Your debt is $" + taxCollection.toString() + ". Unfortunately, you had enough money to pay and " +
+                        "no one has to perish today. :( »", 3000);
                 netWorth = netWorth.subtract(taxCollection);
                 taxCollection = taxCollection.subtract(taxCollection);
                 taxCollector = 0;
@@ -7196,12 +7238,12 @@ public class MainActivity extends AppCompatActivity {
 
         healthRange = healthRange + healthChange;
         happinessLevel = happinessLevel + happinessChange;
-        String s = "Days Without Dying: " + daysNotDead;
+        String s = "Days Survived: " + daysNotDead;
         ((TextView) findViewById(R.id.textView2)).setText(s); //updates the value to UI
 
 
         if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
         else
             ((TextView) findViewById(R.id.textView4)).setText("Net. W.: $" + (netWorth) + " (" + outputStocks().toString() + ")");
 
@@ -7216,43 +7258,32 @@ public class MainActivity extends AppCompatActivity {
             if (respawnToken < 2) {
                 respawnToken++;
                 if (respawnToken == 1) {
-                    messagePrompt(" You have earned a Respawn Token!\n\n Respawn Tokens are passively stored and automatically used if you die. Upon " +
-                            "use, your Health and Happiness drains become halved.", 4000);
-                    if (mInterstitialAd.isLoaded())
-                        mInterstitialAd.show();
-                    else if (mInterstitialAd2.isLoaded())
-                    {
-                        mInterstitialAd2.show();
-                    }
-                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                    mInterstitialAd2.loadAd(new AdRequest.Builder().build());
+                    messagePrompt(" You have earned a Respawn Token!\n\n Respawn Tokens are passively stored and automatically used if you die. If " +
+                            "used, your Health and Happiness drains become 1/2 as strong.", 3000);
+
                 }
                 else {
-                    messagePrompt(" You have earned another Respawn Token!\n\n Respawn Tokens are passively stored and automatically used if you die. Upon " +
-                            "use, your Health and Happiness drains become halved.", 4000);
+                    messagePrompt(" You have earned another Respawn Token!\n\n Respawn Tokens are passively stored and automatically used if you die. If " +
+                            "used, your Health and Happiness drains become 1/2 as strong.", 2000);
                     if (mInterstitialAd.isLoaded())
                         mInterstitialAd.show();
-                    else if (mInterstitialAd2.isLoaded())
+                    else
                     {
-                        mInterstitialAd2.show();
+                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
                     }
-                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                    mInterstitialAd2.loadAd(new AdRequest.Builder().build());
                 }
                 return;
             } else {
-                messagePrompt("You have reached " +
-                        "the maximum amount of Respawn Tokens I can give away. However, I do want to reward you for getting this far in life.\n\n" +
-                        "Here's a small loan of a million dollars, instead.", 4000);
+                messagePrompt("« You have reached " +
+                        "the maximum amount of Respawn Tokens I can give. »\n\n « However, I want to reward you for getting this far. " +
+                        "Here's a small loan of a million dollars, like I gave decades ago to one of my servants. »", 2800);
                 netWorth = netWorth.add(new BigDecimal("1000000.00"));
                 if (mInterstitialAd.isLoaded())
                     mInterstitialAd.show();
-                else if (mInterstitialAd2.isLoaded())
+                else
                 {
-                    mInterstitialAd2.show();
+                    mInterstitialAd.loadAd(new AdRequest.Builder().build());
                 }
-                mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                mInterstitialAd2.loadAd(new AdRequest.Builder().build());
                 return;
             }
         }
@@ -7315,29 +7346,29 @@ public class MainActivity extends AppCompatActivity {
                         " days now. Health drain increases by 14. ", 800);
             }
         } else if (daysNotDead > 84) {
-                if (daysNotDead % 14 == 0 && daysNotDeadCycle == 0) {
-                    messagePrompt(" You have been alive for " + daysNotDead +
-                            " days now. Happiness drain increases by 11. ", 800);
-                } else if (daysNotDead % 7 == 0 && daysNotDeadCycle == 0) {
-                    healthDrain = healthDrain + 14;
-                    messagePrompt(" You have been alive for " + daysNotDead +
-                            " days now. Health drain increases by 11. ", 800);
-                }
+            if (daysNotDead % 14 == 0 && daysNotDeadCycle == 0) {
+                messagePrompt(" You have been alive for " + daysNotDead +
+                        " days now. Happiness drain increases by 11. ", 800);
+            } else if (daysNotDead % 7 == 0 && daysNotDeadCycle == 0) {
+                healthDrain = healthDrain + 14;
+                messagePrompt(" You have been alive for " + daysNotDead +
+                        " days now. Health drain increases by 11. ", 800);
+            }
         } else if (daysNotDead > 70) {
             if (daysNotDead % 84 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt("TIP(!) - Wall Street assets (stocks) are taxed at a much lower rate " +
-                        "than your Net Worth. This will be important when taxes are collected every 90 days. \n\nHappiness drain increases by 8. ", 800);
+                        "than your spendable funds. This will be important when taxes are collected every 90 days. \n\nHappiness drain increases by 8. ", 800);
             } else if (daysNotDead % 77 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt("TIP(!) - Every 90 days, taxes are collected. The amount you pay is calculated by an algorithm" +
-                        " based on how much money you have made, how much Net Worth you have, and Wall Street (stock) assets which are taxed less.\n\nHealth drain increases by 8. ", 800);
+                        " based on how much money you have made, how much spendable funds you have, and Wall Street (stock) assets which are taxed less.\n\nHealth drain increases by 8. ", 800);
             }
         } else if (daysNotDead > 56) {
             if (daysNotDead % 70 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt(" You have been alive for " + daysNotDead +
                         " days now. Happiness drain increases by 5. ", 800);
             } else if (daysNotDead % 63 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - You can kill yourself in the Success category to save your Respawn Tokens. If you do, you will restart " +
-                                "the game back to Day 1, but start with 1 Respawn Token instead of 0. \n\nHealth drain increases by 5. ", 800);
+                messagePrompt("TIP(!) - You can choose reincarnation in the Success category to save your Respawn Tokens. If you do, you will restart " +
+                        "the game back to Day 1, but start with 1 Respawn Token instead of 0. \n\nHealth drain increases by 5. ", 800);
             }
         } else if (daysNotDead > 42) {
             if (daysNotDead % 56 == 0 && daysNotDeadCycle == 0) {
@@ -7345,14 +7376,14 @@ public class MainActivity extends AppCompatActivity {
                         "other activities of the same price. \n\nHappiness drain increases by 4. ", 800);
             } else if (daysNotDead % 49 == 0 && daysNotDeadCycle == 0) {
                 //messagePrompt("TIP(!) - Generally, the Luxury and Love categories will have activities that are more beneficial than " +
-                        //"other activities of the same price. \n\nHealth drain increases by 3. ", 800);
+                //"other activities of the same price. \n\nHealth drain increases by 3. ", 800);
             }
         } else if (daysNotDead > 28) {
             if (daysNotDead % 42 == 0 && daysNotDeadCycle == 0) {
                 if (hasPartner == 0)
-                messagePrompt("TIP(!) - It would be a wise decision to go out in search of a partner, if you have not already. Everyone needs a friend.\n\n Happiness drain increases by 3. ", 1500);
+                    messagePrompt("TIP(!) - It would be wise to go out in search of a partner. To meet someone, try to go to social places.\n\n Happiness drain increases by 3. ", 1500);
                 else
-                    messagePrompt("TIP(!) - Nice job on getting a partner. Don't forget to go out on dates! They are more effective than most activities.\n\n Happiness drain increases by 3. ", 1500);
+                    messagePrompt("TIP(!) - You have a partner so don't forget to go out on dates! They are more effective than most activities at making you happy.\n\n Happiness drain increases by 3. ", 1500);
 
             } else if (daysNotDead % 35 == 0 && daysNotDeadCycle == 0) {
                 messagePrompt("TIP(!) - Visiting the Luxury category allows you to go out and progress the story. Although, you probably can't afford most " +
@@ -7363,7 +7394,7 @@ public class MainActivity extends AppCompatActivity {
                 messagePrompt("TIP(!) - Clicking on the purple Respawn Token to the right allows you to see how much your Health and Happiness decreases by, along with the number of Respawn Tokens (if any). \n" +
                         "\nHappiness drain increases by 2. ", 1500);
             } else if (daysNotDead % 21 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Save up your Net Worth for education. Eventually, you can learn your way to a higher-paying job. \n\nHealth drain increases by 2. ", 1500);
+                messagePrompt("TIP(!) - Save up your money for education. Eventually, you can learn your way to a higher-paying job. \n\nHealth drain increases by 2. ", 1500);
             }
         } else if (daysNotDead > 0) {
             if (daysNotDead % 14 == 0 && daysNotDeadCycle == 0) {
@@ -7373,26 +7404,26 @@ public class MainActivity extends AppCompatActivity {
                         " a few expensive ones. However, as your drains increase, this will become less effective and you will need more expensive alternatives.\n\nHealth drain increases by 1. ", 1500);
             }
         }
-        if (daysNotDead > 2 && dayMessage == 1)
+        if (daysNotDead > 2 && dayMessage == 1 && firstTimePlaying == 1)
         {
             dayMessage = 0;
-            messagePrompt("Congratulations! You have survived " + daysNotDead + " days.\n\nEvery 3 functions you complete, equates to 1 day of being alive. The days you are alive represents your score.", 1200);
+            messagePrompt("Congratulations! You have survived " + daysNotDead + " days.\n\nEvery 3 events you click, equals 1 day of survival. The days you survive represent your score!", 1200);
         }
         if (loveCounter2 > 90)
         {
             if (hasPartner == 1 && isMarried == 0 && isEngaged == 0) {
-                messagePrompt("It's been over a month since your last date. You have not been returning texts or calls.\n\n<I regret" +
-                        " to inform you, but your partner has broken up with you.>\n\nYou are now single... again. Your happiness took a low" +
-                        " blow.", 3500);
+                messagePrompt("It's been over a month since your last date. You have not been returning texts or calls.\n\n« I regret" +
+                        " to inform you, but your partner has broken up with you. »\n\nYou are again single. Your happiness took a deep" +
+                        " blow.", 3000);
                 hasPartner = 0;
                 isEngaged = 0;
                 isMarried = 0;
                 happinessLevel = happinessLevel - 150;
                 updateHealthAndHappiness();
             }
-            else if (hasPartner == 1 && isEngaged == 1 && isMarried == 0) {
-                messagePrompt("It's been over a month since your last date. You have not been returning texts or calls.\n\n<I regret" +
-                        " to inform you, but your fiance has broken up with you.>\n\nYou are now single, and are no longer eligible to get married.", 3500);
+            else if (hasPartner == 1 && isEngaged == 1 && isMarried == 0 && loveCounter2 > 180) {
+                messagePrompt("It's been over two months since your last date. You have not been returning texts or calls.\n\n« I regret" +
+                        " to inform you, but your fiance has broken up with you. »\n\nYou are now single, and are no longer eligible to get married.", 3000);
                 happinessLevel = happinessLevel - 400;
                 hasPartner = 0;
                 isEngaged = 0;
@@ -7401,11 +7432,11 @@ public class MainActivity extends AppCompatActivity {
             }
             else if (isMarried == 1)
             {
-                if (loveCounter2 > 180)
+                if (loveCounter2 > 270)
                 {
-                    messagePrompt("It's been over two months since your last date. You have not been returning texts or calls.\n\n<I regret" +
-                            " to inform you, but your partner has divorced you.>\n\nYou are now single, and have lost half of your Net Worth.", 3500);
-                    happinessLevel = happinessLevel - 400;
+                    messagePrompt("It's been over three months since your last date. You have not been returning texts or calls.\n\n« I regret" +
+                            " to inform you, but your partner has divorced you. »\n\nYou are now single, and have lost half of your spendable funds.", 3500);
+                    happinessLevel = happinessLevel - 1000;
                     hasPartner = 0;
                     isEngaged = 0;
                     isMarried = 0;
@@ -7447,7 +7478,7 @@ public class MainActivity extends AppCompatActivity {
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.loser.superfruit86.myapplication/http/host/path")
+                Uri.parse("android-app://com.losersimulator.divergenteuropeans/http/host/path")
         );
         AppIndex.AppIndexApi.start(client, viewAction);
     }
@@ -7466,7 +7497,7 @@ public class MainActivity extends AppCompatActivity {
                 // Otherwise, set the URL to null.
                 Uri.parse("http://host/path"),
                 // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.loser.superfruit86.myapplication/http/host/path")
+                Uri.parse("android-app://com.losersimulator.divergenteuropeans/http/host/path")
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
@@ -7480,14 +7511,10 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead < 35)
                 ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and modify your body. (LOCKED)");
+                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
         }
-
-        messagePrompt("Open the categories menu by swiping from left to right, or by clicking on the top left icon.", 1500);
-
-        messagePrompt("<Well, since you skipped the tutorial, I'm going to assume that you won't need " +
-                "it and thus will never show it to you again.> \n\nGood luck.", 1500);
+        messagePrompt("« Well since you skipped the tutorial, I'll never show it again. »\n\n« After closing this message, click anywhere on your health, or swipe the screen from left to right. »", 1600);
     }
 
     public void functionDone(View view) {
@@ -7498,13 +7525,11 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead < 35)
                 ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and modify your body. (LOCKED)");
+                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
         }
 
-        messagePrompt("Open the Category menu by swiping right from the left side, or clicking on the status bar screen.", 1500);
-
-        messagePrompt("<Welcome to Loser. A message in brackets means that I am speaking.>\n\nYou can close windows by tapping near the corners, or the back button.", 1800);
+        messagePrompt("« After closing this message, starting from the left side of the screen, swipe from left to right to open the menu. »\n\n« Or click anywhere on your health. »", 1500);
 
     }
 
@@ -8034,9 +8059,9 @@ public class MainActivity extends AppCompatActivity {
             sharesOwned = sharesOwned + quantity;
             updateStockVariables();
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
         }
 
@@ -8117,9 +8142,9 @@ public class MainActivity extends AppCompatActivity {
             sharesOwned = sharesOwned - quantity;
             updateStockVariables();
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
         }
 
@@ -8287,9 +8312,9 @@ public class MainActivity extends AppCompatActivity {
         // --------------------- STATS OF USER --------------
         if (mInterstitialAd.isLoaded())
             mInterstitialAd.show();
-        else if (mInterstitialAd2.isLoaded())
+        else
         {
-            mInterstitialAd2.show();
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
         }
 
         resetVariables();
@@ -8298,15 +8323,13 @@ public class MainActivity extends AppCompatActivity {
         succMessage = 0;
         dayMessage = 0;
         resetStocks();
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-        mInterstitialAd2.loadAd(new AdRequest.Builder().build());
 
 
-        ((TextView) findViewById(R.id.textView2)).setText("Days Without Dying: " + daysNotDead);
+        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
         if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("Net Worth: $" + (netWorth));
+            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
         else
-            ((TextView) findViewById(R.id.textView4)).setText("N-W: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
         ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
         updateHealthAndHappiness();
@@ -8321,42 +8344,42 @@ public class MainActivity extends AppCompatActivity {
 
     void updateHealthAndHappiness() {
         ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgress(happinessLevel);
-            if (happinessLevel > 4000) {
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffcc99"));
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(12000);
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(12000);
-                ((TextView) findViewById(R.id.happinessIndicator)).setText("*****");
-            } else if (happinessLevel > 1350) {
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffff99"));
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(4000);
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(4000);
-                ((TextView) findViewById(R.id.happinessIndicator)).setText("****");
-            } else if (happinessLevel > 450) {
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffffcc"));
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(1350);
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(1350);
-                ((TextView) findViewById(R.id.happinessIndicator)).setText("***");
-            } else if (happinessLevel > 150) {
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ccffcc"));
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(450);
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(450);
-                ((TextView) findViewById(R.id.happinessIndicator)).setText("**");
-            } else if (happinessLevel > 50) {
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ccffff"));
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(150);
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(150);
-                ((TextView) findViewById(R.id.happinessIndicator)).setText("*");
-            } else {
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#b3d9ff"));
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(50);
-                ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(50);
-                ((TextView) findViewById(R.id.happinessIndicator)).setText("");
-            }
+        if (happinessLevel > 4000) {
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffcc99"));
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(12000);
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(12000);
+            ((TextView) findViewById(R.id.happinessIndicator)).setText("*****");
+        } else if (happinessLevel > 1350) {
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffff99"));
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(4000);
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(4000);
+            ((TextView) findViewById(R.id.happinessIndicator)).setText("****");
+        } else if (happinessLevel > 450) {
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffffcc"));
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(1350);
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(1350);
+            ((TextView) findViewById(R.id.happinessIndicator)).setText("***");
+        } else if (happinessLevel > 150) {
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ccffcc"));
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(450);
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(450);
+            ((TextView) findViewById(R.id.happinessIndicator)).setText("**");
+        } else if (happinessLevel > 50) {
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ccffff"));
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(150);
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(150);
+            ((TextView) findViewById(R.id.happinessIndicator)).setText("*");
+        } else {
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#b3d9ff"));
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(50);
+            ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(50);
+            ((TextView) findViewById(R.id.happinessIndicator)).setText("");
+        }
         if (firstTimeHappinessIndicator == 0 && happinessLevel > 50)
         {
             firstTimeHappinessIndicator = 1;
             messagePrompt(" TIP(!) - After closing this message, notice the color of your Happiness bar changed. " +
-                    "\n\nYour Happiness did not go down. Instead, you have reached the next level.", 1200);
+                    "\n\nYour Happiness did not go down. Instead, you have reached the next tier.", 1200);
         }
         ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgress(happinessLevel);
 
@@ -8397,7 +8420,7 @@ public class MainActivity extends AppCompatActivity {
             firstTimeHealthIndicator = 1;
             messagePrompt(" TIP(!) - After closing this message, notice the color of your Health bar changed. \n" +
                     "\n" +
-                    "Your Health did not go down. Instead, you have reached the next level.", 1200);
+                    "You have filled your Health meter and are now in the second tier.", 1200);
         }
         ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgress(healthRange);
     }
@@ -8410,7 +8433,7 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead < 35)
                 ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and modify your body. (LOCKED)");
+                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
         }
     }

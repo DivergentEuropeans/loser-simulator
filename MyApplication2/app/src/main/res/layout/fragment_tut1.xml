@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@mipmap/secdefaulttut1_2"
-            android:minHeight="510dp"
+            android:minHeight="450dp"
             xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -22,7 +22,7 @@
                 android:background="@drawable/my_button_bg"
                 android:text="Skip"
                 android:id="@+id/buttonSkip1"
-                android:layout_marginTop="450dp"
+                android:layout_marginTop="390dp"
                 android:layout_marginLeft="50dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="left"
@@ -34,7 +34,7 @@
                     android:background="@drawable/my_button_bg"
                     android:text="Next"
                     android:id="@+id/buttonNext1"
-                    android:layout_marginTop="450dp"
+                    android:layout_marginTop="390dp"
                     android:layout_marginRight="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="right"
