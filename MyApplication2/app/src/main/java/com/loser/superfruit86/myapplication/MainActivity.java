@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+
+// TODO: Old packages? Needs updates/refactors
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.app.ActionBar;
+
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.TextPaint;
+import android.text.style.CharacterStyle;
+import android.text.style.UpdateAppearance;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,11 +34,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+
+// TODO: Does ad integration work correctly anymore?
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -37,8 +52,6 @@ import java.nio.charset.Charset;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -235,6 +248,8 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+        // Ads stuff
+
         setContentView(R.layout.activity_main);
         MobileAds.initialize(this, "ca-app-pub-6612683572827982~5717244235");
         mInterstitialAd = new InterstitialAd(this);
@@ -249,8 +264,11 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        // UI stuff begins
+        //ActionBar actionBar = getSupportActionBar();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         byte[] emojiBytes = new byte[]{(byte) 0xE2, (byte) 0x98, (byte) 0xBA};
@@ -261,8 +279,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "R. Tokens(" + respawnToken + ")  " + emojiAsString + " Drain(" +
-                        "" + happinessDrain + ")  " + emojiHealthString + " Drain:(" + healthDrain + ")", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Respawn " + respawnToken + "  |  " + emojiAsString + " drain " +
+                        "" + happinessDrain + "  |  " + emojiHealthString + " drain " + healthDrain + "", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -301,7 +319,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.add(R.id.main_container, new DifficultyFragment());
                 fragmentTransaction.commit();
 
-                messagePrompt("Choose a difficulty.", 1200);
+                messagePrompt("Hello.", 1200);
 
                 if (mInterstitialAd.isLoaded())
                     mInterstitialAd.show();
@@ -326,7 +344,17 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportFragmentManager().executePendingTransactions()) {
             editor.putInt("firstTimePlaying", 1);
             editor.apply();
-            getSupportActionBar().setTitle("Status");
+
+            SpannableString s = new SpannableString("Menu");
+            s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            s.setSpan(new ShadowSpan(8.5f, 5.0f, 5.0f, Color.BLACK), 0, s.length(), 0);
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
+                // TODO: Move all mipmap regular assets into drawable
+                actionBar.setHomeAsUpIndicator(R.mipmap.right_icon2);
+                actionBar.setTitle(s);
+            }
+
         }
 
         //navigationView.setItemTextAppearance(5);
@@ -354,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
                             ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
 
                     }
-                    //getSupportActionBar().setTitle("Physical");
+                    //actionBar.setTitle("Physical");
                     item.setChecked(true);
 
 
@@ -368,7 +396,7 @@ public class MainActivity extends AppCompatActivity {
                         if (daysNotDead < 125)
                             ((TextView) findViewById(R.id.buttonDrugs)).setText("Seek out alternative medicine. (LOCKED)");
                     }
-                    //getSupportActionBar().setTitle("Mental");
+                    //actionBar.setTitle("Mental");
                     item.setChecked(true);
 
                 } else if (id == R.id.nav_success) {
@@ -381,7 +409,7 @@ public class MainActivity extends AppCompatActivity {
                         succMessage = 0;
                         messagePrompt("TIP(!) - The Success category is largely responsible for increasing how much money you have to spend.", 1000);
                     }
-                    //getSupportActionBar().setTitle("Success");
+                    //actionBar.setTitle("Success");
                     item.setChecked(true);
 
 
@@ -412,7 +440,7 @@ public class MainActivity extends AppCompatActivity {
                             if (luxuryCounter < 6)
                                 ((TextView) findViewById(R.id.buttonToppleGovernment)).setText("(LOCKED)");
                         }
-                        //getSupportActionBar().setTitle("Luxury");
+                        //actionBar.setTitle("Luxury");
                         item.setChecked(true);
 
                     }
@@ -448,7 +476,7 @@ public class MainActivity extends AppCompatActivity {
                                 ((TextView) findViewById(R.id.buttonFamily)).setText("(LOCKED)");
                             }
                         }
-                        //getSupportActionBar().setTitle("Love");
+                        //actionBar.setTitle("Love");
                         item.setChecked(true);
                     } else {
                         messagePrompt("You are single.", 500);
@@ -458,7 +486,7 @@ public class MainActivity extends AppCompatActivity {
                     fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.main_container, new IdentityFragment());
                     fragmentTransaction.commit();
-                    //getSupportActionBar().setTitle("Love");
+                    //actionBar.setTitle("Love");
                     item.setChecked(true);
                 } else if (id == R.id.nav_privacy) {
                     Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://app.termly.io/document/privacy-policy/a93ae13c-3a07-4bdd-b98a-705572832c3c"));
@@ -2693,7 +2721,7 @@ public class MainActivity extends AppCompatActivity {
         {
             messagePrompt("You can't reincarnate because of the difficulty you chose.", 500);
         }
-        if (respawnToken == 2) {
+        if (respawnToken == 2) { // TODO: This doesn't seem right?
             messagePrompt(" You can only reincarnate if you have no more than 1 Respawn Token.", 500);
             return;
         }

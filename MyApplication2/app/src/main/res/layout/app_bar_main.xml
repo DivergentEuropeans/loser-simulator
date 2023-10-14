@@ -31,7 +31,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="19dp"
         android:layout_marginRight="11dp"
-        android:src="@mipmap/token_icon1"
+        android:src="@mipmap/status_icon1"
         app:backgroundTint="#955e2e77"
         app:fabSize="mini"
         app:rippleColor="@color/bg_screen1" />

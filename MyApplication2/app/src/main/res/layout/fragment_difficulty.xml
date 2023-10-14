@@ -1,12 +1,12 @@
-<RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content" android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical" >
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.loser.superfruit86.myapplication.SuccessFragment"
@@ -21,7 +21,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@drawable/my_button_bg"
-        android:text="Realistic."
+        android:text="Neurotypical."
         android:id="@+id/buttonRealistic"
         android:layout_marginTop="80dp"
         android:layout_centerHorizontal="true"
@@ -31,7 +31,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@drawable/my_button_bg"
-        android:text="Hard as hell."
+        android:text="Challenge."
         android:id="@+id/buttonHardAsHell"
         android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true"
@@ -41,7 +41,7 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:background="@drawable/my_button_bg"
-        android:text="End my suffering. (No Respawn Tokens)"
+        android:text="Real life. (No Respawn Tokens)"
         android:id="@+id/buttonEndMySuffering"
         android:layout_marginTop="220dp"
         android:layout_centerHorizontal="true"
@@ -49,14 +49,21 @@
         android:onClick="functionEndMySuffering" />
 
     <TextView
+        android:id="@+id/textView25"
         android:layout_width="302dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="Choose a difficulty."
-        android:gravity="center"
-        android:id="@+id/textView25"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="7"
+        android:shadowDy="7"
+        android:shadowRadius="15"
+        android:text="Choose a difficulty."
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp" />
 
 
 </FrameLayout>
