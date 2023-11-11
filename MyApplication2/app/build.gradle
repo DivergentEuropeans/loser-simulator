@@ -27,9 +27,9 @@ dependencies {
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     compile 'com.google.android.gms:play-services-ads:11.2.0'
     compile 'com.google.ads.interactivemedia.v3:interactivemedia:3.6.0'
-    compile 'com.google.firebase:firebase-appindexing:11.2.0'
-    compile 'com.google.firebase:firebase-core:11.2.0'
-    compile 'com.google.firebase:firebase-ads:11.2.0'
+//    compile 'com.google.firebase:firebase-appindexing:11.2.0'
+//    compile 'com.google.firebase:firebase-core:11.2.0'
+//    compile 'com.google.firebase:firebase-ads:11.2.0'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'com.google.gms.google-services'
