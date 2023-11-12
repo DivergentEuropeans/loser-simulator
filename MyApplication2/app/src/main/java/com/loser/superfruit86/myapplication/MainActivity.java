@@ -86,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
     public int popupCounter3;
     public int cheatingCounter;
     public int returningPlayer;
-    public int succMessage;
-    public int luxuMessage;
+    public int successMessage;
+    public int luxuryMessage;
     public int loveMessage;
     public int careerMessage;
-    public int educMessage;
+    public int educationMessage;
     public int dayMessage;
     public int hasWon;
     public int taxSeason;
@@ -289,6 +289,48 @@ public class MainActivity extends AppCompatActivity {
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    // ------------------------------- UTILITIES
+    // Static because this method doesn't care about the rest of the game (or game's class)
+    public static String getRandomString(String... strings) {
+        if (strings.length == 0) {
+            throw new IllegalArgumentException("At least one string must be provided");
+        }
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(strings.length); // generates a random index
+        return strings[randomIndex];
+    }
+
+    // Static because this method doesn't care about the rest of the game (or game's class)
+//    public static String getNextThenRandomString(String... inputStrings) {
+//        // Initialize the list if it's empty and inputStrings are provided
+//        if (strings.isEmpty() && inputStrings.length > 0) {
+//            for (String str : inputStrings) {
+//                strings.add(str);
+//            }
+//        }
+//
+//        if (strings.isEmpty()) {
+//            throw new IllegalArgumentException("At least one string must be provided");
+//        }
+//
+//        // If we haven't cycled through all the strings yet, return them in order
+//        if (!hasCycledOnce) {
+//            String nextString = strings.get(currentIndex);
+//            currentIndex++;
+//
+//            // Check if we have reached the end of the list
+//            if (currentIndex == strings.size()) {
+//                hasCycledOnce = true;
+//                currentIndex = 0; // Reset for random selection
+//            }
+//            return nextString;
+//        } else {
+//            // Once we've cycled through all strings, select randomly
+//            return strings.get(random.nextInt(strings.size()));
+//        }
+//    }
+
     // -------------------------- Normal parts of game init
 
     public void initActionBar() {
@@ -306,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view ) {
                 Snackbar.make(view, "Respawn " + respawnToken + "  |  " + emojiAsString + " drain " +
                                 "" + happinessDrain + "  |  " + emojiHealthString + " drain " + healthDrain + "", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -330,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
         updateHealthAndHappiness();
     }
 
-    public void setNavigation() {
+    public void initNavigation() {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -369,35 +411,27 @@ public class MainActivity extends AppCompatActivity {
                     item.setChecked(true);
 
                 } else if (id == R.id.nav_success) {
-                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.main_container, new SuccessFragment());
-                    fragmentTransaction.commit();
-
-                    if (succMessage == 1)
-                    {
-                        succMessage = 0;
-                        messagePrompt("TIP(!) - The Success category is largely responsible for increasing how much money you have to spend.", 1000);
-                    }
+                    functionSuccess(null);
                     //actionBar.setTitle("Success");
                     item.setChecked(true);
 
 
                 } else if (id == R.id.nav_luxury) {
                     if (daysNotDead < 30) {
-                        messagePrompt("You have to have lived 30 days before you can access Luxury. ", 600);
+                        messagePrompt("You have to exist 30 days before you can access Luxury. ", 600);
                     } else {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new LuxuryFragment());
                         fragmentTransaction.commit();
                         if (getSupportFragmentManager().executePendingTransactions()) {
-                            if (luxuMessage == 1)
+                            if (luxuryMessage == 1)
                             {
-                                luxuMessage = 0;
-                                messagePrompt("TIP(!) - The Luxury category is where you go to enjoy yourself, and propel the plot of the " +
-                                        "game forward.\n\n<< The very last button wins the game. >>", 1200);
+                                luxuryMessage = 0;
+                                messagePrompt("TIP (!) Luxury is where you go to enjoy yourself and propel the plot " +
+                                        "forward.\n\n<< The very last button wins the game. >>", 1200);
                             }
                             if (luxuryCounter < 1)
-                                ((TextView) findViewById(R.id.buttonTravelWorld)).setText("(LOCKED)");
+                                ((TextView) findViewById(R.id.buttonTravelWorld)).setText("Travel across the world. (LOCKED)");
                             if (luxuryCounter < 2)
                                 ((TextView) findViewById(R.id.buttonCar)).setText("(LOCKED)");
                             if (luxuryCounter < 3)
@@ -448,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
                         //actionBar.setTitle("Love");
                         item.setChecked(true);
                     } else {
-                        messagePrompt("You are single.", 500);
+                        messagePrompt("<< You are single. >>", 500);
                     }
                 } else if (id == R.id.nav_about_us) {
 
@@ -482,16 +516,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static String getRandomString(String... strings) {
-        if (strings.length == 0) {
-            throw new IllegalArgumentException("At least one string must be provided");
-        }
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(strings.length); // generates a random index
-        return strings[randomIndex];
-    }
-
     public void beginGame() {
         if (returningPlayer == 1) {
             if (daysNotDead <= 0) // NEW GAME
@@ -500,7 +524,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.add(R.id.main_container, new DifficultyFragment());
                 fragmentTransaction.commit();
 
-                messagePrompt(getRandomString("<< Hello. >>", "<< Hello. >>", "<< Hello. >>"), 1200);
+                messagePrompt(getRandomString("<< Let's try this again. >>", "<< Hello there. >>", "<< Hello. >>", "<< Hi. >>", "<< Hey. >>","<< Back to square one. >>"), 1200);
 
 //                if (mInterstitialAd.isLoaded())
 //                    mInterstitialAd.show();
@@ -514,7 +538,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.add(R.id.main_container, new PhysicalFragment());
                 fragmentTransaction.commit();
-                messagePrompt("<< Welcome back. >>\n\n You have been alive for " + daysNotDead + " days.", 1000);
+                messagePrompt(getRandomString("<< Welcome back. >>", "<< Nice to see you again. >>", "<< I missed you. >>", "<< Hello again. >>", "<< Glad to see you back. >>") + "\n\n You have been alive for " + daysNotDead + " days.", 1000);
             }
         } else { // FIRST TIME PLAYER, PLAYING!
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -526,7 +550,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("returningPlayer", 1);
         editor.apply();
         setHomeTitle();
-        setNavigation();
+        initNavigation();
     }
 
     void initVariablesFromSave() {
@@ -573,11 +597,11 @@ public class MainActivity extends AppCompatActivity {
         popupCounter2 = sharedPref.getInt("popupCounter2", 1);
         popupCounter3 = sharedPref.getInt("popupCounter3", 1);
         cheatingCounter = sharedPref.getInt("cheatingCounter", 0);
-        succMessage = sharedPref.getInt("succMessage", 1);
-        luxuMessage = sharedPref.getInt("luxuMessage", 1);
+        successMessage = sharedPref.getInt("successMessage", 1);
+        luxuryMessage = sharedPref.getInt("luxuryMessage", 1);
         loveMessage = sharedPref.getInt("loveMessage", 1);
         careerMessage = sharedPref.getInt("careerMessage", 1);
-        educMessage = sharedPref.getInt("educMessage", 1);
+        educationMessage = sharedPref.getInt("educationMessage", 1);
         dayMessage = sharedPref.getInt("dayMessage", 1);
 
         isHomeless = sharedPref.getInt("isHomeless", 0);
@@ -834,10 +858,10 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("loveUnlock6", loveUnlock6);
         editor.putInt("hasSecurity", hasSecurity);
         editor.putInt("partnerKidnap", partnerKidnap);
-        editor.putInt("succMessage", succMessage);
+        editor.putInt("successMessage", successMessage);
         editor.putInt("dayMessage", dayMessage);
         editor.putInt("loveMessage", loveMessage);
-        editor.putInt("luxuMessage", luxuMessage);
+        editor.putInt("luxuryMessage", luxuryMessage);
         editor.putInt("careerMessage", careerMessage);
         editor.putInt("cheatingCounter", cheatingCounter);
 
@@ -933,36 +957,36 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void functionTut2(View view) {
+    public void functionTut2(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial2Fragment());
         fragmentTransaction.commit();
     }
 
-    public void functionTut3(View view) {
+    public void functionTut3(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial3Fragment());
         fragmentTransaction.commit();
     }
 
-    public void functionTut4(View view) {
+    public void functionTut4(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial4Fragment());
         fragmentTransaction.commit();
     }
 
-    public void functionTut5(View view) {
+    public void functionTut5(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial5Fragment());
         fragmentTransaction.commit();
     }
 
-    public void functionTut6(View view) {
+    public void functionTut6(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial6Fragment());
         fragmentTransaction.commit();
     }
-    public void functionDrawer(View view) {
+    public void functionDrawer(View view ) {
         //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.openDrawer(Gravity.LEFT);
         //drawerButton.setVisibility(View.INVISIBLE);
@@ -971,19 +995,33 @@ public class MainActivity extends AppCompatActivity {
     //------------- PHYSICAL ---------------------------------------------------------------
     // ------------ DIFFICULTY -------------------------------------------------------------
 
-    public void functionRealistic(View view) {
+    public void functionRealistic(View view ) {
         difficulty = 1;
-        if (returningPlayer == 0)
+        if (returningPlayer == 0) // TODO: bugfix the tutorial
         {
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.add(R.id.main_container, new Tutorial1Fragment());
             fragmentTransaction.commit();
             return;
         }
-        if (returningPlayer == 1 && daysNotDead > 0)
-            messagePrompt("<< Welcome back. >>\n\n So far you have survived " + daysNotDead + " days.", 1200);
-        if (returningPlayer == 1 && daysNotDead == 0)
-            messagePrompt("<< Let's try again. >>\n\n Back to square 1.", 1200);
+//        if (returningPlayer == 1 && daysNotDead > 0)
+//            messagePrompt("<< Welcome back. >>\n\n So far you have survived " + daysNotDead + " days.", 1200);
+//        if (returningPlayer == 1 && daysNotDead == 0)
+//            messagePrompt("<< Let's try again. >>\n\n Back to square 1.", 1200);
+
+        messagePrompt(getRandomString("<< Choosing the scenic route? >>", "<< An excellent first choice to begin a sea of mediocre ones. >>", "<< A wise decision in regards to your well-being. >>", "<< You merely delay the inevitable with a less burdensome path. >>"), 1000);
+        //Ah, choosing the scenic route? Enjoy the leisurely adventure!"
+        //Wise choice for a relaxing day
+        //An excellent first choice to begin a sea of mediocre ones
+        // hard
+        // "Your days are now numbered"
+        //"Balanced as all things should be."
+        // "The time is now for divine judgement"
+        // "Where the flames tickle but don't scorch"
+        // hardest
+        // "My friends pause to spectate your fate"
+        //
+
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commit();
@@ -995,7 +1033,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-    public void functionHardAsHell(View view) {
+    public void functionHardAsHell(View view ) {
         difficulty = 2;
         healthDrain = healthDrain + 2;
         happinessDrain = happinessDrain + 2;
@@ -1024,7 +1062,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-    public void functionEndMySuffering(View view) {
+    public void functionEndMySuffering(View view ) {
         if (hasWon != 1)
         {
             messagePrompt("You need to win the game before unlocking this difficulty.", 700);
@@ -1057,13 +1095,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void functionHealth(View view) {
+    public void functionHealth(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new HealthFragment());
         fragmentTransaction.commit();
     }
 
-    public void functionPhysical(View view) {
+    public void functionPhysical(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commit();
@@ -1076,7 +1114,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void functionAid(View view) {
+    public void functionAid(View view ) {
 
         if (daysNotDead < 35)//15
         {
@@ -1088,7 +1126,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void functionEnhance(View view) {
+    public void functionEnhance(View view ) {
         if (daysNotDead < 80)//50
         {
             messagePrompt(" You need to survive 80 days before experimenting on your body.", 500);
@@ -1099,7 +1137,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void functionShake(View view) {
+    public void functionShake(View view ) {
         if (canIAffordIt("35.00")) {
             pShakeCounter++;
             int temp = pShakeCounter;
@@ -1155,7 +1193,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionGym(View view) {
+    public void functionGym(View view ) {
 
         Random rand2 = new Random();
 
@@ -1247,7 +1285,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionSupplements(View view) {
+    public void functionSupplements(View view ) {
         if (canIAffordIt("200.00")) {
             supplementCounter++;
             int temp = supplementCounter;
@@ -1323,7 +1361,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionChangeLifeStyle(View view) {
+    public void functionChangeLifeStyle(View view ) {
         if (canIAffordIt("500.00")) {
             statChanges(85, -12, "500.00");
             if (new Random().nextDouble() < .07) {
@@ -1365,7 +1403,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionYoga(View view) {
+    public void functionYoga(View view ) {
         if (canIAffordIt("900.00")) {
             statChanges(132, -20, "900.00");
             if (hasPartner == 0) {
@@ -1419,7 +1457,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionDoctor(View view) {
+    public void functionDoctor(View view ) {
 
         if (canIAffordIt("2000.00")) {
             statChanges(242, -30, "2000.00");
@@ -1530,7 +1568,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionTrainer(View view) {
+    public void functionTrainer(View view ) {
 
         if (canIAffordIt("5000.00")) {
             statChanges(501, -50, "5000.00");
@@ -1608,7 +1646,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionPrivateDoctor(View view) {
+    public void functionPrivateDoctor(View view ) {
         if (canIAffordIt("12000.00")) {
             statChanges(1021, -100, "12000.00");
             if (isSick != 0) {
@@ -1676,7 +1714,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionInjection(View view) {
+    public void functionInjection(View view ) {
 
         if (canIAffordIt("30000.00")) {
             statChanges(2158, -200, "30000.00");
@@ -1717,7 +1755,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionSteroids(View view) {
+    public void functionSteroids(View view ) {
         if (canIAffordIt("75000.00")) {
             statChanges(4511, -350, "75000.00");
             if (new Random().nextDouble() < 0.15) {
@@ -1749,7 +1787,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionExperiment(View view) {
+    public void functionExperiment(View view ) {
 
         if (canIAffordIt("150000.00")) {
             statChanges(7574, -500, "150000.00");
@@ -1784,7 +1822,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionDNA(View view) {
+    public void functionDNA(View view ) {
 
         if (canIAffordIt("500000.00")) {
             statChanges(21043, -1000, "500000.00");
@@ -1833,13 +1871,13 @@ public class MainActivity extends AppCompatActivity {
     //------------------ MENTAL -------------------------------------------------------------
 
 
-    public void functionTime(View view) {
+    public void functionTime(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new TimeFragment());
         fragmentTransaction.commit();
     }
 
-    public void functionMental(View view) {
+    public void functionMental(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new MentalFragment());
         fragmentTransaction.commit();
@@ -1851,7 +1889,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void functionHelp(View view) {
+    public void functionHelp(View view ) {
 
         if (daysNotDead < 50)//15
         {
@@ -1863,7 +1901,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void functionDrugs(View view) {
+    public void functionDrugs(View view ) {
         if (daysNotDead < 125)//50
         {
             messagePrompt("You need to have survived 125 days before experimenting on your body.", 500);
@@ -1875,7 +1913,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void functionShow(View view) {
+    public void functionShow(View view ) {
 
         Random rand1 = new Random();
 
@@ -1976,7 +2014,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionBook(View view) {
+    public void functionBook(View view ) {
         if (canIAffordIt("60.00")) {
             statChanges(-1, 16, "60.00");
             if (hasPartner == 0) {
@@ -2056,7 +2094,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionMedication(View view) {
+    public void functionMedication(View view ) {
 
         if (canIAffordIt("200.00")) {
             medicationCounter++;
@@ -2152,7 +2190,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionBar(View view) {
+    public void functionBar(View view ) {
         if (canIAffordIt("500.00")) {
             barCounter++;
             int temp = barCounter;
@@ -2269,7 +2307,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionGroupTherapy(View view) {
+    public void functionGroupTherapy(View view ) {
         if (canIAffordIt("1200.00")) {
             statChanges(-14, 176, "1200.00");
             if (new Random().nextDouble() < 0.13) {
@@ -2305,7 +2343,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionTherapy(View view) {
+    public void functionTherapy(View view ) {
         if (canIAffordIt("3000.00")) {
             statChanges(18, 345, "3000.00");
 
@@ -2414,7 +2452,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionMotivator(View view) {
+    public void functionMotivator(View view ) {
         if (canIAffordIt("8000.00")) {
             statChanges(0, 782, "8000.00");
             if (hasPartner == 0) {
@@ -2488,7 +2526,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionBodyguard(View view) {
+    public void functionBodyguard(View view ) {
         if (securityCounter > 180)
         {
             messagePrompt("Your agency does not allow an extension of policy past 90 days.\n\nYou can re-hire after " + (securityCounter/3) + " days, or extend after " + ((securityCounter - 180)/3) + " days.", 1000);
@@ -2512,7 +2550,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionOpiates(View view) {
+    public void functionOpiates(View view ) {
         if (canIAffordIt("45000.00")) {
             statChanges(-210, 3390, "45000.00");
 
@@ -2554,7 +2592,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionHeroin(View view) {
+    public void functionHeroin(View view ) {
         if (canIAffordIt("90000.00")) {
             statChanges(-500, 6910, "90000.00");
 
@@ -2606,7 +2644,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionExperimentalDrugs(View view) {
+    public void functionExperimentalDrugs(View view ) {
         if (canIAffordIt("200000.00")) {
             statChanges(-1000, 15134, "200000.00");
 
@@ -2657,7 +2695,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionPill(View view) {
+    public void functionPill(View view ) {
         if (canIAffordIt("500000.00")) {
             statChanges(-3000, 38335, "500000.00");
             if (hasPartner == 0) {
@@ -2701,7 +2739,7 @@ public class MainActivity extends AppCompatActivity {
 
     // ---------------------- SUCCESS --------------------------------------------------------
 
-    public void functionSaveRespawnTokens2(View view) {
+    public void functionSaveRespawnTokens2(View view ) {
         if (daysNotDead > highScore) {
             int rT = respawnToken;
             messagePrompt(" You died after surviving " + daysNotDead + " days. A Respawn Token has been granted towards your next life." +
@@ -2739,7 +2777,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void functionSaveRespawnTokens(View view) {
+    public void functionSaveRespawnTokens(View view ) {
         if (difficulty == 3)
         {
             messagePrompt("You can't reincarnate because of the difficulty you chose.", 500);
@@ -2763,27 +2801,30 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_container, new SuccessFragment());
         fragmentTransaction.commit();
 
-        if (succMessage == 1)
+        if (successMessage == 1)
         {
-            succMessage = 0;
-            messagePrompt(" TIP(!) - The Success category is largely responsible for increasing how much money you have to spend.", 1200);
-
+            successMessage = 0;
+            editor.putInt("successMessage", successMessage);
+            editor.apply();
+            messagePrompt("TIP (!) Success is responsible for increasing your net worth.", 1000);
         }
     }
 
-    public void functionEducation(View view) {
+    public void functionEducation(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new EducationFragment());
         fragmentTransaction.commit();
 
-        if (educMessage == 1)
+        if (educationMessage == 1)
         {
-            educMessage = 0;
-            messagePrompt(" TIP(!) - Taking a certain amount of college classes gives you a Degree.\n\nA college Degree allows you to get higher-paying jobs.", 1500);
+            educationMessage = 0;
+            editor.putInt("educationMessage", educationMessage);
+            editor.apply();
+            messagePrompt(" TIP (!) Taking a certain amount of college classes gives you a Degree.\n\nA college Degree allows you to get higher-paying jobs.", 1500);
         }
     }
 
-    public void functionLottery(View view) {
+    public void functionLottery(View view ) {
         if (lotteryCycle >= 10) {
             messagePrompt(" Your local law prohibits you from purchasing more than 10 lottery" +
                     " tickets at a time.", 500);
@@ -2794,11 +2835,11 @@ public class MainActivity extends AppCompatActivity {
 
             lotteryCycle++;
             int temp = lotteryCycle;
-            if (new Random().nextDouble() < 0.0001) {
-                messagePrompt(" You won the jackpot. Congratulations!\n\n<< I'll be honest. I forget I even coded this in. Congratulations. >>\n\n You are rewarded $1,000,000 " +
-                        "(after taxes, this sum becomes $661,290.30).", 30500);
+            if (new Random().nextDouble() < 0.001) {
+                messagePrompt(" You won the jackpot. Congratulations!\n\n<< I'll be honest. I forget I even added this. This is incredibly rare. I'm not kidding, it's 1/10,000. >>\n\n You are rewarded $10,000,000 " +
+                        "(after taxes, this sum becomes $6,612,903.50).", 30500);
                 happinessLevel = happinessLevel + 5000;
-                statChanges(healthDrain / -2, happinessDrain / -2, "-661285.30");
+                statChanges(healthDrain / -2, happinessDrain / -2, "-6612903.30");
                 amIDeadYet("How did you screw this up? You won the freaking lottery.");
             } else if (new Random().nextDouble() < 0.05) {
                 messagePrompt("You scratched out your ticket and...\n" +
@@ -2841,7 +2882,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void functionCareers(View view) {
+    public void functionCareers(View view ) {
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new CareersFragment());
@@ -2856,7 +2897,7 @@ public class MainActivity extends AppCompatActivity {
 
     // ----------------------- STOCKS --------------------------------
 
-    public void functionStockAnalysis(View view) {
+    public void functionStockAnalysis(View view ) {
         if (canIAffordIt("750.00")) {
             netWorth = netWorth.subtract(new BigDecimal("750.00"));
             if (outputStocks().equals(new BigDecimal("0.00")))
@@ -2877,7 +2918,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void functionTradingReport(View view) {
+    public void functionTradingReport(View view ) {
         if (canIAffordIt("7500.00")) {
             netWorth = netWorth.subtract(new BigDecimal("7500.00"));
             if (outputStocks().equals(new BigDecimal("0.00")))
@@ -2902,7 +2943,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionStocks(View view) {
+    public void functionStocks(View view ) {
 
         if (daysNotDead < 75)//75
         {
@@ -3041,7 +3082,7 @@ public class MainActivity extends AppCompatActivity {
         return percentChange;
     }
 
-    public void functionBuyStocks(View view) {
+    public void functionBuyStocks(View view ) {
 
         //statChanges(healthRange / 2, happinessLevel / 2, "0.00");
         //((TextView) findViewById(R.id.textView4)).setText(nW); //updates the net worth value to UI
@@ -3116,7 +3157,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionSellStocks(View view) {
+    public void functionSellStocks(View view ) {
 
         //statChanges(healthRange / 2, happinessLevel / 2, "0.00");
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -3191,7 +3232,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void functionStockAP(View view) {
+    public void functionStockAP(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3212,7 +3253,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockAPsell(View view) {
+    public void functionStockAPsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3227,7 +3268,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockBNN(View view) {
+    public void functionStockBNN(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3242,7 +3283,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockBNNsell(View view) {
+    public void functionStockBNNsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3257,7 +3298,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFU(View view) {
+    public void functionStockFU(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3272,7 +3313,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFUsell(View view) {
+    public void functionStockFUsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3287,7 +3328,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFWB(View view) {
+    public void functionStockFWB(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3302,7 +3343,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFWBsell(View view) {
+    public void functionStockFWBsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3317,7 +3358,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockET(View view) {
+    public void functionStockET(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3332,7 +3373,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockETsell(View view) {
+    public void functionStockETsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3347,7 +3388,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockIBC(View view) {
+    public void functionStockIBC(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3362,7 +3403,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockIBCsell(View view) {
+    public void functionStockIBCsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3377,7 +3418,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockKC(View view) {
+    public void functionStockKC(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3392,7 +3433,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockKCsell(View view) {
+    public void functionStockKCsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3407,7 +3448,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACA(View view) {
+    public void functionStockMACA(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3422,7 +3463,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACAsell(View view) {
+    public void functionStockMACAsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3437,7 +3478,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACB(View view) {
+    public void functionStockMACB(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3452,7 +3493,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACBsell(View view) {
+    public void functionStockMACBsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3467,7 +3508,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMM(View view) {
+    public void functionStockMM(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3482,7 +3523,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMMsell(View view) {
+    public void functionStockMMsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3497,7 +3538,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockNSX(View view) {
+    public void functionStockNSX(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3512,7 +3553,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockNSXsell(View view) {
+    public void functionStockNSXsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3527,7 +3568,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockRM(View view) {
+    public void functionStockRM(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3542,7 +3583,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockRMsell(View view) {
+    public void functionStockRMsell(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3557,7 +3598,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockAP5B(View view) {
+    public void functionStockAP5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3572,7 +3613,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockAP25B(View view) {
+    public void functionStockAP25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3587,7 +3628,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockBNN5B(View view) {
+    public void functionStockBNN5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3602,7 +3643,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockBNN25B(View view) {
+    public void functionStockBNN25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3617,7 +3658,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFU5B(View view) {
+    public void functionStockFU5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3632,7 +3673,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFU25B(View view) {
+    public void functionStockFU25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3647,7 +3688,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFWB5B(View view) {
+    public void functionStockFWB5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3662,7 +3703,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFWB25B(View view) {
+    public void functionStockFWB25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3677,7 +3718,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockET5B(View view) {
+    public void functionStockET5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3692,7 +3733,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockET25B(View view) {
+    public void functionStockET25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3707,7 +3748,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockIBC5B(View view) {
+    public void functionStockIBC5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3722,7 +3763,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockIBC25B(View view) {
+    public void functionStockIBC25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3737,7 +3778,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockKC5B(View view) {
+    public void functionStockKC5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3752,7 +3793,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockKC25B(View view) {
+    public void functionStockKC25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3767,7 +3808,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACA5B(View view) {
+    public void functionStockMACA5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3782,7 +3823,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACA25B(View view) {
+    public void functionStockMACA25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3797,7 +3838,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACB5B(View view) {
+    public void functionStockMACB5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3812,7 +3853,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACB25B(View view) {
+    public void functionStockMACB25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3827,7 +3868,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMM5B(View view) {
+    public void functionStockMM5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3842,7 +3883,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMM25B(View view) {
+    public void functionStockMM25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3857,7 +3898,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockNSX5B(View view) {
+    public void functionStockNSX5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3872,7 +3913,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockNSX25B(View view) {
+    public void functionStockNSX25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3887,7 +3928,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockRM5B(View view) {
+    public void functionStockRM5B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3902,7 +3943,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockRM25B(View view) {
+    public void functionStockRM25B(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3917,7 +3958,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockAP5S(View view) {
+    public void functionStockAP5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3932,7 +3973,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockAP25S(View view) {
+    public void functionStockAP25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3947,7 +3988,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockBNN5S(View view) {
+    public void functionStockBNN5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3962,7 +4003,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockBNN25S(View view) {
+    public void functionStockBNN25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3977,7 +4018,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFU5S(View view) {
+    public void functionStockFU5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -3992,7 +4033,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFU25S(View view) {
+    public void functionStockFU25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4007,7 +4048,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFWB5S(View view) {
+    public void functionStockFWB5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4022,7 +4063,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockFWB25S(View view) {
+    public void functionStockFWB25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4037,7 +4078,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockET5S(View view) {
+    public void functionStockET5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4052,7 +4093,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockET25S(View view) {
+    public void functionStockET25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4067,7 +4108,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockIBC5S(View view) {
+    public void functionStockIBC5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4082,7 +4123,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockIBC25S(View view) {
+    public void functionStockIBC25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4097,7 +4138,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockKC5S(View view) {
+    public void functionStockKC5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4112,7 +4153,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockKC25S(View view) {
+    public void functionStockKC25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4127,7 +4168,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACA5S(View view) {
+    public void functionStockMACA5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4142,7 +4183,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACA25S(View view) {
+    public void functionStockMACA25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4157,7 +4198,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACB5S(View view) {
+    public void functionStockMACB5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4172,7 +4213,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMACB25S(View view) {
+    public void functionStockMACB25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4187,7 +4228,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMM5S(View view) {
+    public void functionStockMM5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4202,7 +4243,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockMM25S(View view) {
+    public void functionStockMM25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4217,7 +4258,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockNSX5S(View view) {
+    public void functionStockNSX5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4232,7 +4273,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockNSX25S(View view) {
+    public void functionStockNSX25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4247,7 +4288,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockRM5S(View view) {
+    public void functionStockRM5S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4262,7 +4303,7 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockRM25S(View view) {
+    public void functionStockRM25S(View view ) {
 
         if (tradeCounter >= 15)
         {
@@ -4277,152 +4318,152 @@ public class MainActivity extends AppCompatActivity {
         tradeCounter++;
     }
 
-    public void functionStockAnalysisAP(View view) {
+    public void functionStockAnalysisAP(View view ) {
 
         messagePrompt("<<< Stock: AP - Acquaintance Pages >>>\n" +
                 "Online software development firm that specializes in social networking services.\n\n" + AP.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisBNN(View view) {
+    public void functionStockAnalysisBNN(View view ) {
 
         messagePrompt("<<< Stock: BNN - Biased News Network >>>\n" +
                 "Most popular mainstream news and television channel that is owned by lobbyists.\n\n" + BNN.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisFU(View view) {
+    public void functionStockAnalysisFU(View view ) {
 
         messagePrompt("<<< Stock: FU - Fracking United >>>\n" +
                 "Online software development firm that specializes in social networking services.\n\n" + FU.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisFWB(View view) {
+    public void functionStockAnalysisFWB(View view ) {
 
         messagePrompt("<<< Stock: FWB - Fair Weather Bank >>>\n" +
                 "International banking and financial services company that has locations all across the globe.\n\n" + FWB.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisET(View view) {
+    public void functionStockAnalysisET(View view ) {
 
         messagePrompt("<<< Stock: ET - Enterprise Connected >>>\n" +
                 "Telecommunications network that specializes in 'high-speed' internet and hopefully, some mobile coverage.\n\n" + ET.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisIBC(View view) {
+    public void functionStockAnalysisIBC(View view ) {
 
         messagePrompt("<<< Stock: IBC - International Business Corp. >>>\n" +
                 "Computer hardware company that specializes in advancing electronic technologies, just before any one else does.\n\n" + IBC.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisKC(View view) {
+    public void functionStockAnalysisKC(View view ) {
 
         messagePrompt("<<< Stock: KC - King Cola Inc. >>>\n" +
                 "Multinational beverage company that specializes in carbonated sodas and obesity.\n\n" + KC.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisMACA(View view) {
+    public void functionStockAnalysisMACA(View view ) {
 
         messagePrompt("<<< Stock: MAC.A - Money Arc Central >>>\n" +
                 "Class A stock of a multinational estate and asset management agency.\n\n" + MACA.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisMACB(View view) {
+    public void functionStockAnalysisMACB(View view ) {
 
         messagePrompt("<<< Stock: MAC.B - Money Arc Central >>>\n" +
                 "Class B stock of a multinational estate and asset management agency.\n\n" + MACB.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisMM(View view) {
+    public void functionStockAnalysisMM(View view ) {
 
         messagePrompt("<<< Stock: MM - Monopoly Mart >>>\n" +
                 "National chain of supermarkets infamously known for its terrible wages and lackluster customer service.\n\n" + MM.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisNSX(View view) {
+    public void functionStockAnalysisNSX(View view ) {
 
         messagePrompt("<<< Stock: NSX - National Service Energy >>>\n" +
                 "Energy and natural gas corporation that vows to convince the public it is looking for a brighter future.\n\n" + NSX.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysisRM(View view) {
+    public void functionStockAnalysisRM(View view ) {
 
         messagePrompt("<<< Stock: RM - Relative Motors >>>\n" +
                 "International corporation that designs, manufactures, and distributes vehicles of questionable origins.\n\n" + RM.analysisReport(), 2000);
     }
 
-    public void functionStockAnalysis2NSX(View view) {
+    public void functionStockAnalysis2NSX(View view ) {
 
         messagePrompt("<<< Stock: NSX - National Service Energy >>>\n" +
                 "\n" + NSX.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2AP(View view) {
+    public void functionStockAnalysis2AP(View view ) {
 
         messagePrompt("<<< Stock: AP - Acquaintance Pages >>>\n" +
                 "\n" + AP.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2BNN(View view) {
+    public void functionStockAnalysis2BNN(View view ) {
 
         messagePrompt("<<< Stock: BNN - Biased News Network >>>\n" +
                 "\n" + BNN.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2FU(View view) {
+    public void functionStockAnalysis2FU(View view ) {
 
         messagePrompt("<<< Stock: FU - Fracking United >>>\n" +
                 "\n" + FU.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2FWB(View view) {
+    public void functionStockAnalysis2FWB(View view ) {
 
         messagePrompt("<<< Stock: FWB - Fair Weather Bank >>>\n" +
                 "\n" + FWB.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2ET(View view) {
+    public void functionStockAnalysis2ET(View view ) {
 
         messagePrompt("<<< Stock: ET - Enterprise Connected >>>\n" +
                 "\n" + ET.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2IBC(View view) {
+    public void functionStockAnalysis2IBC(View view ) {
 
         messagePrompt("<<< Stock: IBC - International Business Corp. >>>\n" +
                 "\n" + IBC.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2KC(View view) {
+    public void functionStockAnalysis2KC(View view ) {
 
         messagePrompt("<<< Stock: KC - King Cola Inc. >>>\n" +
                 "\n" + KC.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2MACA(View view) {
+    public void functionStockAnalysis2MACA(View view ) {
 
         messagePrompt("<<< Stock: MAC.A - Money Arc Central >>>\n" +
                 "\n" + MACA.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2MACB(View view) {
+    public void functionStockAnalysis2MACB(View view ) {
 
         messagePrompt("<<< Stock: MAC.B - Money Arc Central >>>\n" +
                 "\n" + MACB.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2MM(View view) {
+    public void functionStockAnalysis2MM(View view ) {
 
         messagePrompt("<<< Stock: MM - Monopoly Mart >>>\n" +
                 "\n" + MM.insiderReport(), 2000);
     }
 
-    public void functionStockAnalysis2RM(View view) {
+    public void functionStockAnalysis2RM(View view ) {
 
         messagePrompt("<<< Stock: RM - Relative Motors >>>\n" +
                 "\n" + RM.insiderReport(), 2000);
     }
 
     //----------------------------------  CAREERS ---------------------------------------------------------------
-    public void functionCareers1(View view) {
+    public void functionCareers1(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Careers1Fragment());
         fragmentTransaction.commit();
@@ -4430,12 +4471,12 @@ public class MainActivity extends AppCompatActivity {
         if (careerMessage == 1)
         {
             careerMessage = 0;
-            messagePrompt(" TIP(!) - Jobs are displayed with relative pay rates.\n\nFor ex. (X2.2$) means a job pays x2.2 as much as" +
+            messagePrompt(" TIP (!) Jobs are displayed with relative pay rates.\n\nFor ex. (X2.2$) means a job pays x2.2 as much as" +
                     " the starting pay.", 1500);
         }
     }
 
-    public void functionCareers2(View view) {
+    public void functionCareers2(View view ) {
         if (isEducated < 2)
         {
             messagePrompt("You don't have a Bachelor's Degree.", 500);
@@ -4446,7 +4487,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    public void functionCareers3(View view) {
+    public void functionCareers3(View view ) {
         if (isEducated < 4)
         {
             messagePrompt("You don't have a Doctorate Degree.", 500);
@@ -4458,7 +4499,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void functionSalesJob(View view) {
+    public void functionSalesJob(View view ) {
         if (isEducated >= 2) {
             messagePrompt(" You have a higher tiered job now, and cannot do this peasant work anymore.", 500);
             return;
@@ -4536,7 +4577,7 @@ public class MainActivity extends AppCompatActivity {
             amIOkayYet();
     }
 
-    public void functionOfficeManagerJob(View view) {
+    public void functionOfficeManagerJob(View view ) {
         if (job4Trigger == 1) {
             messagePrompt(" You have a higher tiered job now, and cannot do this peasant work anymore.", 500);
             return;
@@ -4609,7 +4650,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionInformationOfficerJob(View view) {
+    public void functionInformationOfficerJob(View view ) {
         if (isEducated >= 3) {
             messagePrompt(" You have a higher tiered job now, and cannot do this peasant work anymore.", 500);
             return;
@@ -4690,7 +4731,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionRegionalManagerJob(View view) {
+    public void functionRegionalManagerJob(View view ) {
         if (job6Trigger == 1) {
             messagePrompt("You have a higher tiered job now, and cannot do this peasant work anymore.", 500);
             return;
@@ -4767,7 +4808,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionJuniorConsultantJob(View view) {
+    public void functionJuniorConsultantJob(View view ) {
         if (isEducated >= 4) {
             messagePrompt("You have a higher tiered job now, and cannot do this peasant work anymore.", 500);
             return;
@@ -4823,7 +4864,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionSeniorExecutiveJob(View view) {
+    public void functionSeniorExecutiveJob(View view ) {
         if (isEducated < 3) {
             messagePrompt("This job requires a Master's Degree.", 500);
             return;
@@ -4873,7 +4914,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionBoardDirectorsJob(View view) {
+    public void functionBoardDirectorsJob(View view ) {
         if (isEducated < 4) {
             messagePrompt("This job requires a Doctorate Degree.", 500);
             return;
@@ -4925,7 +4966,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionChiefOperatingOfficerJob(View view) {
+    public void functionChiefOperatingOfficerJob(View view ) {
         if (isEducated < 4) {
             messagePrompt("This job requires a Doctorate Degree.", 500);
             return;
@@ -4981,7 +5022,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionCEOJob(View view) {
+    public void functionCEOJob(View view ) {
         if (jobCEOTrigger == 0) {
             messagePrompt("You are not the CEO of this company.", 500);
             return;
@@ -5022,7 +5063,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionCollege(View view) {
+    public void functionCollege(View view ) {
 
         if (daysNotDead < 15) {
             messagePrompt("You must survive 15 days before attempting school.", 500);
@@ -5144,7 +5185,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionGradSchool(View view) {
+    public void functionGradSchool(View view ) {
 
         if (daysNotDead < 50) {
             messagePrompt("You must survive 50 days before attempting graduate school.", 500);
@@ -5268,7 +5309,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionPostGradSchool(View view) {
+    public void functionPostGradSchool(View view ) {
 
         if (daysNotDead < 100) {
             messagePrompt("You must survive 100 days before attempting post-graduate school.", 500);
@@ -5353,7 +5394,7 @@ public class MainActivity extends AppCompatActivity {
 
     // ---------------------------- LUXURY ---------------------------------------------------
 
-    public void functionNightclub(View view) {
+    public void functionNightclub(View view ) {
         if (luxuryCounter2 < 21) {
             messagePrompt("You need to wait " + ((21 - luxuryCounter2) / 3) + " days before spending more luxury time.", 500);
             return;
@@ -5455,7 +5496,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionVegas(View view) {
+    public void functionVegas(View view ) {
 
         if (luxuryCounter < 1) {
             messagePrompt("You need to go party at a club before taking on Las Vegas.", 500);
@@ -5624,7 +5665,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionTravelWorld(View view) {
+    public void functionTravelWorld(View view ) {
         if (luxuryCounter < 1) {
             messagePrompt("(LOCKED)", 500);
             return;
@@ -5721,7 +5762,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionCar(View view) {
+    public void functionCar(View view ) {
         if (luxuryCounter < 2) {
             messagePrompt("(LOCKED)", 500);
             return;
@@ -5802,7 +5843,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionSpace(View view) {
+    public void functionSpace(View view ) {
         if (luxuryCounter < 3) {
             messagePrompt("(LOCKED)", 500);
             return;
@@ -5858,7 +5899,7 @@ public class MainActivity extends AppCompatActivity {
             amIOkayYet();
     }
 
-    public void functionMansion(View view) {
+    public void functionMansion(View view ) {
         if (luxuryCounter < 4) {
             messagePrompt("(LOCKED)", 500);
             return;
@@ -5899,7 +5940,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionYacht(View view) {
+    public void functionYacht(View view ) {
         if (luxuryCounter < 5) {
             messagePrompt("(LOCKED)", 500);
             return;
@@ -5934,7 +5975,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionToppleGovernment(View view) {
+    public void functionToppleGovernment(View view ) {
         if (luxuryCounter < 6) {
             messagePrompt("(LOCKED)", 500);
             return;
@@ -6001,7 +6042,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void functionWinTheGame(View view) {
+    public void functionWinTheGame(View view ) {
         if (canIAffordIt("15000000.00") == false) {
             messagePrompt("You cannot afford to win the game.\n\n<< Yet. >>", 500);
             return;
@@ -6037,7 +6078,7 @@ public class MainActivity extends AppCompatActivity {
 
     // ----------------------------------- LOVE ---------------------------------
 
-    public void functionDinerDate(View view) {
+    public void functionDinerDate(View view ) {
         if (hasPartner == 0)
         {
             messagePrompt("You are single.", 500);
@@ -6091,7 +6132,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("You cannot afford that.", 500);
     }
 
-    public void functionRestaurantDate(View view) {
+    public void functionRestaurantDate(View view ) {
         if (loveCounter < 42) {
             messagePrompt(" You need to wait " + ((44 - loveCounter) / 3) + " days before going on another date.", 500);
             return;
@@ -6145,7 +6186,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionCampingDate(View view) {
+    public void functionCampingDate(View view ) {
         if (loveCounter < 42) {
             messagePrompt("You need to wait " + ((44 - loveCounter) / 3) + " days before going on another date.", 500);
             return;
@@ -6194,7 +6235,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionRoadTripDate(View view) {
+    public void functionRoadTripDate(View view ) {
         if (loveCounter < 42) {
             messagePrompt(" You need to wait " + ((44 - loveCounter) / 3) + " days before going on another date.", 500);
             return;
@@ -6224,7 +6265,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionWineCruise(View view) {
+    public void functionWineCruise(View view ) {
         if (loveCounter < 42) {
             messagePrompt(" You need to wait " + ((44 - loveCounter) / 3) + " days before going on another date.", 500);
             return;
@@ -6266,7 +6307,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionPrivateIsland(View view) {
+    public void functionPrivateIsland(View view ) {
         if (loveCounter < 42) {
             messagePrompt(" You need to wait " + ((44 - loveCounter) / 3) + " days before going on another date.", 500);
             return;
@@ -6321,7 +6362,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionMarriage(View view) {
+    public void functionMarriage(View view ) {
         if (isEngaged == 0) {
             messagePrompt(" You need to be engaged with your partner prior to marrying them.", 500);
             return;
@@ -6354,7 +6395,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void functionFamily(View view) {
+    public void functionFamily(View view ) {
         if (isMarried != 1) {
             messagePrompt("You aren't married yet, you buffoon.", 500);
             return;
@@ -7407,10 +7448,10 @@ public class MainActivity extends AppCompatActivity {
             }
         } else if (daysNotDead > 70) {
             if (daysNotDead % 84 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Wall Street assets (stocks) are taxed at a much lower rate " +
+                messagePrompt("TIP (!) Wall Street assets (stocks) are taxed at a much lower rate " +
                         "than your spendable funds. This will be important when taxes are collected every 90 days. \n\nHappiness drain increases by 8. ", 800);
             } else if (daysNotDead % 77 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Every 90 days, taxes are collected. The amount you pay is calculated by an algorithm" +
+                messagePrompt("TIP (!) Every 90 days, taxes are collected. The amount you pay is calculated by an algorithm" +
                         " based on how much money you have made, how much spendable funds you have, and Wall Street (stock) assets which are taxed less.\n\nHealth drain increases by 8. ", 800);
             }
         } else if (daysNotDead > 56) {
@@ -7418,40 +7459,40 @@ public class MainActivity extends AppCompatActivity {
                 messagePrompt(" You have been alive for " + daysNotDead +
                         " days now. Happiness drain increases by 5. ", 800);
             } else if (daysNotDead % 63 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - You can choose reincarnation in the Success category to save your Respawn Tokens. If you do, you will restart " +
+                messagePrompt("TIP (!) You can choose reincarnation in the Success category to save your Respawn Tokens. If you do, you will restart " +
                         "the game back to Day 1, but start with 1 Respawn Token instead of 0. \n\nHealth drain increases by 5. ", 800);
             }
         } else if (daysNotDead > 42) {
             if (daysNotDead % 56 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Generally, the Luxury and Love categories will have activities that are more beneficial than " +
+                messagePrompt("TIP (!) Generally, the Luxury and Love categories will have activities that are more beneficial than " +
                         "other activities of the same price. \n\nHappiness drain increases by 4. ", 800);
             } else if (daysNotDead % 49 == 0 && daysNotDeadCycle == 0) {
-                //messagePrompt("TIP(!) - Generally, the Luxury and Love categories will have activities that are more beneficial than " +
+                //messagePrompt("TIP (!) Generally, the Luxury and Love categories will have activities that are more beneficial than " +
                 //"other activities of the same price. \n\nHealth drain increases by 3. ", 800);
             }
         } else if (daysNotDead > 28) {
             if (daysNotDead % 42 == 0 && daysNotDeadCycle == 0) {
                 if (hasPartner == 0)
-                    messagePrompt("TIP(!) - It would be wise to go out in search of a partner. To meet someone, try to go to social places.\n\n Happiness drain increases by 3. ", 1500);
+                    messagePrompt("TIP (!) It would be wise to go out in search of a partner. To meet someone, try to go to social places.\n\n Happiness drain increases by 3. ", 1500);
                 else
-                    messagePrompt("TIP(!) - You have a partner so don't forget to go out on dates! They are more effective than most activities at making you happy.\n\n Happiness drain increases by 3. ", 1500);
+                    messagePrompt("TIP (!) You have a partner so don't forget to go out on dates! They are more effective than most activities at making you happy.\n\n Happiness drain increases by 3. ", 1500);
 
             } else if (daysNotDead % 35 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Visiting the Luxury category allows you to go out and progress the story. Although, you probably can't afford most " +
+                messagePrompt("TIP (!) Visiting the Luxury category allows you to go out and progress the story. Although, you probably can't afford most " +
                         "of it yet.\n\nHealth drain increases by 3. ", 1500);
             }
         } else if (daysNotDead > 14) {
             if (daysNotDead % 28 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Clicking on the purple Respawn Token to the right allows you to see how much your Health and Happiness decreases by, along with the number of Respawn Tokens (if any). \n" +
+                messagePrompt("TIP (!) Clicking on the purple Respawn Token to the right allows you to see how much your Health and Happiness decreases by, along with the number of Respawn Tokens (if any). \n" +
                         "\nHappiness drain increases by 2. ", 1500);
             } else if (daysNotDead % 21 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Save up your money for education. Eventually, you can learn your way to a higher-paying job. \n\nHealth drain increases by 2. ", 1500);
+                messagePrompt("TIP (!) Save up your money for education. Eventually, you can learn your way to a higher-paying job. \n\nHealth drain increases by 2. ", 1500);
             }
         } else if (daysNotDead > 0) {
             if (daysNotDead % 14 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - Once your Health or Happiness hit zero, you enter a 24 hour buffer zone or eventually, die. Use this to your advantage by accomplishing the most punishing tasks during this time.\n\nHappiness drain increases by 1. ", 1500);
+                messagePrompt("TIP (!) Once your Health or Happiness hit zero, you enter a 24 hour buffer zone or eventually, die. Use this to your advantage by accomplishing the most punishing tasks during this time.\n\nHappiness drain increases by 1. ", 1500);
             } else if (daysNotDead % 7 == 0 && daysNotDeadCycle == 0) {
-                messagePrompt("TIP(!) - A handful of inexpensive activities will be more effective than" +
+                messagePrompt("TIP (!) A handful of inexpensive activities will be more effective than" +
                         " a few expensive ones. However, as your drains increase, this will become less effective and you will need more expensive alternatives.\n\nHealth drain increases by 1. ", 1500);
             }
         }
@@ -7554,8 +7595,7 @@ public class MainActivity extends AppCompatActivity {
 //        client.disconnect();
     }
 
-    // TODO: Do these get called?
-    public void functionSkipTut(View view) {
+    public void functionSkipTut(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commit();
@@ -7569,8 +7609,7 @@ public class MainActivity extends AppCompatActivity {
         messagePrompt("<< Well, since you skipped the tutorial - I'll never show it again. >>\n\n<< After close, click anywhere on your statuses, or swipe the screen from left to right. >>", 1600);
     }
 
-    // TODO: Do these get called?
-    public void functionDone(View view) {
+    public void functionDone(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commit();
@@ -8377,7 +8416,8 @@ public class MainActivity extends AppCompatActivity {
         resetVariables();
         initVariablesFromSave();
 
-        succMessage = 0;
+        // Reset helpful TIP (!) messages
+        successMessage = 0;
         dayMessage = 0;
         resetStocks();
 
@@ -8435,7 +8475,7 @@ public class MainActivity extends AppCompatActivity {
         if (firstTimeHappinessIndicator == 0 && happinessLevel > 50)
         {
             firstTimeHappinessIndicator = 1;
-            messagePrompt(" TIP(!) - After closing this message, notice the color of your Happiness bar changed. " +
+            messagePrompt(" TIP (!) After closing this message, notice the color of your Happiness bar changed. " +
                     "\n\nYour Happiness did not go down. Instead, you have reached the next tier.", 1200);
         }
         ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgress(happinessLevel);
@@ -8475,7 +8515,7 @@ public class MainActivity extends AppCompatActivity {
         if (firstTimeHealthIndicator == 0 && healthRange > 50)
         {
             firstTimeHealthIndicator = 1;
-            messagePrompt(" TIP(!) - After closing this message, notice the color of your Health bar changed. \n" +
+            messagePrompt(" TIP (!) After closing this message, notice the color of your Health bar changed. \n" +
                     "\n" +
                     "You have filled your Health meter and are now in the second tier.", 1200);
         }
