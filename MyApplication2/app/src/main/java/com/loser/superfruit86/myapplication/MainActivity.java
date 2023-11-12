@@ -383,30 +383,13 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if (id == R.id.nav_physical) {
-                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
-                    fragmentTransaction.commit();
-                    if (getSupportFragmentManager().executePendingTransactions()) {
-                        if (daysNotDead < 35)
-                            ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
-                        if (daysNotDead < 80)
-                            ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
-
-                    }
+                    functionPhysical(null);
                     //actionBar.setTitle("Physical");
                     item.setChecked(true);
 
 
                 } else if (id == R.id.nav_mental) {
-                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.main_container, new MentalFragment());
-                    fragmentTransaction.commit();
-                    if (getSupportFragmentManager().executePendingTransactions()) {
-                        if (daysNotDead < 50)
-                            ((TextView) findViewById(R.id.buttonHelp)).setText("Seek professional help. (LOCKED)");
-                        if (daysNotDead < 125)
-                            ((TextView) findViewById(R.id.buttonDrugs)).setText("Seek out alternative medicine. (LOCKED)");
-                    }
+                    functionMental(null);
                     //actionBar.setTitle("Mental");
                     item.setChecked(true);
 
@@ -418,7 +401,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else if (id == R.id.nav_luxury) {
                     if (daysNotDead < 30) {
-                        messagePrompt("You have to exist 30 days before you can access Luxury. ", 600);
+                        messagePrompt("You have to survive for 30 days before you can access Luxury. ", 600);
                     } else {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new LuxuryFragment());
@@ -521,7 +504,7 @@ public class MainActivity extends AppCompatActivity {
             if (daysNotDead <= 0) // NEW GAME
             {
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.add(R.id.main_container, new DifficultyFragment());
+                fragmentTransaction.replace(R.id.main_container, new DifficultyFragment());
                 fragmentTransaction.commit();
 
                 messagePrompt(getRandomString("<< Let's try this again. >>", "<< Hello there. >>", "<< Hello. >>", "<< Hi. >>", "<< Hey. >>","<< Back to square one. >>"), 1200);
@@ -535,14 +518,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
             else { // CONTINUING PREVIOUS GAME
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.add(R.id.main_container, new PhysicalFragment());
-                fragmentTransaction.commit();
+                functionPhysical(null);
                 messagePrompt(getRandomString("<< Welcome back. >>", "<< Nice to see you again. >>", "<< I missed you. >>", "<< Hello again. >>", "<< Glad to see you back. >>") + "\n\n You have been alive for " + daysNotDead + " days.", 1000);
             }
         } else { // FIRST TIME PLAYER, PLAYING!
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.main_container, new DifficultyFragment());
+            fragmentTransaction.replace(R.id.main_container, new DifficultyFragment());
             fragmentTransaction.commit();
             messagePrompt("<< Nice to meet you. I speak like this. >>\n\nTap outside (or your back button) to close. ", 1200);
         }
@@ -1000,7 +981,7 @@ public class MainActivity extends AppCompatActivity {
         if (returningPlayer == 0) // TODO: bugfix the tutorial
         {
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.main_container, new Tutorial1Fragment());
+            fragmentTransaction.replace(R.id.main_container, new Tutorial1Fragment());
             fragmentTransaction.commit();
             return;
         }
@@ -1022,16 +1003,7 @@ public class MainActivity extends AppCompatActivity {
         // "My friends pause to spectate your fate"
         //
 
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
-        fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
-            if (daysNotDead < 35)
-                ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
-            if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
-
-        }
+        functionPhysical(null);
     }
     public void functionHardAsHell(View view ) {
         difficulty = 2;
@@ -1043,7 +1015,7 @@ public class MainActivity extends AppCompatActivity {
         if (returningPlayer == 0)
         {
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.main_container, new Tutorial1Fragment());
+            fragmentTransaction.replace(R.id.main_container, new Tutorial1Fragment());
             fragmentTransaction.commit();
             return;
         }
@@ -1051,16 +1023,7 @@ public class MainActivity extends AppCompatActivity {
             messagePrompt("<< Welcome back. >>\n\n So far you have survived " + daysNotDead + " days.", 1200);
         if (returningPlayer == 1 && daysNotDead == 0)
             messagePrompt("<< You enjoy a challenge. >>\n\n << I admire that. >>", 1200);
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
-        fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
-            if (daysNotDead < 35)
-                ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
-            if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
-
-        }
+        functionPhysical(null);
     }
     public void functionEndMySuffering(View view ) {
         if (hasWon != 1)
@@ -1083,16 +1046,7 @@ public class MainActivity extends AppCompatActivity {
         healthRange = healthRange - 13;
         happinessLevel = happinessLevel - 13;
         updateHealthAndHappiness();
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
-        fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
-            if (daysNotDead < 35)
-                ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
-            if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
-
-        }
+        functionPhysical(null);
     }
 
     public void functionHealth(View view ) {
@@ -7596,33 +7550,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void functionSkipTut(View view ) {
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
-        fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
-            if (daysNotDead < 35)
-                ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
-            if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
-
-        }
+        functionPhysical(null);
         messagePrompt("<< Well, since you skipped the tutorial - I'll never show it again. >>\n\n<< After close, click anywhere on your statuses, or swipe the screen from left to right. >>", 1600);
     }
 
     public void functionDone(View view ) {
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
-        fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
-            if (daysNotDead < 35)
-                ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
-            if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
-
-        }
-
+        functionPhysical(null);
         messagePrompt("<< After closing this message, starting from the left side of the screen, swipe from left to right to open the menu. >>\n\n<< Or click anywhere on your health. >>", 1500);
-
     }
 
     public class Stock {
@@ -8432,7 +8366,7 @@ public class MainActivity extends AppCompatActivity {
         updateHealthAndHappiness();
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.main_container, new DifficultyFragment());
+        fragmentTransaction.replace(R.id.main_container, new DifficultyFragment());
         fragmentTransaction.commit();
 
         //messagePrompt("Choose a difficulty.", 1200);
@@ -8523,16 +8457,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void functionHome() {
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
-        fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
-            if (daysNotDead < 35)
-                ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
-            if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance and perfect your physiology. (LOCKED)");
-
-        }
+        functionPhysical(null);
     }
 
 
