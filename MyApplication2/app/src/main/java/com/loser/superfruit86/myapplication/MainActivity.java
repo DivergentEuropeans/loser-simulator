@@ -1003,7 +1003,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        messagePrompt(getRandomString("<< Too dim-witted to choose the above, too apprehensive to choose the below. >>", "<< Balanced as all things should be. >>", "<< Where the flames tickle but don't scorch... >>"), 1000);
+        messagePrompt(getRandomString("<< Too dim-witted to choose above, too apprehensive to choose below. >>", "<< Balanced as all things should be. >>", "<< Where the flames tickle but don't scorch... >>"), 1000);
 
         functionPhysical(null);
     }
