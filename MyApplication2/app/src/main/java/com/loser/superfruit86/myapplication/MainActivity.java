@@ -501,13 +501,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void beginGame() {
         if (returningPlayer == 1) {
-            if (daysNotDead <= 0) // NEW GAME
+            if (daysNotDead <= 0) // NEW GAME, RETURNING PLAYER
             {
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_container, new DifficultyFragment());
                 fragmentTransaction.commit();
 
-                messagePrompt(getRandomString("<< Let's try this again. >>", "<< Hello there. >>", "<< Hello. >>", "<< Hi. >>", "<< Hey. >>","<< Back to square one. >>"), 1200);
+                messagePrompt(getRandomString("<< Let's give this another shot. >>",
+                        "<< Time for a fresh start. >>", "<< Restarting from the beginning. >>",
+                        "<< Here we go again. >>", "<< Resetting and ready to try once more. >>",
+                        "<< Back to the basics, game on. >>", "<< New round, let's make it count. >>",
+                        "<< Back to the starting line. >>", "<< Let's try this again. >>",
+                        "<< Hello there. >>", "<< Hello. >>", "<< Hi. >>", "<< Hey. >>","<< Back to square one. >>"), 1200);
 
 //                if (mInterstitialAd.isLoaded())
 //                    mInterstitialAd.show();
@@ -519,7 +524,10 @@ public class MainActivity extends AppCompatActivity {
             }
             else { // CONTINUING PREVIOUS GAME
                 functionPhysical(null);
-                messagePrompt(getRandomString("<< Welcome back. >>", "<< Nice to see you again. >>", "<< I missed you. >>", "<< Hello again. >>", "<< Glad to see you back. >>") + "\n\n You have been alive for " + daysNotDead + " days.", 1000);
+                messagePrompt(getRandomString("<< Welcome back. >>", "<< Nice to see you again. >>", "<< I missed you. >>",
+                        "<< Hello again. >>", "<< Glad to see you back. >>", "<< You've returned. Interesting choice. >>",
+                        "<< Couldn't stay away, could you? >>", "<< Back so soon? I'm delighted. >>", "<< Did you miss this place? >>",
+                        "<< Look who's back. >>", "<< And here you are again, as expected. >>") + "\n\n You have been alive for " + daysNotDead + " days.", 1000);
             }
         } else { // FIRST TIME PLAYER, PLAYING!
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -985,7 +993,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        messagePrompt(getRandomString("<< Ah, choosing the scenic route? >>", "<< Enjoy the slightly less painful adventure. >>", "<< A stellar first choice to begin a sea of mediocre ones. >>", "<< A mighty decision in regards to your well-being. >>", "<< You delay the inevitable with a less burdensome path. >>"), 1000);
+        messagePrompt(getRandomString("<< Ah, choosing the scenic route? >>", "<< Enjoy the slightly less painful adventure. >>",
+                "<< A stellar first choice to begin a sea of mediocre ones. >>", "<< A mighty decision in regards to your well-being. >>",
+                "<< You delay the inevitable with a less burdensome path. >>"), 1000);
         updateHealthAndHappiness();
         functionPhysical(null);
     }
@@ -1003,7 +1013,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        messagePrompt(getRandomString("<< Too dim-witted to choose above, too apprehensive to choose below. >>", "<< Balanced as all things should be. >>", "<< Where the flames tickle but don't scorch... >>"), 1000);
+        messagePrompt(getRandomString("<< Too dim-witted to choose the above, too apprehensive to choose below. >>",
+                "<< Balanced as all things should be. >>", "<< Where the flames tickle but don't scorch... >>"), 1000);
 
         functionPhysical(null);
     }
@@ -1026,7 +1037,8 @@ public class MainActivity extends AppCompatActivity {
         happinessLevel = happinessLevel - 13;
         updateHealthAndHappiness();
 
-        messagePrompt(getRandomString("<< The time is now for divine judgement. >>", "<< My friends pause to spectate your fate. >>", "<< Your days are now literally numbered. >>"), 1000);
+        messagePrompt(getRandomString("<< The time is now for divine judgement. >>", "<< My friends pause to spectate your fate. >>",
+                "<< Your days are, literally, numbered. >>"), 1000);
 
         functionPhysical(null);
     }
@@ -1083,48 +1095,47 @@ public class MainActivity extends AppCompatActivity {
             if (pShakeCounter > 6 && new Random().nextDouble() < 0.50) {
                 healthLevel = healthLevel - 5;
 
-                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis.", "Azotemia."));
+                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis."));
                 messagePrompt(getRandomString("You are drinking too many shakes. You are beginning to make yourself sick.", "You are consuming too many. You are starting to get sick."), 1500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 2;
 
-                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis.", "Azotemia."));
+                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis."));
                 messagePrompt("Don't fool yourself, this tastes disgusting.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 2;
 
-                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis.", "Azotemia."));
+                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis."));
                 messagePrompt("You'll be fit in no time.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 healthLevel = healthLevel + 2;
 
-                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis.", "Azotemia."));
-                messagePrompt("It's steak in a bottle.", 500);
+                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis."));
+                messagePrompt("Like steak in a bottle.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 2;
                 healthLevel = healthLevel - 2;
-                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis.", "Azotemia."));
-                messagePrompt("I am such a fitness junkie!", 500);
+                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis."));
+                messagePrompt("I am a total fitness junkie! OMG", 500);
 
                 return;
             }
-            if (new Random().nextDouble() < 0.03) {
+            if (new Random().nextDouble() < 0.06) {
                 happinessLevel = happinessLevel + 2;
-                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis.", "Azotemia."));
-                messagePrompt("And just a little pinch of Tequila...", 500);
+                amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis."));
+                messagePrompt(getRandomString("Just a splash of Rum...", "Just a dash of Vodka...", "Just a dribble of Whiskey...", "Just a drop of Gin...", "Just a smidgen of Brandy...", "Just a speck of Bourbon..."), 500);
                 return;
             }
-            amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis.", "Azotemia."));
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIDeadYet(getRandomString("Protein poisoning.", "Protein toxicity.", "Hyperproteinemia.", "Proteotoxicity.", "Aminoacidemia.", "Protein-Induced Ketosis."));
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -1146,15 +1157,15 @@ public class MainActivity extends AppCompatActivity {
                     happinessLevel = happinessLevel + 20;
                     hasPartner = 1;
                     loveDrain = 0;
-                    amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
-                    messagePrompt("At the gym, you meet a cute workout junkie. << Clearly, they go here more than you do. >> " +
+                    amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
+                    messagePrompt("At the gym, you meet a cute workout buddy. Weeks of awkward grins & fist bumps haven't accomplished much, but today is somehow miraculously different. \n\n<< You're welcome. >> " +
                             "\n\nYou can now go on dates with your gym partner.", 3000);
                     return;
                 }
             }
             if (gymCounter > 4 && new Random().nextDouble() < 0.50) {
                 healthLevel = healthLevel - 7;
-                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
+                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
                 messagePrompt(getRandomString("Your frequent gym sessions are leading to fatigue and increasing injury risk.", "Excessive workouts are causing exhaustion and recurrent injuries.", "Constant training is taking a toll, resulting in weariness and harm to your body.", "Over-training is leading to burnout and making you more prone to injuries.", "Your relentless exercise routine is causing physical strain and recurring injuries."), 2000);
                 return;
             }
@@ -1162,7 +1173,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 7;
                 healthLevel = healthLevel + 4;
-                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
+                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
                 messagePrompt("The endorphins are pumping and you feel great. Today was a " +
                         "very productive workout.", 500);
                 return;
@@ -1170,14 +1181,14 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 4;
-                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
+                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
                 messagePrompt("Be physically stronger than what you mentally feel.", 500);
                 return;
             }
 
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel + 5;
-                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
+                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
                 messagePrompt(" A productive day at the gym always begins with a heavily filtered selfie.", 500);
                 return;
             }
@@ -1185,7 +1196,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 4;
 
-                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
+                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
                 messagePrompt("Sweat is just your fat crying.", 500);
                 return;
             }
@@ -1193,14 +1204,14 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 2;
                 healthLevel = healthLevel + 5;
-                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
+                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
                 messagePrompt("Never skip leg day.", 500);
                 return;
             }
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 2;
                 healthLevel = healthLevel + 3;
-                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
+                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
                 messagePrompt("Look at all the people that are in better shape than you are.", 500);
                 return;
             }
@@ -1208,14 +1219,13 @@ public class MainActivity extends AppCompatActivity {
             if (new Random().nextDouble() < 0.03) {
                 happinessLevel = happinessLevel - 7;
                 healthLevel = healthLevel - 9;
-                amIDeadYet("Injured at the gym.");
+                amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
                 messagePrompt("You were careless and dropped a weight on yourself. Be careful.", 1000);
                 return;
             }
 
-            amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to supplements taken for exercise.", "Heat stroke during high-intensity training."));
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIDeadYet(getRandomString("Went too hard at the gym.", "Overexertion leading to cardiac arrest.", "Slip and fall accident with gym equipment.", "Severe dehydration during intense workout.", "Fatal accident with heavy weights.", "Electrocution from faulty gym machinery.", "Allergic reaction to the pre-workout.", "Heat stroke during high-intensity training."));
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -1290,8 +1300,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             amIDeadYet("n/a");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -1332,8 +1341,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Nutrient deficiency.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -1386,8 +1394,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             amIDeadYet("Going too hard in yoga class.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -1496,8 +1503,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             amIDeadYet("The wait time was too long.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -1574,8 +1580,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             amIDeadYet("You overworked yourself.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -1643,8 +1648,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("The doc was a radioactive alien.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -1683,8 +1687,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             } else
                 amIDeadYet("Why would you even try that?");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -1716,8 +1719,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("The injections were toxic.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -1750,8 +1752,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("For science!");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -1795,8 +1796,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("You don't have spider powers.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -1942,8 +1942,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             amIDeadYet("Too sedentary of a lifestyle.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -2023,8 +2022,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Couldn't handle all of this knowledge.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -2118,8 +2116,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             amIDeadYet("Took the wrong medication.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -2236,8 +2233,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             amIDeadYet("Alcoholism.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -2272,8 +2268,7 @@ public class MainActivity extends AppCompatActivity {
                 happinessLevel = happinessLevel + 15;
             }
             amIDeadYet("Well that's ironic, isn't it?");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -2380,8 +2375,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             amIDeadYet("Clearly they weren't very good at their job.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -2454,8 +2448,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             amIDeadYet("Clearly they weren't very good at their job.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -2479,8 +2472,7 @@ public class MainActivity extends AppCompatActivity {
                 messagePrompt("You have extended your contract to " + (securityCounter/3) + " days.", 1200);
 
             amIDeadYet("Bodyguards can't help you with your health.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -2520,8 +2512,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Drugs are bad, m'kay?");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -2572,8 +2563,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Drugs are bad, m'kay?");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -2623,8 +2613,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Drugs are bad, m'kay?");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -2664,8 +2653,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             amIDeadYet("You choked on the pill.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
 
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
@@ -2810,8 +2798,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             lotteryCycle = temp;
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -4508,8 +4495,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
     }
 
     public void functionOfficeManagerJob(View view ) {
@@ -4580,8 +4566,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
 
     }
 
@@ -4661,8 +4646,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
 
     }
 
@@ -4738,8 +4722,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
 
     }
 
@@ -4794,8 +4777,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
 
     }
 
@@ -4844,8 +4826,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
 
     }
 
@@ -4896,8 +4877,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
 
     }
 
@@ -4952,8 +4932,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
 
     }
 
@@ -4993,8 +4972,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         amIDeadYet("Overworked yourself.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
 
     }
 
@@ -5425,8 +5403,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             amIDeadYet("n/a");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -5691,8 +5668,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Got lost and died.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -5772,8 +5748,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             amIDeadYet("n/a");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -5830,8 +5805,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         amIDeadYet("The shuttle crashed.");
-        if (amIDead() == false && daysNotDead % 7 != 0)
-            amIOkayYet();
+        amIOkayYet();
     }
 
     public void functionMansion(View view ) {
@@ -5869,8 +5843,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Your mansion collapsed.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -5904,8 +5877,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Got lost in the Bermuda Triangle.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -5970,8 +5942,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             amIDeadYet("Your dinner party was poisoned.");
-            if (amIDead() == false && daysNotDead % 7 != 0)
-                amIOkayYet();
+            amIOkayYet();
         } else
             messagePrompt(getRandomString("You cannot afford that.", "You do not have enough money.", "Your balance is too low."), 500);
     }
@@ -6879,6 +6850,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void amIOkayYet() {
+        if (!(amIDead() == false && daysNotDead % 7 != 0)) {
+            return;
+        }
         if (happinessLevel > 45 && healthLevel > 45)
             popupCounter1 = 1;
         if (happinessLevel > 50)
