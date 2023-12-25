@@ -1153,7 +1153,7 @@ public class MainActivity extends AppCompatActivity {
             gymCounter = temp;
 
             if (hasPartner == 0) {
-                if (new Random().nextDouble() < 0.02) {
+                if (new Random().nextDouble() < 0.015) {
                     happinessLevel = happinessLevel + 20;
                     hasPartner = 1;
                     loveDrain = 0;
@@ -1239,11 +1239,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (hasPartner == 0) {
 
-                if (new Random().nextDouble() < 0.008) {
+                if (new Random().nextDouble() < 0.01) {
                     happinessLevel = happinessLevel + 30;
                     hasPartner = 1;
                     loveDrain = 0;
-                    amIDeadYet("Choked on a tablet.");
+                    amIDeadYet(getRandomString("Choked on a tablet.", "Supplement pill overdose.", "Had a severe allergic reaction to unknown supplement.", "Excessive insoluble vitamin intake.", "Choked on a pill.", "Clogged airway by pill."));
                     messagePrompt(" Even though the cashier is scanning your items, they are the one you're interested in checking out"
                             + " tonight. \n\nYou are no longer single and can now go on dates with the clerk.", 2500);
                     return;
@@ -1252,14 +1252,14 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .5 && supplementCounter > 4) {
                 healthLevel = healthLevel - 20;
-                amIDeadYet("Choked on a tablet.");
+                amIDeadYet(getRandomString("Choked on a tablet.", "Supplement pill overdose.", "Had a severe allergic reaction to unknown supplement.", "Excessive insoluble vitamin intake.", "Choked on a pill.", "Clogged airway by pill."));
                 messagePrompt(" You are consuming an extraneous amount of supplements. You're making yourself sick.", 1500);
 
                 return;
             }
             if (new Random().nextDouble() < .06) {
                 happinessLevel = happinessLevel - 9;
-                amIDeadYet("Choked on a tablet.");
+                amIDeadYet(getRandomString("Choked on a tablet.", "Supplement pill overdose.", "Had a severe allergic reaction to unknown supplement.", "Excessive insoluble vitamin intake.", "Choked on a pill.", "Clogged airway by pill."));
                 messagePrompt("You must feel great about yourself.", 500);
 
                 return;
@@ -1267,7 +1267,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .06) {
                 happinessLevel = happinessLevel + 8;
-                amIDeadYet("Choked on a tablet.");
+                amIDeadYet(getRandomString("Choked on a tablet.", "Supplement pill overdose.", "Had a severe allergic reaction to unknown supplement.", "Excessive insoluble vitamin intake.", "Choked on a pill.", "Clogged airway by pill."));
                 messagePrompt("Step 1 to becoming the bodybuilder you've always dreamed of.", 500);
 
                 return;
@@ -1275,7 +1275,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (new Random().nextDouble() < .06) {
                 happinessLevel = happinessLevel + 9;
-                amIDeadYet("Choked on a tablet.");
+                amIDeadYet(getRandomString("Choked on a tablet.", "Supplement pill overdose.", "Had a severe allergic reaction to unknown supplement.", "Excessive insoluble vitamin intake.", "Choked on a pill.", "Clogged airway by pill."));
                 messagePrompt("It's organic, so it must be healthy. ", 500);
 
                 return;
