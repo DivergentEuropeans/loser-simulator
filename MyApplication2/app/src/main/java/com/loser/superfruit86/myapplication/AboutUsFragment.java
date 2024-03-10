@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class IdentityFragment extends Fragment {
+public class AboutUsFragment extends Fragment {
 
 
-    public IdentityFragment() {
+    public AboutUsFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,7 @@ public class IdentityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(com.loser.superfruit86.myapplication.R.layout.fragment_identity, container, false);
+        return inflater.inflate(com.loser.superfruit86.myapplication.R.layout.fragment_about_us, container, false);
     }
 
 }

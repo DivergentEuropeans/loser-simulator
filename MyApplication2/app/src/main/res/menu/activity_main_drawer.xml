@@ -25,13 +25,13 @@
             android:title="Love" />
 </group>
 
-    <item android:title="Developer">
+    <item android:title="and beyond...">
         <menu>
             <group android:checkableBehavior="single">
             <item
                 android:id="@+id/nav_about_us"
                 android:icon="@mipmap/about_icon1"
-                android:title="About Me" />
+                android:title="In the Beginning" />
 
                 <item
                     android:id="@+id/nav_privacy"

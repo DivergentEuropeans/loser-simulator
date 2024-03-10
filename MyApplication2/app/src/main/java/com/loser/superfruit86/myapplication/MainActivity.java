@@ -477,7 +477,7 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.nav_about_us) {
 
                     fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.main_container, new IdentityFragment());
+                    fragmentTransaction.replace(R.id.main_container, new AboutUsFragment());
                     fragmentTransaction.commit();
                     //actionBar.setTitle("Love");
                     item.setChecked(true);
@@ -5978,7 +5978,7 @@ public class MainActivity extends AppCompatActivity {
         statChanges(healthDrain, happinessDrain, "0.00");
         if (daysNotDead > highScore) {
             highScore = daysNotDead;
-            messagePrompt(" << You did it. You actually did it. You f***ing beat me. >> \n\n<< If you have the time, I would highly suggest checking out the 'About Me' section to learn about the meaning of it all. >>\n\n (NEW) HIGHSCORE: " + highScore, 3500);
+            messagePrompt(" << You did it. You actually did it. You f***ing beat me. >> \n\n<< If you have the time, I would highly suggest checking out the 'In the Beginning' section to learn about the meaning of it all. >>\n\n (NEW) HIGHSCORE: " + highScore, 3500);
         } else
             messagePrompt(" << You beat me... again. I cannot believe this. >> \n\n<< Congratulations... yadda yadda yadda... What are you going to do with your life, now? >>\n" +
                     "\n HIGHSCORE: " + highScore, 3000);
