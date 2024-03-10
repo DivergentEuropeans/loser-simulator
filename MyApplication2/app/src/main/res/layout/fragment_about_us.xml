@@ -22,7 +22,7 @@
                 android:layout_width="229dp"
                 android:layout_height="55dp"
                 android:layout_gravity="center_horizontal|top"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:shadowColor="#000000"
                 android:shadowDx="2"
                 android:shadowDy="2"
@@ -34,18 +34,21 @@
 
             <TextView
                 android:id="@+id/textView6"
-                android:layout_width="321dp"
+                android:layout_width="387dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|top"
                 android:layout_marginTop="90dp"
-                android:shadowColor="#FFFFFF"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="10"
-                android:text='...there were two men: John and I. Two fairly nihilistic lads as they were, they created a little pact to themselves as a form of life insurance.\n\n\nWhoever dies first, "loses" the game.\n\n\nWe had our mental ailments which were difficult to shake. But even more - we were competitive and two-fold as stubborn. Neither of us want to give the other the satisfaction of winning. And thus, I made a game about it.\n\nThis game is filled with self aware social commentary and was made to be enjoyed by those who struggle with life. If you are someone who suffers from depression or mental health issues of any kind, please do not hesitate to seek help, especially from your friends and family. Limit your recreational usage. Focus on planning for the future. Eat and sleep well, take care of your health, and carry yourself with confidence.\n\nYou are just a mortal. But I still love you. \n\n\n'
+                android:background="#66B8628B"
+                android:paddingLeft="10sp"
+                android:paddingRight="5sp"
+                android:shadowColor="#FFFFFFFF"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="5"
+                android:text=' ...there were two men: John and I. Two fairly nihilistic lads as they were, they created a little pact to themselves as a form of life insurance.\n\n\n Whoever dies first, "loses" the game.\n\n\n We had our mental ailments which were difficult to shake. But even more - we were competitive and two-fold as stubborn. Neither of us want to give the other the satisfaction of winning. And thus, I made a game about it.\n\n This game is filled with self aware social commentary and was made to be enjoyed by those who struggle with life. If you are someone who suffers from depression or mental health issues of any kind, please do not hesitate to seek help, especially from your friends and family. Limit your recreational usage. Focus on planning for the future. Eat and sleep well, take care of your health, and carry yourself with confidence.\n\n You are just a mortal. But I still love you. \n\n\n'
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000000"
-                android:textSize="18sp" />
+                android:textSize="19sp" />
 
 
         </FrameLayout>
