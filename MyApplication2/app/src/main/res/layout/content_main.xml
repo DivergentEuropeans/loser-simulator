@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/days_not_dead"
-        android:id="@+id/textView2"
+        android:id="@+id/daysSurvivedLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="#753c5a"
@@ -30,15 +30,15 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/net_worth"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView2"
+        android:id="@+id/netWorthLabel"
+        android:layout_below="@+id/daysSurvivedLabel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textColor="#753c5a"
         android:layout_marginTop="1dp"/>
 
     <TextView
-        android:id="@+id/happinessIndicator"
+        android:id="@+id/happinessTierSymbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="203dp"
@@ -49,7 +49,7 @@
         android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/healthIndicator"
+        android:id="@+id/healthTierSymbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="203dp"
@@ -97,7 +97,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        android:id="@+id/happinessIcon"
 
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -108,7 +108,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
+        android:id="@+id/healthIcon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:src="@mipmap/health_icon1"
@@ -117,28 +117,30 @@
         android:layout_marginLeft="1dp" />
 
     <TextView
+        android:id="@+id/highScoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Highscore: "
-        android:id="@+id/textView10"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBottom="@+id/daysSurvivedLabel"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#252525"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:text="Highscore: "
         android:textAlignment="viewEnd"
-        android:layout_gravity="end"/>
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#252525" />
 
-    <Button
-        android:text=""
-        android:layout_width="400dp"
-        android:layout_gravity="center"
-        android:layout_height="200dp"
-        android:id="@+id/drawerButton"
-        android:onClick="functionDrawer"
-        android:elevation="24dp"
-        android:background="@null" />
+<!--    This makes the status header area open up the Categories menu when clicked -->
+<!--    <Button-->
+<!--        android:id="@+id/drawerButton"-->
+<!--        android:layout_width="400dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:background="@null"-->
+<!--        android:elevation="24dp"-->
+<!--        android:onClick="functionDrawer"-->
+<!--        android:text="" />-->
 
 
 </RelativeLayout>

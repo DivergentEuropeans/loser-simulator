@@ -54,8 +54,11 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
+    // ------------- components ----------------
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBarDrawerToggle toggle;
@@ -64,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
     ActionBar actionBar;
+
+    // ------------- UI things -----------------
+
+    static final String daysNotDeadText = " days not dead.";
 
     // --------------------- STATS OF USER --------------
     public int highScore;
@@ -362,13 +369,13 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
         if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
         else
-            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
         updateHealthAndHappiness();
     }
 
@@ -2672,12 +2679,12 @@ public class MainActivity extends AppCompatActivity {
             resetStats();
             respawnToken = rT;
             updateVariables();
-            ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+            ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
-            ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+            ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
             updateHealthAndHappiness();
 
         } else {
@@ -2688,13 +2695,13 @@ public class MainActivity extends AppCompatActivity {
             resetStats();
             respawnToken = rT;
             updateVariables();
-            ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+            ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-            ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+            ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
             updateHealthAndHappiness();
 
         }
@@ -2787,14 +2794,14 @@ public class MainActivity extends AppCompatActivity {
                 amIDeadYet("Lottery depresso.");
             }
 
-            String s = "Days Survived: " + daysNotDead;
-            ((TextView) findViewById(R.id.textView2)).setText(s); //updates the value to UI
+            String s = daysNotDead + daysNotDeadText;
+            ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(s); //updates the value to UI
 
 
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
 
             lotteryCycle = temp;
@@ -2823,9 +2830,9 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("750.00")) {
             netWorth = netWorth.subtract(new BigDecimal("750.00"));
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
             statChanges(healthLevel / 2, happinessLevel / 2, "0.00");
             //amIDeadYet("Spent too much time day trading.");
@@ -2844,9 +2851,9 @@ public class MainActivity extends AppCompatActivity {
         if (canIAffordIt("7500.00")) {
             netWorth = netWorth.subtract(new BigDecimal("7500.00"));
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
             if (new Random().nextDouble() < .15 && daysNotDead > 250 && netWorth.compareTo(new BigDecimal("50000.00")) <= 0)
             {
@@ -3007,7 +3014,7 @@ public class MainActivity extends AppCompatActivity {
     public void functionBuyStocks(View view ) {
 
         //statChanges(healthLevel / 2, happinessLevel / 2, "0.00");
-        //((TextView) findViewById(R.id.textView4)).setText(nW); //updates the net worth value to UI
+        //((TextView) findViewById(R.id.netWorthLabel)).setText(nW); //updates the net worth value to UI
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new StocksFragment());
         fragmentTransaction.commit();
@@ -6717,13 +6724,13 @@ public class MainActivity extends AppCompatActivity {
                         highScore = daysNotDead;
                         deathCounter = 0;
                         resetStats();
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+                        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-                        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+                        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
 
                     } else if (daysNotDead > 100) {
@@ -6732,13 +6739,13 @@ public class MainActivity extends AppCompatActivity {
                         dM = 1;
                         deathCounter = 0;
                         resetStats();
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+                        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-                        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+                        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
 
                     } else if (daysNotDead > 50) {
@@ -6747,13 +6754,13 @@ public class MainActivity extends AppCompatActivity {
                         dM = 1;
                         deathCounter = 0;
                         resetStats();
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+                        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-                        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+                        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
 
                     } else {
@@ -6762,13 +6769,13 @@ public class MainActivity extends AppCompatActivity {
                         dM = 1;
                         deathCounter = 0;
                         resetStats();
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+                        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-                        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+                        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
                     }
                 } else  if (difficulty != 3){
@@ -6787,13 +6794,13 @@ public class MainActivity extends AppCompatActivity {
                     if (daysNotDead > 300) {
                         happinessLevel = 755;
                         healthLevel = 755;
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+                        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-                        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+                        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
                         updateVariables();
                         updateStockVariables();
@@ -6801,26 +6808,26 @@ public class MainActivity extends AppCompatActivity {
                     if (daysNotDead > 200) {
                         happinessLevel = 250;
                         healthLevel = 250;
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+                        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-                        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+                        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
                         updateVariables();
                         updateStockVariables();
                     } else {
                         happinessLevel = 90;
                         healthLevel = 90;
-                        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+                        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
                         if (outputStocks().equals(new BigDecimal("0.00")))
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
                         else
-                            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-                        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+                        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
                         updateHealthAndHappiness();
                         updateVariables();
                         updateStockVariables();
@@ -6839,13 +6846,13 @@ public class MainActivity extends AppCompatActivity {
             updateStatus();
         updateVariables();
         updateStockVariables();
-        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
         if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
         else
-            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
         updateHealthAndHappiness();
     }
 
@@ -7010,7 +7017,7 @@ public class MainActivity extends AppCompatActivity {
         delayBeforeCancelable = delayBeforeCancelable * (long)0.8;
         AlertDialog.Builder popupBuilder = new AlertDialog.Builder(this);
         TextView myMsg = new TextView(this);
-        //TextView tv2 = (TextView)findViewById(R.id.textView2);
+        //TextView tv2 = (TextView)findViewById(R.id.daysSurvivedLabel);
         Typeface OswRegular = Typeface.createFromAsset(getAssets(), "fonts/Odin Rounded - Regular.otf");
         myMsg.setTypeface(OswRegular);
         myMsg.setTextSize(25);
@@ -7239,14 +7246,14 @@ public class MainActivity extends AppCompatActivity {
 
         healthLevel = healthLevel + healthChange;
         happinessLevel = happinessLevel + happinessChange;
-        String s = "Days Survived: " + daysNotDead;
-        ((TextView) findViewById(R.id.textView2)).setText(s); //updates the value to UI
+        String s = daysNotDead + daysNotDeadText;
+        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(s); //updates the value to UI
 
 
         if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
         else
-            ((TextView) findViewById(R.id.textView4)).setText("Net. W.: $" + (netWorth) + " (" + outputStocks().toString() + ")");
+            ((TextView) findViewById(R.id.netWorthLabel)).setText("Net. W.: $" + (netWorth) + " (" + outputStocks().toString() + ")");
 
 
 
@@ -8041,9 +8048,9 @@ public class MainActivity extends AppCompatActivity {
             sharesOwned = sharesOwned + quantity;
             updateStockVariables();
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
         }
 
@@ -8124,9 +8131,9 @@ public class MainActivity extends AppCompatActivity {
             sharesOwned = sharesOwned - quantity;
             updateStockVariables();
             if (outputStocks().equals(new BigDecimal("0.00")))
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
             else
-                ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+                ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
         }
 
@@ -8311,13 +8318,13 @@ public class MainActivity extends AppCompatActivity {
         resetStocks();
 
 
-        ((TextView) findViewById(R.id.textView2)).setText("Days Survived: " + daysNotDead);
+        ((TextView) findViewById(R.id.daysSurvivedLabel)).setText(daysNotDead + daysNotDeadText);
         if (outputStocks().equals(new BigDecimal("0.00")))
-            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth));
+            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth));
         else
-            ((TextView) findViewById(R.id.textView4)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
+            ((TextView) findViewById(R.id.netWorthLabel)).setText("$" + (netWorth) + " (" + outputStocks().toString() + ")");
 
-        ((TextView) findViewById(R.id.textView10)).setText("Highscore: " + highScore);
+        ((TextView) findViewById(R.id.highScoreLabel)).setText("Highscore: " + highScore);
         updateHealthAndHappiness();
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -8334,32 +8341,32 @@ public class MainActivity extends AppCompatActivity {
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffcc99"));
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(12000);
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(12000);
-            ((TextView) findViewById(R.id.happinessIndicator)).setText("*****");
+            ((TextView) findViewById(R.id.happinessTierSymbol)).setText("*****");
         } else if (happinessLevel > 1350) {
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffff99"));
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(4000);
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(4000);
-            ((TextView) findViewById(R.id.happinessIndicator)).setText("****");
+            ((TextView) findViewById(R.id.happinessTierSymbol)).setText("****");
         } else if (happinessLevel > 450) {
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ffffcc"));
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(1350);
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(1350);
-            ((TextView) findViewById(R.id.happinessIndicator)).setText("***");
+            ((TextView) findViewById(R.id.happinessTierSymbol)).setText("***");
         } else if (happinessLevel > 150) {
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ccffcc"));
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(450);
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(450);
-            ((TextView) findViewById(R.id.happinessIndicator)).setText("**");
+            ((TextView) findViewById(R.id.happinessTierSymbol)).setText("**");
         } else if (happinessLevel > 50) {
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#ccffff"));
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(150);
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(150);
-            ((TextView) findViewById(R.id.happinessIndicator)).setText("*");
+            ((TextView) findViewById(R.id.happinessTierSymbol)).setText("*");
         } else {
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setProgressColor(Color.parseColor("#b3d9ff"));
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setMax(50);
             ((RoundCornerProgressBar) findViewById(R.id.happinessBar)).setSecondaryProgress(50);
-            ((TextView) findViewById(R.id.happinessIndicator)).setText("");
+            ((TextView) findViewById(R.id.happinessTierSymbol)).setText("");
         }
         if (firstTimeHappinessIndicator == 0 && happinessLevel > 50)
         {
@@ -8374,32 +8381,32 @@ public class MainActivity extends AppCompatActivity {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#b3ccff"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(12000);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(12000);
-            ((TextView) findViewById(R.id.healthIndicator)).setText("*****");
+            ((TextView) findViewById(R.id.healthTierSymbol)).setText("*****");
         } else if (healthLevel > 1350) {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ccccff"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(4000);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(4000);
-            ((TextView) findViewById(R.id.healthIndicator)).setText("****");
+            ((TextView) findViewById(R.id.healthTierSymbol)).setText("****");
         } else if (healthLevel > 450) {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#dab3ff"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(1350);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(1350);
-            ((TextView) findViewById(R.id.healthIndicator)).setText("***");
+            ((TextView) findViewById(R.id.healthTierSymbol)).setText("***");
         } else if (healthLevel > 150) {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ff99ff"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(450);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(450);
-            ((TextView) findViewById(R.id.healthIndicator)).setText("**");
+            ((TextView) findViewById(R.id.healthTierSymbol)).setText("**");
         } else if (healthLevel > 50) {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ff99cc"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(150);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(150);
-            ((TextView) findViewById(R.id.healthIndicator)).setText("*");
+            ((TextView) findViewById(R.id.healthTierSymbol)).setText("*");
         } else {
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setProgressColor(Color.parseColor("#ff9999"));
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setMax(50);
             ((RoundCornerProgressBar) findViewById(R.id.healthBar)).setSecondaryProgress(50);
-            ((TextView) findViewById(R.id.healthIndicator)).setText("");
+            ((TextView) findViewById(R.id.healthTierSymbol)).setText("");
         }
         if (firstTimeHealthIndicator == 0 && healthLevel > 50)
         {
@@ -8414,8 +8421,6 @@ public class MainActivity extends AppCompatActivity {
     void functionHome() {
         functionPhysical(null);
     }
-
-
 }
 
 
