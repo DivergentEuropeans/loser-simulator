@@ -125,22 +125,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_gravity="end"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:text="Highscore: "
         android:textAlignment="viewEnd"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#252525" />
-
-<!--    This makes the status header area open up the Categories menu when clicked -->
-<!--    <Button-->
-<!--        android:id="@+id/drawerButton"-->
-<!--        android:layout_width="400dp"-->
-<!--        android:layout_height="200dp"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:background="@null"-->
-<!--        android:elevation="24dp"-->
-<!--        android:onClick="functionDrawer"-->
-<!--        android:text="" />-->
 
 
 </RelativeLayout>
