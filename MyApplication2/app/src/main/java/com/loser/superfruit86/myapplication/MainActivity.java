@@ -500,7 +500,7 @@ public class MainActivity extends AppCompatActivity {
             if (actionBar != null) {
                 actionBar.setDisplayHomeAsUpEnabled(true);
                 // TODO: Move all mipmap regular assets into drawable
-                actionBar.setHomeAsUpIndicator(R.mipmap.right_icon2);
+                actionBar.setHomeAsUpIndicator(R.mipmap.right_icon3);
                 actionBar.setTitle(s);
             }
         }
