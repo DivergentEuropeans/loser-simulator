@@ -413,7 +413,9 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new LuxuryFragment());
                         fragmentTransaction.commit();
-                        if (getSupportFragmentManager().executePendingTransactions()) {
+                        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
                             if (luxuryMessage == 1)
                             {
                                 luxuryMessage = 0;
@@ -443,7 +445,9 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new LoveFragment());
                         fragmentTransaction.commit();
-                        if (getSupportFragmentManager().executePendingTransactions()) {
+                        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
                             if (canIAffordIt("2000.00") == false && loveUnlock1 == 0) {
                                 loveUnlock1 = 1;
                                 ((TextView) findViewById(R.id.buttonCampingDate)).setText("(LOCKED)");
@@ -493,7 +497,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setHomeTitle() {
-        if (getSupportFragmentManager().executePendingTransactions()) {
+        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
             SpannableString s = new SpannableString("Menu");
             s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             s.setSpan(new ShadowSpan(8.5f, 5.0f, 5.0f, Color.BLACK), 0, s.length(), 0);
@@ -1060,11 +1066,15 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
-            if (daysNotDead < 35)
-                ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
+        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
+            if (daysNotDead < 35) // TODO: Explore why is if (TextView) findViewById(R.id.buttonAid) sometimes null
+                if ((TextView) findViewById(R.id.buttonAid) != null)
+                    ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 80)
-                ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance your physiology. (LOCKED)");
+                if ((TextView) findViewById(R.id.buttonEnhance) != null)
+                    ((TextView) findViewById(R.id.buttonEnhance)).setText("Enhance your physiology. (LOCKED)");
 
         }
     }
@@ -1823,7 +1833,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new MentalFragment());
         fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
+        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
             if (daysNotDead < 50)
                 ((TextView) findViewById(R.id.buttonHelp)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 125)
@@ -2816,7 +2828,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new CareersFragment());
         fragmentTransaction.commit();
-        if (getSupportFragmentManager().executePendingTransactions()) {
+        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
             if (isEducated < 2)
                 ((TextView) findViewById(R.id.buttonCareers2)).setText("Mid level. (LOCKED)");
             if (isEducated < 4)
@@ -2883,7 +2897,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_container, new TradeFragment());
         fragmentTransaction.commit();
 
-        if (getSupportFragmentManager().executePendingTransactions()) {
+        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
 
             valueNow = outputStocks();
             ((TextView) findViewById(R.id.textView9)).setText("$" + valueNow.toString() + "     ");
@@ -3019,7 +3035,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_container, new StocksFragment());
         fragmentTransaction.commit();
 
-        if (getSupportFragmentManager().executePendingTransactions()) {
+        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
             ((TextView) findViewById(R.id.APDayvalue)).setText("(" + dividedBy((AP.value), AP.value2).toString() + "%)   $" + AP.value2.toString() + "       ");
             ((TextView) findViewById(R.id.APWeekvalue)).setText("(" + dividedBy((AP.value), AP.value7).toString() + "%)   $" + AP.value7.toString() + "       ");
             ((TextView) findViewById(R.id.BNNDayvalue)).setText("(" + dividedBy((BNN.value), BNN.value2).toString() + "%)   $" + BNN.value2.toString() + "       ");
@@ -3094,7 +3112,9 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
 
-        if (getSupportFragmentManager().executePendingTransactions()) {
+        // if (getSupportFragmentManager().executePendingTransactions()) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
 
             ((TextView) findViewById(R.id.APDayvalue)).setText("(" + dividedBy((AP.value), AP.value2).toString() + "%)   $" + AP.value2.toString() + "       ");
             ((TextView) findViewById(R.id.APWeekvalue)).setText("(" + dividedBy((AP.value), AP.value7).toString() + "%)   $" + AP.value7.toString() + "       ");
