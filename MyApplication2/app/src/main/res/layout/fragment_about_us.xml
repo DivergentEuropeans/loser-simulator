@@ -10,7 +10,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@mipmap/secdefault5"
+            android:background="@mipmap/main_background3_long"
             android:minHeight="600dp"
             tools:context="com.loser.superfruit86.myapplication.PhysicalFragment">
 

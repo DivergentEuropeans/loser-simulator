@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@mipmap/secdefault1"
+            android:background="@mipmap/top_header2"
             android:onClick="functionDrawer"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
@@ -34,7 +34,7 @@
         android:clickable="true"
         android:hapticFeedbackEnabled="true"
         android:src="@mipmap/status_icon1"
-        app:backgroundTint="#884669"
+        app:backgroundTint="#A1537D"
         app:borderWidth="7dp"
         app:elevation="50dp"
         app:fabCustomSize="55dp"

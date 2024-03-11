@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.loser.superfruit86.myapplication.SuccessFragment"
-    android:background="@mipmap/secdefault5"
+    android:background="@mipmap/main_background3_long"
     android:minHeight="600dp">
 
 

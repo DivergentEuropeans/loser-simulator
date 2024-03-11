@@ -10,7 +10,7 @@
                     xmlns:tools="http://schemas.android.com/tools"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@mipmap/secdefault5"
+                    android:background="@mipmap/main_background3_long"
                     android:minHeight="600dp"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     tools:context="com.loser.superfruit86.myapplication.MentalFragment">

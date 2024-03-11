@@ -13,7 +13,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.loser.superfruit86.myapplication.MentalFragment"
-            android:background="@mipmap/secdefault5"
+            android:background="@mipmap/main_background3_long"
             android:minHeight="600dp">
 
 
