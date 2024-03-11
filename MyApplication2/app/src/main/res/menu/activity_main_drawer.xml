@@ -31,7 +31,7 @@
             <item
                 android:id="@+id/nav_about_us"
                 android:icon="@mipmap/about_icon1"
-                android:title="In the Beginning" />
+                android:title="Purpose of Life" />
 
                 <item
                     android:id="@+id/nav_privacy"

@@ -40,14 +40,15 @@
                 android:layout_marginTop="90dp"
                 android:background="#66B8628B"
                 android:paddingLeft="10sp"
+                android:paddingTop="10sp"
                 android:paddingRight="5sp"
-                android:shadowColor="#FFFFFFFF"
+                android:shadowColor="#000000"
                 android:shadowDx="1"
                 android:shadowDy="1"
-                android:shadowRadius="5"
-                android:text=' ...there were two men: John and I. Two fairly nihilistic lads as they were, they created a little pact to themselves as a form of life insurance.\n\n\n Whoever dies first, "loses" the game.\n\n\n We had our mental ailments which were difficult to shake. But even more - we were competitive and two-fold as stubborn. Neither of us want to give the other the satisfaction of winning. And thus, I made a game about it.\n\n This game is filled with self aware social commentary and was made to be enjoyed by those who struggle with life. If you are someone who suffers from depression or mental health issues of any kind, please do not hesitate to seek help, especially from your friends and family. Limit your recreational usage. Focus on planning for the future. Eat and sleep well, take care of your health, and carry yourself with confidence.\n\n You are just a mortal. But I still love you. \n\n\n'
+                android:shadowRadius="10"
+                android:text=' ...there were two men: John and I. Two fairly nihilistic lads as they were, forged a Lilliputian pact as a form of instrinsic life insurance.\n\n\n Whoever dies first, "loses" the game.\n\n\n We had our mental ailments, at the time, that tethered our spirits. But more — we were competitive and two-fold as stubborn. Neither of us willing to grant the other victory, I made a game about it.\n\n Thus my creation was filled with self awareness, social commentary, and divinity. Just as I laboriously tinker with the dials and levers of life, my project was constructed to be enjoyed by those who struggle with it. If you are someone who suffers from depression or mental health issues, do not hesitate to seek help, especially from your friends and family. Learning about their lives will improve yours. You are nothing but an organized container of flesh compartments. In other words, you are perfect.\n\nTragically, the blueprint to your longstanding maintence I lost somehow during the Betelguese transfer. Vaguely to recall — Limit your recreational use of substances. They are there for play, not purpose. Focus on planning for the future. Eat and sleep well, take care of your health, and carry yourself with confidence. I love you.\n\n'
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="19sp" />
 
 
