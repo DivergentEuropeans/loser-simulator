@@ -412,10 +412,10 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new LuxuryFragment());
-                        fragmentTransaction.commit();
+                        fragmentTransaction.commitNow();
                         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
                             if (luxuryMessage == 1)
                             {
                                 luxuryMessage = 0;
@@ -444,10 +444,10 @@ public class MainActivity extends AppCompatActivity {
                     if (hasPartner == 1) {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new LoveFragment());
-                        fragmentTransaction.commit();
+                        fragmentTransaction.commitNow();
                         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
                             if (canIAffordIt("2000.00") == false && loveUnlock1 == 0) {
                                 loveUnlock1 = 1;
                                 ((TextView) findViewById(R.id.buttonCampingDate)).setText("(LOCKED)");
@@ -482,7 +482,7 @@ public class MainActivity extends AppCompatActivity {
 
                     fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.main_container, new AboutUsFragment());
-                    fragmentTransaction.commit();
+                    fragmentTransaction.commitNow();
                     //actionBar.setTitle("Love");
                     item.setChecked(true);
                 } else if (id == R.id.nav_privacy) {
@@ -498,8 +498,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void setHomeTitle() {
         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
             SpannableString s = new SpannableString("Menu");
             s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             s.setSpan(new ShadowSpan(8.5f, 5.0f, 5.0f, Color.BLACK), 0, s.length(), 0);
@@ -518,7 +518,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.main_container, new DifficultyFragment());
-                fragmentTransaction.commit();
+                fragmentTransaction.commitNow();
 
                 messagePrompt(getRandomString("<< Let's give this another shot. >>",
                         "<< Time for a fresh start. >>", "<< Restarting from the beginning. >>",
@@ -545,7 +545,7 @@ public class MainActivity extends AppCompatActivity {
         } else { // FIRST TIME PLAYER, PLAYING!
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new DifficultyFragment());
-            fragmentTransaction.commit();
+            fragmentTransaction.commitNow();
             messagePrompt("<< Nice to meet you. I speak like this. >>\n\nTap outside (or your back button) to close. ", 1200);
         }
 
@@ -956,37 +956,37 @@ public class MainActivity extends AppCompatActivity {
     public void functionTut1(View view) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial1Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionTut2(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial2Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionTut3(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial3Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionTut4(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial4Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionTut5(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial5Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionTut6(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Tutorial6Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
     public void functionDrawer(View view ) {
         //drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -1059,16 +1059,16 @@ public class MainActivity extends AppCompatActivity {
     public void functionHealth(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new HealthFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionPhysical(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
             if (daysNotDead < 35) // TODO: Explore why is if (TextView) findViewById(R.id.buttonAid) sometimes null
                 if ((TextView) findViewById(R.id.buttonAid) != null)
                     ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
@@ -1088,7 +1088,7 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new AidFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionEnhance(View view ) {
@@ -1099,7 +1099,7 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new EnhanceFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionShake(View view ) {
@@ -1826,16 +1826,16 @@ public class MainActivity extends AppCompatActivity {
     public void functionTime(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new TimeFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionMental(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new MentalFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
             if (daysNotDead < 50)
                 ((TextView) findViewById(R.id.buttonHelp)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 125)
@@ -1852,7 +1852,7 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new HelpFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionDrugs(View view ) {
@@ -1863,7 +1863,7 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new DrugsFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
 
@@ -2734,14 +2734,14 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new RespawnFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
 
     }
 
     public void functionSuccess(View view) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new SuccessFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
 
         if (successMessage == 1)
         {
@@ -2755,7 +2755,7 @@ public class MainActivity extends AppCompatActivity {
     public void functionEducation(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new EducationFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
 
         if (educationMessage == 1)
         {
@@ -2827,10 +2827,10 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new CareersFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
             if (isEducated < 2)
                 ((TextView) findViewById(R.id.buttonCareers2)).setText("Mid level. (LOCKED)");
             if (isEducated < 4)
@@ -2853,7 +2853,7 @@ public class MainActivity extends AppCompatActivity {
             //updates the net worth value to UI
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new StockAnalysisFragment());
-            fragmentTransaction.commit();
+            fragmentTransaction.commitNow();
             amIDeadYet("Spent too much time day trading.");
             updateVariables();
         } else {
@@ -2877,7 +2877,7 @@ public class MainActivity extends AppCompatActivity {
             statChanges(healthLevel / 2, happinessLevel / 2, "0.00");
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.main_container, new StockInsiderFragment());
-            fragmentTransaction.commit();
+            fragmentTransaction.commitNow();
             amIDeadYet("Spent too much time day trading.");
             updateVariables();
         } else {
@@ -2895,11 +2895,11 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new TradeFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
 
         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
 
             valueNow = outputStocks();
             ((TextView) findViewById(R.id.textView9)).setText("$" + valueNow.toString() + "     ");
@@ -3033,11 +3033,11 @@ public class MainActivity extends AppCompatActivity {
         //((TextView) findViewById(R.id.netWorthLabel)).setText(nW); //updates the net worth value to UI
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new StocksFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
 
         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
             ((TextView) findViewById(R.id.APDayvalue)).setText("(" + dividedBy((AP.value), AP.value2).toString() + "%)   $" + AP.value2.toString() + "       ");
             ((TextView) findViewById(R.id.APWeekvalue)).setText("(" + dividedBy((AP.value), AP.value7).toString() + "%)   $" + AP.value7.toString() + "       ");
             ((TextView) findViewById(R.id.BNNDayvalue)).setText("(" + dividedBy((BNN.value), BNN.value2).toString() + "%)   $" + BNN.value2.toString() + "       ");
@@ -3109,12 +3109,12 @@ public class MainActivity extends AppCompatActivity {
         //statChanges(healthLevel / 2, happinessLevel / 2, "0.00");
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Stocks2Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
 
 
         // if (getSupportFragmentManager().executePendingTransactions()) {
-        // Ignore stupid conditional: regex, text search thing
-        if (0 == 0) {
+                        // Ignore stupid conditional: regex, text search thing
+                        if (0 == 0) {
 
             ((TextView) findViewById(R.id.APDayvalue)).setText("(" + dividedBy((AP.value), AP.value2).toString() + "%)   $" + AP.value2.toString() + "       ");
             ((TextView) findViewById(R.id.APWeekvalue)).setText("(" + dividedBy((AP.value), AP.value7).toString() + "%)   $" + AP.value7.toString() + "       ");
@@ -4415,7 +4415,7 @@ public class MainActivity extends AppCompatActivity {
     public void functionCareers1(View view ) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Careers1Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
 
         if (careerMessage == 1)
         {
@@ -4433,7 +4433,7 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Careers2Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
     public void functionCareers3(View view ) {
@@ -4444,7 +4444,7 @@ public class MainActivity extends AppCompatActivity {
         }
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new Careers3Fragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
     }
 
 
@@ -8349,7 +8349,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_container, new DifficultyFragment());
-        fragmentTransaction.commit();
+        fragmentTransaction.commitNow();
 
         //messagePrompt("Choose a difficulty.", 1200);
 
