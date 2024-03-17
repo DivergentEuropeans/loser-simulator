@@ -3,142 +3,166 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="205dp"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="208dp"
+    android:layout_marginTop="0dp"
+    android:background="@mipmap/statuses_header_less_shadow"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
 
-    tools:showIn="@layout/app_bar_main"
-    android:background="@mipmap/secdefault4">
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:showIn="@layout/app_bar_main">
 
 
     <TextView
 
-        android:layout_width="wrap_content"
+        android:id="@+id/daysSurvivedLabel"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="3dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="10"
         android:text="@string/days_not_dead"
-        android:id="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#753c5a"
-        android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/net_worth"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#753c5a"
-        android:layout_marginTop="1dp"/>
+        android:textColor="#FFFFFF" />
 
     <TextView
-        android:id="@+id/happinessIndicator"
+        android:id="@+id/netWorthLabel"
+        android:layout_width="214dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/daysSurvivedLabel"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="3dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="10"
+        android:text="@string/net_worth"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/happinessTierSymbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="203dp"
         android:layout_marginTop="78dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#753c5a"
-        android:textSize="30sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="10"/>
 
     <TextView
-        android:id="@+id/healthIndicator"
+        android:id="@+id/healthTierSymbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="203dp"
         android:layout_marginTop="118dp"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#753c5a"
-        android:textSize="30sp" />
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="10"/>
 
     <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
         android:id="@+id/happinessBar"
         android:layout_width="200dp"
         android:layout_height="24dp"
-        app:rcProgress="75"
-        app:rcMax="100"
-        app:rcRadius="20dp"
-        app:rcBackgroundPadding="7dp"
-        app:rcReverse="false"
-        app:rcProgressColor="#a2c9ca"
-        app:rcSecondaryProgress="100"
-
-
-        app:rcBackgroundColor="#aaa191"
-        app:rcSecondaryProgressColor="#85dbd9d5"
+        android:layout_marginLeft="1dp"
         android:layout_marginTop="90dp"
-        android:layout_marginLeft="1dp"/>
+        app:rcBackgroundColor="#aaa191"
+
+
+        app:rcBackgroundPadding="7dp"
+        app:rcMax="100"
+        app:rcProgress="75"
+        app:rcProgressColor="#a2c9ca"
+        app:rcRadius="20dp"
+        app:rcReverse="false"
+        app:rcSecondaryProgress="100"
+        app:rcSecondaryProgressColor="#85dbd9d5" />
+
     <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
         android:id="@+id/healthBar"
         android:layout_width="200dp"
         android:layout_height="24dp"
-        app:rcProgress="75"
-        app:rcSecondaryProgress="100"
-        app:rcMax="100"
-        app:rcRadius="8dp"
-        app:rcBackgroundPadding="7dp"
-        app:rcReverse="false"
-        app:rcProgressColor="#f79494"
-        app:rcSecondaryProgressColor="#85dbd9d5"
-
-
-        app:rcBackgroundColor="#aaa292"
+        android:layout_marginLeft="1dp"
         android:layout_marginTop="130dp"
-        android:layout_marginLeft="1dp" />
+        app:rcBackgroundColor="#aaa292"
+        app:rcBackgroundPadding="7dp"
+        app:rcMax="100"
+        app:rcProgress="75"
+        app:rcProgressColor="#f79494"
+        app:rcRadius="8dp"
+
+
+        app:rcReverse="false"
+        app:rcSecondaryProgress="100"
+        app:rcSecondaryProgressColor="#85dbd9d5" />
 
     <ImageButton
+        android:id="@+id/happinessIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
 
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@mipmap/happiness_icon1"
-        android:background="@android:color/transparent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="1dp"
         android:layout_marginTop="87dp"
-        android:layout_marginLeft="1dp"/>
+        android:background="@android:color/transparent"
+        android:src="@mipmap/happiness_icon1" />
+
     <ImageButton
+        android:id="@+id/healthIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:src="@mipmap/health_icon1"
-        android:background="@android:color/transparent"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="1dp"
         android:layout_marginTop="126dp"
-        android:layout_marginLeft="1dp" />
+        android:background="@android:color/transparent"
+        android:src="@mipmap/health_icon1"
+        />
 
     <TextView
+        android:id="@+id/highScoreLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Highscore: "
-        android:id="@+id/textView10"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBottom="@+id/daysSurvivedLabel"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="#252525"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="0dp"
+        android:paddingRight="3dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="10"
+        android:text="Highscore: "
         android:textAlignment="viewEnd"
-        android:layout_gravity="end"/>
-
-    <Button
-        android:text=""
-        android:layout_width="400dp"
-        android:layout_gravity="center"
-        android:layout_height="200dp"
-        android:id="@+id/drawerButton"
-        android:onClick="functionDrawer"
-        android:elevation="24dp"
-        android:background="@null" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

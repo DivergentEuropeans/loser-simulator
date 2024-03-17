@@ -7,6 +7,7 @@
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="320dp"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -15,7 +16,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@mipmap/secdefault1"
+            android:background="@mipmap/top_header2"
+            android:onClick="functionDrawer"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <include layout="@layout/content_main" />
@@ -24,14 +26,21 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="11dp"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true"
+        android:hapticFeedbackEnabled="true"
         android:src="@mipmap/status_icon1"
-        app:backgroundTint="#95452159"
-        app:fabSize="mini"
+        app:backgroundTint="#A1537D"
+        app:borderWidth="7dp"
+        app:elevation="50dp"
+        app:fabCustomSize="55dp"
+        app:fabSize="normal"
+        app:maxImageSize="35dp"
+        app:pressedTranslationZ="0dp"
         app:rippleColor="@color/bg_screen1" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

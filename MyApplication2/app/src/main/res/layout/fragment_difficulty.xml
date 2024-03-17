@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.loser.superfruit86.myapplication.SuccessFragment"
-    android:background="@mipmap/secdefault5"
+    android:background="@mipmap/main_background3_long"
     android:minHeight="600dp">
 
 
@@ -18,40 +18,42 @@
 
 
     <Button
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/my_button_bg"
-        android:text="Realistic."
         android:id="@+id/buttonRealistic"
-        android:layout_marginTop="80dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal|top"
-        android:onClick="functionRealistic" />
-    <Button
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="90dp"
         android:background="@drawable/my_button_bg"
-        android:text="Hard as hell."
+        android:onClick="functionRealistic"
+        android:text="Realistic." />
+
+    <Button
         android:id="@+id/buttonHardAsHell"
-        android:layout_marginTop="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal|top"
-        android:onClick="functionHardAsHell" />
-    <Button
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/my_button_bg"
-        android:text="End my suffering. (No Respawn Tokens)"
-        android:id="@+id/buttonEndMySuffering"
-        android:layout_marginTop="220dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal|top"
-        android:onClick="functionEndMySuffering" />
+        android:layout_marginTop="160dp"
+        android:background="@drawable/my_button_bg"
+        android:onClick="functionHardAsHell"
+        android:text="Hard as hell." />
+
+    <Button
+        android:id="@+id/buttonEndMySuffering"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="230dp"
+        android:background="@drawable/my_button_bg"
+        android:onClick="functionEndMySuffering"
+        android:text="End my suffering. (No Respawn Tokens)" />
 
     <TextView
         android:id="@+id/textView25"
         android:layout_width="302dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-medium"
