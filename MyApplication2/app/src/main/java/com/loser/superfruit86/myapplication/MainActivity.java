@@ -1067,8 +1067,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_container, new PhysicalFragment());
         fragmentTransaction.commitNow();
         // if (getSupportFragmentManager().executePendingTransactions()) {
-                        // Ignore stupid conditional: regex, text search thing
-                        if (0 == 0) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
             if (daysNotDead < 35) // TODO: Explore why is if (TextView) findViewById(R.id.buttonAid) sometimes null
                 if ((TextView) findViewById(R.id.buttonAid) != null)
                     ((TextView) findViewById(R.id.buttonAid)).setText("Seek professional help. (LOCKED)");
@@ -1834,8 +1834,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_container, new MentalFragment());
         fragmentTransaction.commitNow();
         // if (getSupportFragmentManager().executePendingTransactions()) {
-                        // Ignore stupid conditional: regex, text search thing
-                        if (0 == 0) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
             if (daysNotDead < 50)
                 ((TextView) findViewById(R.id.buttonHelp)).setText("Seek professional help. (LOCKED)");
             if (daysNotDead < 125)
@@ -2829,8 +2829,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_container, new CareersFragment());
         fragmentTransaction.commitNow();
         // if (getSupportFragmentManager().executePendingTransactions()) {
-                        // Ignore stupid conditional: regex, text search thing
-                        if (0 == 0) {
+        // Ignore stupid conditional: regex, text search thing
+        if (0 == 0) {
             if (isEducated < 2)
                 ((TextView) findViewById(R.id.buttonCareers2)).setText("Mid level. (LOCKED)");
             if (isEducated < 4)
